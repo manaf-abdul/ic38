@@ -19,6 +19,7 @@ app.get('/',(req,res)=>{
     res.send("API IS RUNNING !!!!!! :->")
 })
 
+
 app.use('/user',UserRoutes)
 
 app.get('/get',async(req,res)=>{
