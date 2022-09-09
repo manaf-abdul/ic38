@@ -50,3 +50,6 @@ $ docker-compose -f docker-compose.yml -f docker-compose-dev.yml up
 
 For Production
 $ docker-compose up -d
+
+The Hosted API :
+https://ic38.herokuapp.com/
