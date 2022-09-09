@@ -9,7 +9,7 @@ For running project, you will only need Docker and Docker Compose or Nodejs (mak
 
 Clone Repository
 
-$ git clone https://github.com/deevsaini/ic38.git
+$ git clone https://github.com/manaf-abdul/ic38.git
 
 Configure app
 
