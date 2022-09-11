@@ -1,0 +1,97 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "ic 38",
+        "description": "ic38 API in NodeJs using Swagger",
+        "contact": {
+            "email": "abdulmanafp1966@gmail.com"
+        },
+        "license": {
+            "name": "IC 38",
+            "url": ""
+        }
+    },
+    "servers": [
+        {
+            "url": "https://ic38.herokuapp.com/user/signin",
+            "description": "Live Environment"
+        },
+        {
+            "url": "http://localhost:5002",
+            "description": "Development Environment"
+        }
+    ],
+    "tags": [
+        {
+            "name": "E-Notes",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/api/language": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "x-client-id",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "properties": {
+                                "x-client-id": {
+                                    "type": "string",
+                                    "example": "XXXXXXXXXXXXXXXXX"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "tags": [
+                    "E-Notes"
+                ],
+                "summary": "get all languages",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "get all Languages",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Hindi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

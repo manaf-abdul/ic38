@@ -3,8 +3,13 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyparser from 'body-parser'
 import connectDB from './Config/DB.js'
+import swaggerUI from "swagger-ui-express";
 import Axios from 'axios'
 import UserRoutes from './Routes/api/userRoutes.js'
+
+import { createRequire } from "module";
+const require = createRequire(import.meta.url); // construct the require method
+const swaggerJSDocs = require("./swaggerApi.json") // use the require method}
 
 dotenv.config()
 const app=express()
@@ -15,11 +20,14 @@ app.use(cors());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
+
 app.get('/',(req,res)=>{
     res.send("API IS RUNNING !!!!!!zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz :->")
 })
 
-
+app.use('/user',UserRoutes)
 app.use('/user',UserRoutes)
 
 app.get('/get',async(req,res)=>{
