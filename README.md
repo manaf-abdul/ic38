@@ -9,7 +9,7 @@ For running project, you will only need Docker and Docker Compose or Nodejs (mak
 
 Clone Repository
 
-$ git clone https://github.com/deevsaini/ic38.git
+$ git clone https://github.com/manaf-abdul/ic38.git
 
 Configure app
 
@@ -50,3 +50,6 @@ $ docker-compose -f docker-compose.yml -f docker-compose-dev.yml up
 
 For Production
 $ docker-compose up -d
+
+The Hosted API :
+https://ic38.herokuapp.com/
