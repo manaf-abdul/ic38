@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "https://ic38.herokuapp.com/user/signin",
+            "url": "https://ic38.herokuapp.com",
             "description": "Live Environment"
         },
         {
@@ -24,33 +24,17 @@
     ],
     "tags": [
         {
-            "name": "E-Notes",
+            "name": "Concepts",
             "description": ""
         }
     ],
     "paths": {
-        "/api/language": {
+        "/api/concepts": {
             "get": {
-                "parameters": [
-                    {
-                        "name": "x-client-id",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "properties": {
-                                "x-client-id": {
-                                    "type": "string",
-                                    "example": "XXXXXXXXXXXXXXXXX"
-                                }
-                            }
-                        }
-                    }
-                ],
                 "tags": [
-                    "E-Notes"
+                    "Concepts"
                 ],
-                "summary": "get all languages",
+                "summary": "Get all chapters",
                 "description": "for testing the swagger doc",
                 "responses": {
                     "200": {
@@ -60,35 +44,33 @@
                         "description": "Unauthorized User"
                     }
                 }
-            },
-            "post": {
+            }
+        },
+        "/api/concepts/{id}": {
+            "get": {
                 "tags": [
-                    "Language"
+                    "Concepts"
                 ],
-                "summary": "get all Languages",
+                "summary": "Get all Contents of Chapters",
                 "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ChapterId",
+                      "required": true,
+                      "schema": {
+                        "type": "string",
+                        "example": "632708c9b5a7bf544400ce2b"
+                      }
+                    }
+                  ],
                 "responses": {
                     "200": {
                         "description": "Status True"
                     },
                     "401": {
                         "description": "Unauthorized User"
-                    }
-                },
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Hindi"
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
