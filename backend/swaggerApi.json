@@ -31,7 +31,7 @@
         "/api/concepts": {
             "get": {
                 "tags": [
-                    "Courses"
+                    "Concepts"
                 ],
                 "summary": "Get all chapters",
                 "description": "for testing the swagger doc",
@@ -48,7 +48,7 @@
         "/api/concepts/{id}": {
             "get": {
                 "tags": [
-                    "Courses"
+                    "Concepts"
                 ],
                 "summary": "Get all Contents of Chapters",
                 "description": "for testing the swagger doc",

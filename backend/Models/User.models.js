@@ -19,6 +19,10 @@ const userModel = new mongoose.Schema(
             type: String,
             required: [true, "Please enter the password"]
         },
+        emailOtp:{
+            type: String,
+            default: null
+        },
     }
 )
 

@@ -1,6 +1,8 @@
 import User from '../Models/User.models.js'
 import { comparePassword } from '../utils/bcrypt.utils.js';
 import jwt from "jsonwebtoken";
+import { getRandomDigits } from '../utils/utility.helper.js';
+import { sendMail } from '../utils/email.js';
 
 export const signIn = async (req, res) => {
     try {
@@ -55,5 +57,52 @@ export const signUp = async (req, res) => {
         }
     } catch (e) {
         return res.status(400).json({errorcode: 5, status: false, msg: e.message, data: null });
+    }
+}
+
+export const sendOtpforForgotPssword = async (req, res) => {
+    try {
+        const {email} = req.body;
+        let user=await User.findOne({email:email})
+        if(!user) return res.status(200).json({ errorcode: 2,status: false, msg:"User not Present", data: null });
+        let otp=getRandomDigits()
+        user.emailOtp=otp;
+        user=await user.save();
+        let html = `
+            <h3>OTP for change password request</h3>
+            <p>Your OTP is : <b>${otp} </b> </p>
+            `;
+            const resp = await sendMail({ email:user.email, name:user.name , subject: "Forgot Password", html });
+            console.log("resp",resp)
+        return res.status(200).json({ errorcode: 0,status: true, msg:"An OTP is sent to your email", data: null });
+       } catch (e) {
+        return res.status(200).json({ status: false, msg: e.message, data: null });
+    }
+}
+
+export const confirmOtpforForgotPssword = async (req, res) => {
+    try {
+        const {email,otp} = req.body;
+        let user=await User.findOne({email:email})
+        if(!user) return res.status(200).json({ errorcode: 2,status: false, msg:"User not Present", data: null });
+        if(user.emailOtp!==otp) return res.status(200).json({ errorcode: 2,status: false, msg:"Incorrect OTP", data: null });
+        user.emailOtp=0;
+        await user.save();
+        return res.status(200).json({ errorcode: 0,status: true, msg:"Verified Successfully", data: null });
+       } catch (e) {
+        return res.status(200).json({ status: false, msg: e.message, data: null });
+    }
+}
+
+export const changePassword = async (req, res) => {
+    try {
+        const {email,password} = req.body;
+        let user=await User.findOne({email:email})
+        if(!user) return res.status(200).json({ errorcode: 2,status: false, msg:"User not Present", data: null });
+        user.password=password;
+        await user.save();
+        return res.status(200).json({ errorcode: 0,status: true, msg:"Changed  Successfully", data: null });
+       } catch (e) {
+        return res.status(200).json({ status: false, msg: e.message, data: null });
     }
 }
