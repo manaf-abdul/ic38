@@ -1,0 +1,35 @@
+import mongoose from "mongoose";
+
+const schema=new mongoose.Schema(
+    {
+        name:{
+            type:String
+        },
+        slug:{
+            type:String,
+            lowercase:true
+        },
+        numberOfQes:{
+            type:String
+        },
+        description:{
+            type:String
+        },
+        qAndA:[
+                {
+                q:{ type: String, default: null },
+                o1: { type: String, default: null },
+                o2: { type: String, default: null },
+                o3: { type: String, default: null },
+                o4: { type: String, default: null },
+                a:{ type: String, default: null }
+            }
+        ]
+    },
+    {
+        timestamps:true
+    }
+)
+
+const testModel=new mongoose.model('TestModel',schema)
+export default testModel

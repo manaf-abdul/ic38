@@ -2,13 +2,12 @@
     "openapi": "3.0.0",
     "info": {
         "version": "1.0.0",
-        "title": "ic 38",
-        "description": "ic38 API in NodeJs using Swagger",
+        "title": "DIGROWFA LIVE",
+        "description": "DIGROWFA API in NodeJs using Swagger",
         "contact": {
             "email": "abdulmanafp1966@gmail.com"
         },
         "license": {
-            "name": "IC 38",
             "url": ""
         }
     },
@@ -32,7 +31,7 @@
         "/api/concepts": {
             "get": {
                 "tags": [
-                    "Concepts"
+                    "Courses"
                 ],
                 "summary": "Get all chapters",
                 "description": "for testing the swagger doc",
@@ -49,7 +48,7 @@
         "/api/concepts/{id}": {
             "get": {
                 "tags": [
-                    "Concepts"
+                    "Courses"
                 ],
                 "summary": "Get all Contents of Chapters",
                 "description": "for testing the swagger doc",
@@ -62,6 +61,67 @@
                       "schema": {
                         "type": "string",
                         "example": "632708c9b5a7bf544400ce2b"
+                      }
+                    }
+                  ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/mock-test": {
+            "get": {
+                "tags": [
+                    "Mock-Test"
+                ],
+                "summary": "Get all Mock test",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Mock-Test"
+                ],
+                "summary": "Create a new mock-test",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/mock-test/{id}": {
+            "get": {
+                "tags": [
+                    "Mock-Test"
+                ],
+                "summary": "Get details of each mock test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "description": "ChapterId",
+                      "required": true,
+                      "schema": {
+                        "type": "string",
+                        "example": "6335ab3eee629df139d896b2"
                       }
                     }
                   ],
