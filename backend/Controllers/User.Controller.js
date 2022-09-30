@@ -53,10 +53,10 @@ export const signUp = async (req, res) => {
         if (newUser) {
             const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "300d" });
             newUser = { ...newUser._doc, password: null, token };
-            return res.status(400).json({ errorcode: 0, status: false, msg: "User SignUp Successfull", data: newUser });
+            return res.status(200).json({ errorcode: 0, status: false, msg: "User SignUp Successfull", data: newUser });
         }
     } catch (e) {
-        return res.status(400).json({errorcode: 5, status: false, msg: e.message, data: null });
+        return res.status(200).json({errorcode: 5, status: false, msg: e.message, data: null });
     }
 }
 
