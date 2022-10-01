@@ -6,13 +6,6 @@ import { sendMail } from '../utils/email.js';
 
 export const signIn = async (req, res) => {
     try {
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     let errs = [];
-        //     let err_msgs = { ...errors };
-        //     err_msgs.errors.forEach(err => errs.push(err.msg));
-        //     return res.status(200).json({ errorcode: 1, status: false, msg: errs, data: null });
-        // }
         const { email, password } = req.body
         let user = await User.findOne({ email: email })
         if (!user) return res.status(200).json({ errorcode: 2, status: false, msg: "User doesn't Exist", data: null });
@@ -34,13 +27,6 @@ export const signIn = async (req, res) => {
 
 export const signUp = async (req, res) => {
     try {
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     let errs = [];
-        //     let err_msgs = { ...errors };
-        //     err_msgs.errors.forEach(err => errs.push(err.msg));
-        //     return res.status(200).json({ errorcode: 1, status: false, msg: errs, data: null });
-        // }
         const { name, email, phone, password } = req.body;
         if (!name || !email || !phone || !password) return res.status(200).json({ errorcode: 2, status: false, msg: "Fill all the fields", data: null })
 

@@ -21,15 +21,26 @@ export const postMockTest = async (req, res) => {
 }
 
 export const getMockTest = async (req, res) => {
+    try {
     const { id } = req.params;
     if (!id) return res.status(200).json({ errorcode: 0, status: false, msg: "Id is required", data: null })
     let data = await testModel.findById(id)
     return res.status(200).json({ errorcode: 0, status: true, msg: "practise test found ", data: data })
-}
+
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: e, data: e });
+    
+    }}
 
 export const getAllMockTests = async (req, res) => {
-    let data = await testModel.find({}, { name: 1, slug: 1, description: 1 })
-    return res.status(200).json({ errorcode: 0, status: true, msg: "practise test found ", data: data })
+    try {
+        let data = await testModel.find({}, { name: 1, slug: 1, description: 1 })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "practise test found ", data: data })
+    
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: e, data: e });
+    
+    }
 }
 
 export const editMockTest = async (req, res) => {

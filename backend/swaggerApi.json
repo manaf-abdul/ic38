@@ -23,11 +23,43 @@
     ],
     "tags": [
         {
-            "name": "Concepts",
+            "name": "Super-Category",
             "description": ""
         }
     ],
     "paths": {
+        "/api/supercategories": {
+            "get": {
+                "tags": [
+                    "Super-Category"
+                ],
+                "summary": "Get all Super-Categories",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Super-Category"
+                ],
+                "summary": "Create new Super-Category",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
         "/api/concepts": {
             "get": {
                 "tags": [
@@ -106,6 +138,7 @@
                 }
             }
         },
+
         "/api/mock-test/{id}": {
             "get": {
                 "tags": [
@@ -125,6 +158,70 @@
                       }
                     }
                   ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/terminology": {
+            "get": {
+                "tags": [
+                    "Terminology"
+                ],
+                "summary": "Get all Terminologies",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Terminology"
+                ],
+                "summary": "Post & EDit Terminologies",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/one-liners": {
+            "get": {
+                "tags": [
+                    "One-Liners"
+                ],
+                "summary": "Get all Terminologies",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "One-Liners"
+                ],
+                "summary": "Post & EDit Terminologies",
+                "description": "for testing the swagger doc",
                 "responses": {
                     "200": {
                         "description": "Status True"
