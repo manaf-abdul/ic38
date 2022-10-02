@@ -86,16 +86,16 @@
                 "description": "for testing the swagger doc",
                 "parameters": [
                     {
-                      "name": "id",
-                      "in": "path",
-                      "description": "ChapterId",
-                      "required": true,
-                      "schema": {
-                        "type": "string",
-                        "example": "632708c9b5a7bf544400ce2b"
-                      }
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "632708c9b5a7bf544400ce2b"
+                        }
                     }
-                  ],
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -138,7 +138,6 @@
                 }
             }
         },
-
         "/api/mock-test/{id}": {
             "get": {
                 "tags": [
@@ -148,16 +147,16 @@
                 "description": "for testing the swagger doc",
                 "parameters": [
                     {
-                      "name": "id",
-                      "in": "path",
-                      "description": "ChapterId",
-                      "required": true,
-                      "schema": {
-                        "type": "string",
-                        "example": "6335ab3eee629df139d896b2"
-                      }
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6335ab3eee629df139d896b2"
+                        }
                     }
-                  ],
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -228,6 +227,54 @@
                     },
                     "401": {
                         "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/language": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Get all Terminologies",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Post & EDit Terminologies",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "English"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
