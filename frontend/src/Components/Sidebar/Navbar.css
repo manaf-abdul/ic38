@@ -60,11 +60,15 @@
   }
   
   .nav-text a:hover {
-    background-color: #1a83ff;
+    background-color:	#E86100;
   }
   
   .nav-menu-items {
     width: 100%;
+  }
+  .nav-menu-items .nav-text a:hover {
+    width: 100%;
+    color: white;
   }
   
   .navbar-toggle {
@@ -78,5 +82,23 @@
   
   span {
     margin-left: 16px;
+  }
+  
+.textProperty .dropdown-menu{
+  background-color:#E86100;
+  color:black;
+  top: 2rem !important;
+  left: 50% !important;
+  transform: translate(-50%) !important;
+  }
+
+  .textProperty .dropdown-item{
+    color:white;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .jumbotron {
+    background-image: linear-gradient(to right, #E86100, #000);
+    color: #fff;
   }
   

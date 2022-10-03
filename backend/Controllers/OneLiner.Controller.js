@@ -4,6 +4,7 @@ import { fileParser } from "../utils/fileParser.js";
 export const postOneLiners = async (req, res) => {
     try {
         await OneLiner.deleteMany()
+        const {category,language}=req.params
         console.log("req.body", req.body.language)
         console.log("req.file", req.file)
         if (!req.file) return res.status(200).json({ errorcode: 0, status: false, msg: "File not present", data: null })
@@ -12,14 +13,15 @@ export const postOneLiners = async (req, res) => {
         let data = fileData[0].data.map(x => {
             return {
                 ...x,
-                language: req.body.language,
-                superCategory: req.body.superCategory
+                language:language ,
+                superCategory: category
             }
         })
+        console.log("data",data)
         let newOneLiners = await OneLiner.create(data)
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Concept Chapter Found", data: newOneLiners });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "OneLiner Updated Successfully", data: newOneLiners });
     } catch (e) {
-        console.log(e)
+        // console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
     }
 }

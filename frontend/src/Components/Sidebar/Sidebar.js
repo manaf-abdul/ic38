@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SideBarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
-import { Navbar, Container, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap'
+import { Navbar, Container, Nav, Form, FormControl, Button, NavDropdown, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import axios from 'axios';
@@ -21,21 +21,25 @@ function SideBar() {
     const [categories, setCategories] = useState()
     const [languges, setLanguges] = useState()
 
+    const fetchCatData=useCallback(async () => {
+        const { data } = await axios.get('https://ic38.herokuapp.com/api/supercategories')
+            setCategories(data.data)
+            console.log("data", data)
+            setCategory(data.data[0]._id)
+    },[])
+
+    const fetchlangData=useCallback(async () => {
+        const { data } = await axios.get('https://ic38.herokuapp.com/api/language')
+            setLanguges(data.data)
+            console.log("data", data)
+            setLanguage(data.data[0]._id)
+    },[])
+
     console.log("Rendereing")
 
     const showSidebar = () => setSidebar(!sidebar);
 
     useEffect(() => {
-        async function fetchCatData() {
-            const { data } = await axios.get('https://ic38.herokuapp.com/api/supercategories')
-            setCategories(data.data)
-            console.log("data", data)
-        }
-        async function fetchlangData() {
-            const { data } = await axios.get('https://ic38.herokuapp.com/api/language')
-            setLanguges(data.data)
-            console.log("data", data)
-        }
         fetchCatData()
         fetchlangData()
     }, [])
@@ -62,9 +66,9 @@ function SideBar() {
                         </NavDropdown>
                     </div>
                 </div>
-                <div className='navbar2 justify-content-center'>
+                <div className='navbar2'>
                     <NavDropdown
-                        className="px-5"
+                        className="px-5 col-lg-6 text-center textProperty"
                         title={
                             <span style={{ color: 'white' }}>
                                 Categories
@@ -86,7 +90,7 @@ function SideBar() {
                     </NavDropdown>
 
                     <NavDropdown
-                        className="px-5"
+                        className="px-5 col-lg-6 text-center textProperty"
                         title={
                             <span style={{ color: 'white' }}>
                                 Languages
@@ -96,7 +100,7 @@ function SideBar() {
                     >
                         {languges ? languges.map(cat =>
 
-                            <NavDropdown.Item onClick={()=>setLanguage(cat._id)}>
+                            <NavDropdown.Item onClick={()=>setLanguage(cat._id)} className="">
                                 {cat.name}
                             </NavDropdown.Item>
                         )

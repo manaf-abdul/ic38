@@ -1,19 +1,19 @@
 import React from 'react'
-import {Container} from 'react-bootstrap'
-import {CartState} from '../Context'
+import { Col, Container, Row } from 'react-bootstrap'
+import { CartState } from '../Context'
+import { Link, useNavigate } from 'react-router-dom'
+import Jumbotron from '../Components/Jumbotron'
 
 const DashBoard = () => {
 
-  const {category,language}=CartState()
+  const { category, language } = CartState()
 
   console.log("rendering")
-  console.log("category",category)
-  console.log("language",language)
+  console.log("category", category)
+  console.log("language", language)
 
   return (
-    <Container>
-    <div>DashBoard {category} {language}</div>
-    </Container>
+      <Jumbotron name={"Batch"} />
   )
 }
 
