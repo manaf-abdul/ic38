@@ -44,7 +44,6 @@ export const getConceptContentByChapter=async(req,res)=>{
     }
 }
 
-
 export const getChapters=async(req,res)=>{
     try {
         let data=await ConceptChapter.find({})

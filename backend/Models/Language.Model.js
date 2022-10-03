@@ -4,7 +4,7 @@ const schema=new mongoose.Schema(
     {
         name:{
             type:String,
-            required:[true,"Language Name is Required"]
+            required:true
         }
     }
 )

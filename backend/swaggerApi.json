@@ -189,6 +189,30 @@
                 ],
                 "summary": "Post & EDit Terminologies",
                 "description": "for testing the swagger doc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "example": "OneLiner Content-1"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "633929c2a89b9f63b74cc7c9"
+                                    },
+                                    "superCategory": {
+                                        "type": "string",
+                                        "example": "6338546d1fca07627d35e7e7"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -199,13 +223,35 @@
                 }
             }
         },
-        "/api/one-liners": {
+        "/api/one-liners/{category}/{language}": {
             "get": {
                 "tags": [
                     "One-Liners"
                 ],
                 "summary": "Get all Terminologies",
                 "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -227,6 +273,30 @@
                     },
                     "401": {
                         "description": "Unauthorized User"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "example": "OneLiner Content-1"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "633929c2a89b9f63b74cc7c9"
+                                    },
+                                    "superCategory": {
+                                        "type": "string",
+                                        "example": "6338546d1fca07627d35e7e7"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -236,7 +306,7 @@
                 "tags": [
                     "Language"
                 ],
-                "summary": "Get all Terminologies",
+                "summary": "Get all Languages",
                 "description": "for testing the swagger doc",
                 "responses": {
                     "200": {
@@ -251,7 +321,7 @@
                 "tags": [
                     "Language"
                 ],
-                "summary": "Post & EDit Terminologies",
+                "summary": "Post New Language",
                 "description": "for testing the swagger doc",
                 "responses": {
                     "200": {

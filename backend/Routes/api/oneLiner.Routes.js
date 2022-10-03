@@ -5,6 +5,6 @@ import {upload} from '../../Middlewares/Multer.js'
 
 
 router.post('/',upload.single('file'),postOneLiners)
-router.get('/',getOneLiners)
+router.get('/:category/:language',getOneLiners)
 
 export default router

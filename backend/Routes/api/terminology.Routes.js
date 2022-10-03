@@ -4,6 +4,6 @@ import { postTerminology,getTerminologies } from '../../Controllers/TerminologyC
 import {upload} from '../../Middlewares/Multer.js'
 
 router.post('/',upload.single('file'),postTerminology)
-router.get('/',getTerminologies)
+router.get('/:category/:language',getTerminologies)
 
 export default router

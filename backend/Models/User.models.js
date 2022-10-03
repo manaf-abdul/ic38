@@ -5,24 +5,31 @@ const userModel = new mongoose.Schema(
     {
         username: {
             type: String,
-            required: [true, "Please enter the username"]
+            required: true
         },
         email: {
             type: String,
-            required: [true, "Please enter the email"]
+            default: null,
+            match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+            trim: true, 
+            lowercase: true
         },
         phone: {
             type: String,
-            required: [true, "Please enter the phone"]
+            required: true
         },
         password: {
             type: String,
-            required: [true, "Please enter the password"]
+            required: true
         },
         emailOtp:{
             type: String,
             default: null
         },
+        bloodGroup:{
+            type: String,
+            default: null
+        }
     }
 )
 

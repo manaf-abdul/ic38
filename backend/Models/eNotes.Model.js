@@ -7,6 +7,11 @@ const schema=mongoose.Schema(
             ref:'SuperCategory',
             required:true
         },
+        language:{
+            type:mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Language',
+        },
         title:{
             type:String,
             required:true

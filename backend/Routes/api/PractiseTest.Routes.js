@@ -4,7 +4,7 @@ import { postMockTest,getMockTest,getAllMockTests} from '../../Controllers/Pract
 import {upload} from '../../Middlewares/Multer.js'
 
 router.post('/',upload.single('file'),postMockTest)
-router.get('/',getAllMockTests)
+router.get('/:category/:language',getAllMockTests)
 router.get('/:id',getMockTest)
 
 export default router

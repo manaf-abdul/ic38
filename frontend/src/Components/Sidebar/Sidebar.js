@@ -1,152 +1,135 @@
-import React, { useContext, useRef, useState } from "react";
-import {
-    SDivider,
-    SLink,
-    SLinkContainer,
-    SLinkIcon,
-    SLinkLabel,
-    SLinkNotification,
-    SLogo,
-    SSearch,
-    SSearchIcon,
-    SSidebar,
-    SSidebarButton,
-    STheme,
-    SThemeLabel,
-    SThemeToggler,
-    SToggleThumb,
-} from "./styles";
+import React, { useEffect, useState } from 'react';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { SidebarData } from './SideBarData';
+import './Navbar.css';
+import { IconContext } from 'react-icons';
+import { Navbar, Container, Nav, Form, FormControl, Button, NavDropdown } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import axios from 'axios';
+import { CartState } from '../../Context';
 
-import { logoSVG } from "../../assets";
+function SideBar() {
 
-import {
-    AiOutlineApartment,
-    AiOutlineHome,
-    AiOutlineLeft,
-    AiOutlineSearch,
-    AiOutlineSetting,
-} from "react-icons/ai";
-import { MdLogout, MdOutlineAnalytics } from "react-icons/md";
-import { BsPeople } from "react-icons/bs";
+    const navigate = useNavigate()
 
-import { ThemeContext } from "./../../App";
-import { useLocation } from "react-router-dom";
+    const {setCategory,setLanguage}=CartState()
 
-const Sidebar = () => {
-    const searchRef = useRef(null);
-    const { setTheme, theme } = useContext(ThemeContext);
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    // const { pathname } = useLocation();
+    const [sidebar, setSidebar] = useState(false);
+    const [categories, setCategories] = useState()
+    const [languges, setLanguges] = useState()
 
-    const searchClickHandler = () => {
-        if (!sidebarOpen) {
-            setSidebarOpen(true);
-            searchRef.current.focus();
-        } else {
-            // search functionality
+    console.log("Rendereing")
+
+    const showSidebar = () => setSidebar(!sidebar);
+
+    useEffect(() => {
+        async function fetchCatData() {
+            const { data } = await axios.get('https://ic38.herokuapp.com/api/supercategories')
+            setCategories(data.data)
+            console.log("data", data)
         }
-    };
+        async function fetchlangData() {
+            const { data } = await axios.get('https://ic38.herokuapp.com/api/language')
+            setLanguges(data.data)
+            console.log("data", data)
+        }
+        fetchCatData()
+        fetchlangData()
+    }, [])
 
     return (
-        <SSidebar isOpen={sidebarOpen}>
-            <>
-                <SSidebarButton isOpen={sidebarOpen} onClick={() => setSidebarOpen((p) => !p)}>
-                    <AiOutlineLeft />
-                </SSidebarButton>
-            </>
-            <SLogo>
-                <img src={logoSVG} alt="logo" />
-            </SLogo>
-            <SSearch
-                onClick={searchClickHandler}
-                style={!sidebarOpen ? { width: `fit-content` } : {}}
-            >
-                <SSearchIcon>
-                    <AiOutlineSearch />
-                </SSearchIcon>
-                <input
-                    ref={searchRef}
-                    placeholder="Search"
-                    style={!sidebarOpen ? { width: 0, padding: 0 } : {}}
-                />
-            </SSearch>
-            <SDivider />
-            {linksArray.map(({ icon, label, notification, to }) => (
-                // <SLinkContainer key={label} isActive={pathname === to}>
-                    <SLinkContainer key={label} >
-                    <SLink to={to} style={!sidebarOpen ? { width: `fit-content` } : {}}>
-                        <SLinkIcon>{icon}</SLinkIcon>
-                        {sidebarOpen && (
+        <>
+            <IconContext.Provider value={{ color: '#fff' }}>
+                <div className='navbar d-flex justify-content-between' >
+                    <div>
+                        <Link to='#' className='menu-bars'>
+                            <FaIcons.FaBars onClick={showSidebar} />
+                        </Link>
+                    </div>
+                    <div>
+                        <NavDropdown
+                            className="px-5"
+                            title={
+                                <span style={{ color: 'white' }}>
+                                    {/* {cart && cart.email ? cart.email : 'Admin'} */}
+                                </span>
+                            }
+                            id="adminmenu"
+                        >
+                        </NavDropdown>
+                    </div>
+                </div>
+                <div className='navbar2 justify-content-center'>
+                    <NavDropdown
+                        className="px-5"
+                        title={
+                            <span style={{ color: 'white' }}>
+                                Categories
+                            </span>
+                        }
+                        id="adminmenu"
+                    >
+                        {categories ? categories.map(cat =>
+
+                            <NavDropdown.Item onClick={()=>setCategory(cat._id)}>
+                                {cat.name}
+                            </NavDropdown.Item>
+                        )
+                            :
                             <>
-                                <SLinkLabel>{label}</SLinkLabel>
-                                {/* if notifications are at 0 or null, do not display */}
-                                {!!notification && (
-                                    <SLinkNotification>{notification}</SLinkNotification>
-                                )}
+                                'No Data Found'
                             </>
-                        )}
-                    </SLink>
-                </SLinkContainer>
-            ))}
-            <SDivider />
-            {secondaryLinksArray.map(({ icon, label }) => (
-                <SLinkContainer key={label}>
-                    <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
-                        <SLinkIcon>{icon}</SLinkIcon>
-                        {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
-                    </SLink>
-                </SLinkContainer>
-            ))}
-            <SDivider />
-            <STheme>
-                {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
-                <SThemeToggler
-                    isActive={theme === "dark"}
-                    onClick={() => setTheme((p) => (p === "light" ? "dark" : "light"))}
-                >
-                    <SToggleThumb style={theme === "dark" ? { right: "1px" } : {}} />
-                </SThemeToggler>
-            </STheme>
-        </SSidebar>
+                        }
+                    </NavDropdown>
+
+                    <NavDropdown
+                        className="px-5"
+                        title={
+                            <span style={{ color: 'white' }}>
+                                Languages
+                            </span>
+                        }
+                        id="adminmenu"
+                    >
+                        {languges ? languges.map(cat =>
+
+                            <NavDropdown.Item onClick={()=>setLanguage(cat._id)}>
+                                {cat.name}
+                            </NavDropdown.Item>
+                        )
+                            :
+                            <>
+                                'No Data Found'
+                            </>
+                        }
+                    </NavDropdown>
+                </div>
+
+                <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+                    <ul className='nav-menu-items' onClick={showSidebar}>
+                        <li className='navbar-toggle'>
+                            <Link to='#' className='menu-bars'>
+                                <AiIcons.AiOutlineClose />
+                            </Link>
+                        </li>
+                        {SidebarData.map((item, index) => {
+                            return (
+                                <li key={index} className={item.cName}>
+                                    <Link to={item.path}>
+                                        {item.icon}
+                                        <span>{item.title}</span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </nav>
+            </IconContext.Provider>
+        </>
     );
-};
+}
 
-const linksArray = [
-    {
-        label: "Home",
-        icon: <AiOutlineHome />,
-        to: "/",
-        notification: 0,
-    },
-    {
-        label: "Statistics",
-        icon: <MdOutlineAnalytics />,
-        to: "/statistics",
-        notification: 3,
-    },
-    {
-        label: "Customers",
-        icon: <BsPeople />,
-        to: "/customers",
-        notification: 0,
-    },
-    {
-        label: "Diagrams",
-        icon: <AiOutlineApartment />,
-        to: "/diagrams",
-        notification: 1,
-    },
-];
-
-const secondaryLinksArray = [
-    {
-        label: "Settings",
-        icon: <AiOutlineSetting />,
-    },
-    {
-        label: "Logout",
-        icon: <MdLogout />,
-    },
-];
-
-export default Sidebar;
+export default React.memo(SideBar);
