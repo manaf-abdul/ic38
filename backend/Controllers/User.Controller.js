@@ -27,14 +27,14 @@ export const signIn = async (req, res) => {
 
 export const signUp = async (req, res) => {
     try {
-        const { name, email, phone, password } = req.body;
+        const { name, email, phone, password,bloodGroup } = req.body;
         if (!name || !email || !phone || !password) return res.status(200).json({ errorcode: 2, status: false, msg: "Fill all the fields", data: null })
 
         const existingUser=await User.findOne({email:email})
         if (existingUser) return res.status(200).json({ errorcode: 3, status: false, msg: "User already Present.Please Login", data: null })
 
         let newUser = await User.create({
-            username:name, email, phone, password
+            username:name, email, phone, password,bloodGroup
         })
         if (newUser) {
             const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "300d" });
