@@ -16,7 +16,7 @@ export const postTerminology=async(req,res)=>{
         })
         console.log("dataaaaaa",data)
         data=await Terminology.create(data)
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Concept Chapter Found", data: data });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "terminologies Added Successfully", data: data });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
@@ -46,6 +46,39 @@ export const editTerminologies=async(req,res)=>{
         return res.status(200).json({ errorcode: 0, status: true, msg: "terminology updated Successfully", data: term });
     } catch (e) {
         console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const deleteTerminologies = async (req, res) => {
+    console.log("============deleteTerminologies===========");
+    console.log("req.body",req.body);
+    try {
+        const {description,title,_id,language,superCategory}=req.body
+        let terminology = await Terminology.findById({_id:_id})
+        if(!terminology)  return res.status(200).json({ errorcode: 1, status: false, msg: "One-Liner Not Found", data: null })
+        await Terminology.deleteOne({_id:_id})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "One-Liner Deleted Successfully", data: null });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const addTerminologies = async (req, res) => {
+    console.log("============addTerminologies===========");
+    try {
+        const {title,description,language,category}=req.body
+        let terminology=new Terminology({
+            title, 
+            description,
+            language:language ,
+            superCategory: category
+        })
+        terminology=await terminology.save()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Terminology Created Successfully", data: terminology });
+    } catch (e) {
+        // console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
     }
 }

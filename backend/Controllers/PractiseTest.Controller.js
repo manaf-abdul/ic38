@@ -4,7 +4,6 @@ import slugify from "slugify";
 
 export const postMockTest = async (req, res) => {
     try {
-
         if (!req.file) return res.status(200).json({ errorcode: 1, status: false, msg: "File Not Present", data: null })
         const { name, description, category, language } = req.body;
         let ex = await PractiseTestModel.findOne({ slug: slugify(name) })

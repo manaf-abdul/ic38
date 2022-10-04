@@ -1,15 +1,16 @@
 import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Accordion, Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
-import TerminologyModal from '../Components/Modals/TerminologyModal'
-import { errorToast, successToast, warningToast } from '../Constants'
+import SASContentModal from '../Components/Modals/SASContentModal'
+import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
-const Terminology = () => {
+const ShortAndSimpleContent = () => {
     const { category, language } = CartState()
+    const params=useParams()
     const [terminologyData, setTerminologyData] = useState([])
     const [edit, setEdit] = useState('')
     const [name, setName] = useState('')
@@ -18,7 +19,7 @@ const Terminology = () => {
     const [bulk, setBulk] = useState(false)
 
     const fetchData = useCallback(async () => {
-        const { data } = await axios.get(`https://ic38.herokuapp.com/api/terminology/${category}/${language}`)
+        const { data } = await axios.get(`${BASEURL}/api/short-and-simple/${category}/${language}/${params.id}`)
         console.log("data", data)
         setTerminologyData(data.data)
     }, [])
@@ -86,13 +87,13 @@ const Terminology = () => {
     return (
         <>
             <Jumbotron
-                name={"Course "}
+                name={"WorkShop "}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}
                 bulkHandler={() => bulkHandler()}
             />
-            <TerminologyModal
+            <SASContentModal
                 show={modalShow}
                 onHide={() => {
                     setModalShow(false)
@@ -185,4 +186,4 @@ const Terminology = () => {
     )
 }
 
-export default Terminology
+export default ShortAndSimpleContent

@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: 'Enquiry',
-    path: '/admin/enquiry',
+    path: '/short-and-simple',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },
