@@ -1,3 +1,5 @@
+export const BASEURL="https://ic38.herokuapp.com"
+
 
 export const successToast = {
     position: "bottom-center",

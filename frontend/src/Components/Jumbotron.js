@@ -7,7 +7,7 @@ const Jumbotron = (props) => {
         <div className="jumbotron square p-5 mb-4 ">
             <Row>
                 <Col lg={3} className='text-center'>
-                    <Link to="/admin" className="btn btn-light my-3">
+                    <Link to="/admin" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
                         Go Back
                     </Link>
                 </Col>
@@ -16,9 +16,16 @@ const Jumbotron = (props) => {
                 </Col>
                 {
                     props.buttonName ?
+                    <>
                         <Col lg={3} className='text-center'>
+                            <Row className='m-2'>
                             <Button size='md' style={{backgroundColor:"#E86100",border:0}} onClick={props.submitHandler}>{props.buttonName} </Button>
+                            </Row>
+                            <Row className='m-2'>
+                        {props.bulkButton && <Button size='md' style={{backgroundColor:"#E86100",border:0}} onClick={props.bulkHandler}>{props.bulkButton} </Button>
+                        }</Row>
                         </Col>
+                        </>
                         : ""
                 }
 

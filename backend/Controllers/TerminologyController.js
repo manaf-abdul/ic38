@@ -28,7 +28,22 @@ export const getTerminologies=async(req,res)=>{
         const {category,language}=req.params
         if(!category || !language)  return res.status(200).json({ errorcode: 1, status: false, msg: "Category & Language should be present", data: null })
         let data=await Terminology.find({language:language,superCategory:category}).sort({ title: 1 }).collation({ locale: "en", caseLevel: true })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Concept Chapter Found", data: data });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Terminology Found", data: data });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const editTerminologies=async(req,res)=>{
+    try {
+        const {language,superCategory,description,title,_id}=req.body
+        let term=await Terminology.findOne({_id:_id})
+        if(!term) return res.status(200).json({ errorcode: 1, status: false, msg: "Terminology not  Found", data: data });
+        term.title=title?title:term.title
+        term.description=description?description:term.description
+        term=await term.save()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "terminology updated Successfully", data: term });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });

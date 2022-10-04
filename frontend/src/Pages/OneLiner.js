@@ -17,8 +17,14 @@ const OneLiners = () => {
   const [name, setName] = useState('')
   const [render, setRender] = useState(false)
   const [x, setX] = useState()
+  const [bulk, setBulk] = useState(false)
 
   const submitHandler = () => {
+    setModalShow(true)
+  }
+
+  const bulkHandler = () => {
+    setBulk(true)
     setModalShow(true)
   }
 
@@ -63,32 +69,41 @@ const OneLiners = () => {
     }
   })
 
+  const fetchData = useCallback(async () => {
+    const { data } = await axios.get(`https://ic38.herokuapp.com/api/one-liners/${category}/${language}`)
+    console.log("data", data)
+    setOneLinerData(data.data)
+  }, [])
+
 
   useEffect(() => {
     setEdit()
     if (render) setRender(false)
-    async function fetchData() {
-      const { data } = await axios.get(`https://ic38.herokuapp.com/api/one-liners/${category}/${language}`)
-      console.log("data", data)
-      setOneLinerData(data.data)
-    }
+
     fetchData()
   }, [category, language, render])
   return (
     <>
       {/* <h1>Category : {category}   language:{language}</h1> */}
 
-      {/* <Jumbotron
-        name={"One-Liners"}
-        buttonName={"Add/Edit Oneliner"}
-        submitHandler={() => submitHandler()} /> */}
+      <Jumbotron
+        name={"Demo "}
+        buttonName={"Add/Edit"}
+        bulkButton={'Bulk Add'}
+        submitHandler={() => submitHandler()}
+        bulkHandler={() => bulkHandler()}
+      />
 
       <Container>
 
         <OneLinerModal
           show={modalShow}
-          onHide={() => setModalShow(false)}
-        // setRender={() => setRender(true)}
+          onHide={() => {
+            setModalShow(false)
+            setBulk(false)
+          }}
+          setRender={() => setRender(true)}
+          bulk={bulk}
         />
 
         <ConfirmModal
@@ -97,7 +112,7 @@ const OneLiners = () => {
           deletehandler={() => deletehandler()}
         />
 
-        {onelinerData && onelinerData.map((x, index) => (
+        {onelinerData && onelinerData.length > 0 ? onelinerData.map((x, index) => (
           <Card key={x._id}>
             <Card.Body>
               <Row>
@@ -147,13 +162,16 @@ const OneLiners = () => {
                       <Button className='m-2' variant='danger' size="sm" onClick={() => deleteHandler(x)}>Delete</Button>
                     </>
                   }
-                 
+
                 </Col>
               </Row>
             </Card.Body>
           </Card>
         )
-        )}
+        )
+          :
+          <h4 className='text-center'>No Data Found</h4>
+        }
 
       </Container>
     </>

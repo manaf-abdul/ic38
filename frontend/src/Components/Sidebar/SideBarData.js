@@ -30,19 +30,19 @@ export const SidebarData = [
   },
   {
     title: 'Batch',
-    path: '/admin/batch',
+    path: '/terminology',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
   },
   {
-    title: 'Webinars',
-    path: '/admin/webinars',
+    title: 'Language',
+    path: '/language',
     icon: <IoIcons.IoIosCamera />,
     cName: 'nav-text'
   },
   {
     title: 'Category',
-    path: '/admin/category',
+    path: '/category',
     icon: <AiIcons.AiFillTags />,
     cName: 'nav-text'
   },
