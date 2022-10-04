@@ -37,3 +37,38 @@ export const getOneLiners = async (req, res) => {
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
     }
 }
+
+export const editOneLiner = async (req, res) => {
+    console.log("============EDIT oneliner===========");
+    console.log("req.body",req.body);
+    try {
+        // const {category,language}=req.params
+        const {content,_id,language,category}=req.body
+        if(!category || !language)  return res.status(200).json({ errorcode: 1, status: false, msg: "Category & Language should be present", data: null })
+        let oneLiner = await OneLiner.findOne({language:language,superCategory:category,_id:_id})
+        if(!oneLiner)  return res.status(200).json({ errorcode: 1, status: false, msg: "Pne-Liner Not Found", data: null })
+        oneLiner.content=content?content:oneLiner.content
+        oneLiner=await oneLiner.save()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "One-Liner Updated Successfully", data: oneLiner });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const deleteOneLiner = async (req, res) => {
+    console.log("============DELETE oneliner===========");
+    console.log("req.body",req.body);
+    try {
+        // const {category,language}=req.params
+        const {content,_id,language,category}=req.body
+        if(!category || !language)  return res.status(200).json({ errorcode: 1, status: false, msg: "Category & Language should be present", data: null })
+        let oneLiner = await OneLiner.findOne({language:language,superCategory:category,_id:_id})
+        if(!oneLiner)  return res.status(200).json({ errorcode: 1, status: false, msg: "One-Liner Not Found", data: null })
+        await OneLiner.deleteOne({language:language,superCategory:category,_id:_id})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "One-Liner Deleted Successfully", data: null });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}

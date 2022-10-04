@@ -25,10 +25,10 @@ const OneLinerModal = (props) => {
                 }
                 const { data } = await axios.post(`http://localhost:5002/api/one-liners/${category}/${language}`, formData)
                 if (data.errorcode === 0) {
-                    toast.success(`🦄 ${data.msg}!`, successToast);
-                  } else {
-                    toast.warn(`🦄 ${data.msg}!`, warningToast);
-                  }
+                    // toast.success(`🦄 ${data.msg}!`, successToast);
+                } else {
+                    // toast.warn(`🦄 ${data.msg}!`, warningToast);
+                }
             } catch (error) {
                 console.log(error)
             }
@@ -44,46 +44,46 @@ const OneLinerModal = (props) => {
 
     return (
         <>
-        <ToastContainer />
-        <Modal
-            {...props}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
+            {/* <ToastContainer /> */}
+            <Modal
+                {...props}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
 
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Add/Edit One-Liners
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Row>
-                    <Col xs={10} lg={10} xl={10}>
-                        <Form.Group controlId='name'>
-                            <Form.Label>File</Form.Label>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Add/Edit One-Liners
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Row>
+                        <Col xs={10} lg={10} xl={10}>
+                            <Form.Group controlId='name'>
+                                <Form.Label>File</Form.Label>
 
-                            <Form.Control
-                                type="file"
-                                className='file-input-box'
-                                size='md'
-                                width="50px"
-                                name="imageOne"
-                                onChange={(e) => uploadFileHandler(e)}
-                                accept=".xlsx"
-                            ></Form.Control>
-                        </Form.Group>
-                    </Col>
-                </Row>
+                                <Form.Control
+                                    type="file"
+                                    className='file-input-box'
+                                    size='md'
+                                    width="50px"
+                                    name="imageOne"
+                                    onChange={(e) => uploadFileHandler(e)}
+                                    accept=".xlsx"
+                                ></Form.Control>
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
-            </Modal.Body>
-            <Modal.Footer className='align-items-center'>
-                <Button onClick={() => editHandler()} variant="success" size="md">Upload</Button>
-                <Button onClick={props.onHide} variant="danger" size="md">No</Button>
-            </Modal.Footer>
-        </Modal>
+                </Modal.Body>
+                <Modal.Footer className='align-items-center'>
+                    <Button onClick={() => editHandler()} variant="success" size="md">Upload</Button>
+                    <Button onClick={props.onHide} variant="danger" size="md">No</Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }
 
-export default OneLinerModal
+export default React.memo(OneLinerModal)
