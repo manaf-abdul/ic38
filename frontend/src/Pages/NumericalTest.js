@@ -2,34 +2,59 @@ import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import Jumbotron from '../Components/Jumbotron'
+import NumericalTestModal from '../Components/Modals/NumericalTestModal'
 import { BASEURL } from '../Constants'
+import { CartState } from '../Context'
 
 const NumericalTest = () => {
-    const [language, setLanguage] = useState([])
+    const { category, language } = CartState()
+    const [testData, setTestData] = useState([])
+    const [modalShow, setModalShow] = useState(false)
+    const [bulk, setBulk] = useState(false)
+    const [render, setRender] = useState(false)
 
-
-    const getCategoryData = useCallback(async () => {
-        const { data } = await axios.get(`${BASEURL}/api/language`)
+    const getTestData = useCallback(async () => {
+        const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}`)
         console.log("Category data", data)
-        setLanguage(data.data)
+        setTestData(data.data)
     }, [])
 
+    const submitHandler = () => {
+        setModalShow(true)
+    }
+    const bulkHandler = () => {
+        setBulk(true)
+        setModalShow(true)
+    }
+
     useEffect(() => {
-        getCategoryData()
+        getTestData()
     }, [])
 
     return (
         <>
             <Jumbotron
-                name={"Numerical Test "}
-                buttonName={"Add Numerical Test"}
-            // submitHandler={() => submitHandler()} 
+                name={" Test xxxx"}
+                buttonName={"Add Test"}
+                bulkButton={'Bulk Add'}
+                submitHandler={() => submitHandler()}
+                bulkHandler={() => bulkHandler()}
+
+            />
+            <NumericalTestModal
+                show={modalShow}
+                onHide={() => {
+                    setModalShow(false)
+                    setBulk(false)
+                }}
+                setRender={() => setRender(true)}
+                bulk={bulk}
             />
             <Container>
                 <Row>
                     {
-                        language && language.length > 0 ?
-                            language.map(cate => (
+                        testData && testData.length > 0 ?
+                            testData.map(cate => (
                                 <Col key={cate._id} sm={12} md={6} lg={4} xl={3}>
                                     <Card className="rounded my-3 p-3 productCard mb-3">
                                         <Card.Body>
@@ -46,7 +71,7 @@ const NumericalTest = () => {
                                 </Col>
                             ))
                             :
-                            "Categories Empty"
+                            "Test Empty"
                     }
                 </Row>
             </Container>
