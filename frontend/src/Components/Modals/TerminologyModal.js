@@ -45,7 +45,7 @@ const TerminolgyModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`http://localhost:5002/api/terminology`, formData)
+                const { data } = await axios.post(`http://localhost:5002/api/terminology`, formData,config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()

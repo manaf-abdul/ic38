@@ -18,7 +18,7 @@ export const SidebarData = [
   },
   {
     title: 'Blog',
-    path: '/admin/view-blog-posts',
+    path: '/numericaltest',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },

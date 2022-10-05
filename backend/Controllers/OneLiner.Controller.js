@@ -5,9 +5,11 @@ export const postOneLiners = async (req, res) => {
     try {
         await OneLiner.deleteMany()
         const {category,language}=req.params
+        const{isDelete}=req.body
         console.log("req.body", req.body.language)
         console.log("req.file", req.file)
         if (!req.file) return res.status(200).json({ errorcode: 0, status: false, msg: "File not present", data: null })
+        if(isDelete) await OneLiner.deleteMany()
         const fileData = fileParser(req.file.buffer)
         if (!fileData) return res.status(200).json({ errorcode: 0, status: false, msg: "Error Reading your file", data: null })
         let data = fileData[0].data.map(x => {

@@ -84,7 +84,7 @@ const ShortAndSimple = () => {
       {/* <h1>Category : {category}   language:{language}</h1> */}
 
       <Jumbotron
-        name={"Enquiry"}
+        name={"Short & Simple"}
         buttonName={"Add/Edit"}
         submitHandler={() => submitHandler()}
       />

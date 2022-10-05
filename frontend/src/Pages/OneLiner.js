@@ -87,8 +87,8 @@ const OneLiners = () => {
       {/* <h1>Category : {category}   language:{language}</h1> */}
 
       <Jumbotron
-        name={"Demo "}
-        buttonName={"Add/Edit"}
+        name={"One-Liners "}
+        buttonName={"Add/Edit One-LIners"}
         bulkButton={'Bulk Add'}
         submitHandler={() => submitHandler()}
         bulkHandler={() => bulkHandler()}

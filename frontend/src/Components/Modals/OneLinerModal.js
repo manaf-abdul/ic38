@@ -12,10 +12,11 @@ const OneLinerModal = (props) => {
 
     const [file, setFile] = useState()
     const [content, setContent] = useState('')
+    const [isDelete, setIsDelete] = useState(false)
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`http://localhost:5002/api/one-liners/add`, {content:content,language:language,category:category})
+            const { data } = await axios.post(`http://localhost:5002/api/one-liners/add`, { content: content, language: language, category: category })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -25,7 +26,7 @@ const OneLinerModal = (props) => {
                 toast.warn(`🦄 ${data.msg}!`, warningToast);
             }
         } catch (error) {
-            toast.error(`${error.message}`,errorToast)
+            toast.error(`${error.message}`, errorToast)
         }
     }
 
@@ -33,6 +34,7 @@ const OneLinerModal = (props) => {
         try {
             const formData = new FormData()
             formData.append('file', file)
+            formData.append('isDelete', isDelete)
             try {
                 const config = {
                     headers: {
@@ -40,7 +42,7 @@ const OneLinerModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`http://localhost:5002/api/one-liners/${category}/${language}`, formData)
+                const { data } = await axios.post(`http://localhost:5002/api/one-liners/${category}/${language}`, formData,config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()
@@ -81,19 +83,32 @@ const OneLinerModal = (props) => {
                     <Row>
                         <Col xs={10} lg={10} xl={10}>
                             {props.bulk ?
-                                <Form.Group controlId='name'>
-                                    <Form.Label>File</Form.Label>
+                                <>
+                                    <Form.Group controlId='name'>
+                                        <Form.Label>File</Form.Label>
 
-                                    <Form.Control
-                                        type="file"
-                                        className='file-input-box'
-                                        size='md'
-                                        width="50px"
-                                        name="imageOne"
-                                        onChange={(e) => uploadFileHandler(e)}
-                                        accept=".xlsx"
-                                    ></Form.Control>
-                                </Form.Group>
+                                        <Form.Control
+                                            type="file"
+                                            className='file-input-box'
+                                            size='md'
+                                            width="50px"
+                                            name="imageOne"
+                                            onChange={(e) => uploadFileHandler(e)}
+                                            accept=".xlsx"
+                                        ></Form.Control>
+                                    </Form.Group>
+                                    <Form.Group controlId='name' className='pt-4 m-1'>
+                                        <Form.Check
+                                            type="switch"
+                                            id="custom-switch"
+                                            value={isDelete}
+                                            label={isDelete ? <span style={{ color: "red", fontWeight: "bold" }}>Delete previous datas</span>
+                                                : <span style={{}}>Delete previous datas... Please confirm </span>
+                                            }
+                                            onChange={(e) => setIsDelete(!isDelete)}
+                                        />
+                                    </Form.Group>
+                                </>
                                 :
                                 <Form.Group controlId='brand' className='pb-4'>
                                     <Form.Label>Content</Form.Label>

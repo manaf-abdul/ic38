@@ -4,8 +4,9 @@ import { fileParser } from "../utils/fileParser.js"
 export const postTerminology=async(req,res)=>{
     try {
         if(!req.file) return res.status({errorcode:1,status:false,msg:"File is required",data:null})
-        const {language,superCategory}=req.body
+        const {language,superCategory,isDelete}=req.body
         console.log(req.body)
+        if(isDelete) await Terminology.deleteMany({})
         let data = fileParser(req.file.buffer)
         data=data[0].data.map(x=>{
             return{
@@ -24,6 +25,7 @@ export const postTerminology=async(req,res)=>{
 }
 
 export const getTerminologies=async(req,res)=>{
+    console.log("---------getTerminologies--------------");
     try {
         const {category,language}=req.params
         if(!category || !language)  return res.status(200).json({ errorcode: 1, status: false, msg: "Category & Language should be present", data: null })

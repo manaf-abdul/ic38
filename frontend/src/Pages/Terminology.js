@@ -86,7 +86,7 @@ const Terminology = () => {
     return (
         <>
             <Jumbotron
-                name={"Course "}
+                name={"Terminology "}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}

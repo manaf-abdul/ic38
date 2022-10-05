@@ -4,7 +4,7 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import Jumbotron from '../Components/Jumbotron'
 import { BASEURL } from '../Constants'
 
-const Language = () => {
+const NumericalTest = () => {
     const [language, setLanguage] = useState([])
 
 
@@ -21,8 +21,8 @@ const Language = () => {
     return (
         <>
             <Jumbotron
-                name={"Language "}
-                buttonName={"Add Language"}
+                name={"Numerical Test "}
+                buttonName={"Add Numerical Test"}
             // submitHandler={() => submitHandler()} 
             />
             <Container>
@@ -54,4 +54,4 @@ const Language = () => {
     )
 }
 
-export default Language
+export default NumericalTest
