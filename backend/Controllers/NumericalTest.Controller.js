@@ -103,3 +103,54 @@ export const deleteNumericalTest = async (req, res) => {
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
     }
 }
+
+export const addNewQuestion = async (req, res) => {
+    console.log("============Add addNewQuestion===========");
+    console.log("req.body",req.body);
+    try {
+        const {id}=req.params
+        const {q,o1,o2,o3,o4,a}=req.body
+        let numTest = await NumericalTest.findOne({_id:_id})
+        if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        let updateObj={q,o1,o2,o3,o4,a}
+        await NumericalTest.updateOne({_id:_id},{$push:{qAndA:updateObj}})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const deleteQuestion = async (req, res) => {
+    console.log("============deleteQuestion===========");
+    console.log("req.body",req.body);
+    try {
+        const {id}=req.params
+        const {q,o1,o2,o3,o4,a,_id}=req.body
+        let numTest = await NumericalTest.findOne({_id:_id})
+        if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        let updateObj={q,o1,o2,o3,o4,a}
+        await NumericalTest.updateOne({_id:_id},{$pull:{qAndA:_id}})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const editQuestion = async (req, res) => {
+    console.log("============editQuestion===========");
+    console.log("req.body",req.body);
+    try {
+        const {id}=req.params
+        const {q,o1,o2,o3,o4,a,_id}=req.body
+        let numTest = await NumericalTest.findOne({_id:_id})
+        if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        let updateObj={q,o1,o2,o3,o4,a}
+        await NumericalTest.updateOne({_id:_id},{$pull:{qAndA:_id}})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}

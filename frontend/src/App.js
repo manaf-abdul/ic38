@@ -2,8 +2,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import CommonRoutes from './CommonRoutes';
-import SideBar from './Components/SideBar/SideBar';
-import { ToastContainer } from 'react-toastify';
+// import SideBar from './Components/SideBar/SideBar';
+// import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (

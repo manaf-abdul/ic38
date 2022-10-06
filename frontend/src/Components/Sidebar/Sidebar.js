@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import axios from 'axios';
 import { CartState } from '../../Context';
+import { BASEURL } from '../../Constants';
 
 function SideBar() {
 
@@ -22,14 +23,14 @@ function SideBar() {
     const [languges, setLanguges] = useState()
 
     const fetchCatData=useCallback(async () => {
-        const { data } = await axios.get('https://ic38.herokuapp.com/api/supercategories')
+        const { data } = await axios.get(`${BASEURL}/api/supercategories`)
             setCategories(data.data)
             console.log("data", data)
             setCategory(data.data[0]._id)
     },[])
 
     const fetchlangData=useCallback(async () => {
-        const { data } = await axios.get('https://ic38.herokuapp.com/api/language')
+        const { data } = await axios.get(`${BASEURL}/api/language`)
             setLanguges(data.data)
             console.log("data", data)
             setLanguage(data.data[0]._id)
