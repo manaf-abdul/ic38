@@ -1,82 +1,182 @@
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
-import { Button, Card, Col, Container, Row } from 'react-bootstrap'
+import { Accordion, Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
-import NumericalTestModal from '../Components/Modals/NumericalTestModal'
-import { BASEURL } from '../Constants'
+import ConfirmModal from '../Components/Modals/ConfirmModal'
+import NewNumTestModal from '../Components/Modals/NewNumTestModal'
+import SASCategoryModal from '../Components/Modals/SASCategoryModal'
+import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
 const NumericalTest = () => {
-    const { category, language } = CartState()
-    const [testData, setTestData] = useState([])
-    const [modalShow, setModalShow] = useState(false)
-    const [bulk, setBulk] = useState(false)
-    const [render, setRender] = useState(false)
+  const { category, language } = CartState()
+  const [onelinerData, setOneLinerData] = useState()
+  const [modalShow, setModalShow] = useState(false)
+  const [confirmModalShow, setConfirmModalShow] = useState(false)
+  const [edit, setEdit] = useState('')
+  const [name, setName] = useState('')
+  const [render, setRender] = useState(false)
+  const [x, setX] = useState()
+  const [bulk, setBulk] = useState(false)
 
-    const getTestData = useCallback(async () => {
-        const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}`)
-        console.log("Category data", data)
-        setTestData(data.data)
-    }, [])
+  const submitHandler = () => {
+    setModalShow(true)
+  }
 
-    const submitHandler = () => {
-        setModalShow(true)
+
+  const editHandler = async (e) => {
+    try {
+      const { data } = await axios.post('http://localhost:5002/api/numericaltest/edit',
+        { _id: e._id, name: name, category: e.superCategory, language: e.language })
+      if (data.errorcode === 0) {
+        console.log("inside");
+        toast.success(`🦄 ${data.msg}!`, successToast);
+        setRender(true)
+        setEdit()
+      } else {
+        toast.warn(`🦄 ${data.msg}!`, warningToast);
+      }
+    } catch (error) {
+      toast.error(`🦄 ${error.message}!`, errorToast);
     }
-    const bulkHandler = () => {
-        setBulk(true)
-        setModalShow(true)
+  }
+
+  const deleteHandler = useCallback(async (z) => {
+    setConfirmModalShow(true)
+    setX(z)
+
+  })
+
+  const deletehandler = useCallback(async () => {
+    try {
+      const { data } = await axios.post('http://localhost:5002/api/numericaltest/delete',
+        { _id: x._id, name: name, category: x.superCategory, language: x.language }
+      )
+      if (data.errorcode === 0) {
+        console.log("inside");
+        toast.success(`🦄 ${data.msg}!`, successToast);
+        setRender(true)
+        setConfirmModalShow(false)
+      } else {
+        toast.warn(`🦄 ${data.msg}!`, warningToast);
+      }
+    } catch (error) {
+      toast.error(`🦄 ${error.message}!`, errorToast);
     }
+  })
 
-    useEffect(() => {
-        getTestData()
-    }, [])
+  const fetchData = useCallback(async () => {
+    const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}`)
+    console.log("data", data)
+    setOneLinerData(data.data)
+  }, [])
 
-    return (
-        <>
-            <Jumbotron
-                name={" Test xxxx"}
-                buttonName={"Add Test"}
-                bulkButton={'Bulk Add'}
-                submitHandler={() => submitHandler()}
-                bulkHandler={() => bulkHandler()}
 
-            />
-            <NumericalTestModal
-                show={modalShow}
-                onHide={() => {
-                    setModalShow(false)
-                    setBulk(false)
-                }}
-                setRender={() => setRender(true)}
-                bulk={bulk}
-            />
-            <Container>
-                <Row>
-                    {
-                        testData && testData.length > 0 ?
-                            testData.map(cate => (
-                                <Col key={cate._id} sm={12} md={6} lg={4} xl={3}>
-                                    <Card className="rounded my-3 p-3 productCard mb-3">
-                                        <Card.Body>
-                                            <Row>
-                                                <Col>
-                                                    <Card.Title as='div'><strong>{cate.name}</strong></Card.Title>
-                                                </Col>
-                                                <Col className='d-flex justify-content-end'>
-                                                    <Button>Edit</Button>
-                                                </Col>
-                                            </Row>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            ))
-                            :
-                            "Test Empty"
-                    }
-                </Row>
-            </Container>
-        </>
-    )
+  useEffect(() => {
+    setEdit()
+    if (render) setRender(false)
+
+    fetchData()
+  }, [category, language, render])
+  return (
+    <>
+      {/* <h1>Category : {category}   language:{language}</h1> */}
+
+      <Jumbotron
+        name={"Short & Simple"}
+        buttonName={"Add/Edit"}
+        submitHandler={() => submitHandler()}
+      />
+
+      <Container>
+
+        <NewNumTestModal
+          show={modalShow}
+          onHide={() => {
+            setModalShow(false)
+            setBulk(false)
+          }}
+          setRender={() => setRender(true)}
+          bulk={bulk}
+        />
+
+        <ConfirmModal
+          show={confirmModalShow}
+          onHide={() => setConfirmModalShow(false)}
+          deletehandler={() => deletehandler()}
+        />
+        <Row className='m-2'>
+          {onelinerData && onelinerData.length > 0 ? onelinerData.map((x, index) => (
+            
+            <Col key={x._id} sm={12} md={6} lg={6} xl={6} className='pb-3'>
+              <Card key={x._id}>
+                <Card.Body>
+                  <Row>
+                    <Col>
+                      {edit == index ?
+                        <>
+                          <Form.Label>Content</Form.Label>
+
+                          {/* <Form.Control
+                        type='name'
+                        placeholder='Enter name'
+                        value={name}
+                        // onBlur={() => setEdit()}
+                        autoFocus
+                        onChange={(e) => setName(e.target.value)}
+                      ></Form.Control> */}
+
+                          <InputGroup className="mb-3">
+                            <Form.Control
+                              type='name'
+                              placeholder='Enter name'
+                              value={name}
+                              autoFocus
+                              onChange={(e) => setName(e.target.value)}
+                            ></Form.Control>
+                            <Button className='mx-1' variant='success' size="sm" onClick={(e) => editHandler(x)}>Save</Button>
+                            <Button className='mx-1' variant='danger' size="sm" onClick={() => setEdit()}>Cancel</Button>
+                          </InputGroup>
+                        </> :
+                        <Link to={`${x._id}`}>
+                        <Card.Text className='h4'>{x.name}</Card.Text>
+                        </Link>
+                      }
+                    </Col>
+                    <Col className='d-flex justify-content-end'>
+                      {edit == index ?
+                        <Col>
+                          {/* <Button className='m-2 mt-4' variant='success' size="sm" onClick={(e) => editHandler(x)}>Save</Button>
+                      <Button className='m-2 mt-4' variant='danger' size="sm" onClick={() => setEdit()}>Cancel</Button> */}
+
+                        </Col>
+                        :
+                        <>
+                          <Button className='m-2' variant='success' size="sm" onClick={() => {
+                            setEdit(index)
+                            setName(x.name)
+                            { console.log("x.content", x.name) }
+                          }}>Edit</Button>
+                          <Button className='m-2' variant='danger' size="sm" onClick={() => deleteHandler(x)}>Delete</Button>
+                        </>
+                      }
+
+                    </Col>
+                  </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          )
+          )
+            :
+            <h4 className='text-center'>No Data Found</h4>
+          }
+        </Row>
+      </Container>
+    </>
+  )
 }
 
 export default NumericalTest

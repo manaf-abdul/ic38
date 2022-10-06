@@ -26,6 +26,27 @@ const userModel = new mongoose.Schema(
             type: String,
             default: null
         },
+        location:{
+            type: String,
+            default: null
+        },
+        qualification:{
+            type: String,
+            default: null
+        },
+        dateOfBirth:{
+            type: String,
+            default: null
+        },
+        income:{
+            type: Number,
+            default: null
+        },
+        panNumber:{
+            type: Number,
+            default: null
+        },
+        profilePic:{},
         bloodGroup:{
             type: String,
             default: null

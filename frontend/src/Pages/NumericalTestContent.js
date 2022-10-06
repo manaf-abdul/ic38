@@ -105,7 +105,7 @@ const ShortAndSimpleContent = () => {
             />
 
             <Container>
-                {console.log(numericalTestData?.length)}
+                {/* {console.log(numericalTestData?.length)}
                 {numericalTestData ? numericalTestData.map(term => (
                     console.log("inside.........")
                 //   <p>{term.name}</p>
@@ -113,7 +113,7 @@ const ShortAndSimpleContent = () => {
                     :
                     console.log("outside.........")
                     // <h4 className='text-center'>No Data Found</h4>
-                }
+                } */}
             </Container>
         </>
     )

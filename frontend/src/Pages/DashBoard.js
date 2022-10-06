@@ -13,7 +13,7 @@ const DashBoard = () => {
   console.log("language", language)
 
   return (
-      <Jumbotron name={"Batch"} />
+      <Jumbotron name={"Home"} />
   )
 }
 

@@ -26,7 +26,18 @@ export const postNumericalTest = async (req, res) => {
     }
 }
 
-export const getNumericalTest = async (req, res) => {
+// export const getNumericalTest = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         if (!id) return res.status(200).json({ errorcode: 0, status: false, msg: "Id is required", data: null })
+//         let data = await NumericalTest.findById(id)
+//         return res.status(200).json({ errorcode: 0, status: true, msg: "practise test found ", data: data })
+//     } catch (error) {
+//         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
+//     }
+// }
+
+export const getTestById = async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) return res.status(200).json({ errorcode: 0, status: false, msg: "Id is required", data: null })
@@ -38,9 +49,10 @@ export const getNumericalTest = async (req, res) => {
 }
 
 export const getAllNumericalTest = async (req, res) => {
+    console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     try {
         const { category, language } = req.params;
-        let data = await NumericalTest.find({ superCategory: category, language: language }, { name: 1, slug: 1, description: 1 })
+        let data = await NumericalTest.find({ superCategory: category, language: language })
         return res.status(200).json({ errorcode: 0, status: true, msg: "Numerpractise test found ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
@@ -49,31 +61,45 @@ export const getAllNumericalTest = async (req, res) => {
 
 export const editNumericalTest = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { name, description } = req.body;
-        if (!id) return res.status(200).json({ errorcode: 0, status: false, msg: "Id is required", data: null })
-        if (!req.file) return res.status(200).json({ errorcode: 1, status: false, msg: "File Not Present", data: null })
-        let test = await NumericalTest.findById(id)
-        if (!test) return res.status(200).json({ errorcode: 0, status: false, msg: "mock test not found", data: null })
-        const fileData = fileParser(req.file.buffer)
-        test.name = name ? name : test.name;
-        if (name) test.slug = slugify(name)
-        test.description = description ? description : test.description;
-        test.qAndA = req.file && fileData ? fileData[0].data : test.qAndA;
-        test.numberOfQes = req.file && fileData ? fileData[0].data.length : test.numberOfQes;
+        const { name,_id } = req.body;
+        if (!_id) return res.status(200).json({ errorcode: 1, status: false, msg: "Id is required", data: null })
+        let test = await NumericalTest.findById(_id)
+        if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "Numerical test not found", data: null })
+        let testEx=await NumericalTest.findOne({name:name})
+        if (testEx) return res.status(200).json({ errorcode: 3, status: false, msg: "Name is in use", data: null })
+        test.name=name?name:test.name
         test = await test.save()
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical test found ", data: test })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical test Updated Successfully", data: test })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
 }
 
-export const postSingleNumericalTest = async (req, res) => {
+export const postNewNumericalTest = async (req, res) => {
     try {
         console.log(req.body);
-        const { q1,a,option,category,language } = req.body;
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical test found ", data: test })
+        const { name } = req.body;
+        const { category, language } = req.params;
+        let test=new NumericalTest({name,superCategory:category,language})
+        test=await test.save()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "New Numerical test created ", data: test })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
+    }
+}
+
+export const deleteNumericalTest = async (req, res) => {
+    console.log("============DELETE Num TEst===========");
+    console.log("req.body",req.body);
+    try {
+        // const {category,language}=req.params
+        const {name,_id,language,category}=req.body
+        let SASCat = await NumericalTest.findOne({language:language,superCategory:category,_id:_id})
+        if(!SASCat)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        await NumericalTest.deleteOne({language:language,superCategory:category,_id:_id})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test  Deleted Successfully", data: null });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
     }
 }
