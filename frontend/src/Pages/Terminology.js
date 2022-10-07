@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import TerminologyModal from '../Components/Modals/TerminologyModal'
-import { errorToast, successToast, warningToast } from '../Constants'
+import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
 const Terminology = () => {
@@ -18,7 +18,7 @@ const Terminology = () => {
     const [bulk, setBulk] = useState(false)
 
     const fetchData = useCallback(async () => {
-        const { data } = await axios.get(`https://ic38.herokuapp.com/api/terminology/${category}/${language}`)
+        const { data } = await axios.get(`${BASEURL}/api/terminology/${category}/${language}`)
         console.log("data", data)
         setTerminologyData(data.data)
     }, [])

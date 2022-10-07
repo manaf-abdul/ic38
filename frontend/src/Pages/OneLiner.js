@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import ConfirmModal from '../Components/Modals/ConfirmModal'
 import OneLinerModal from '../Components/Modals/OneLinerModal'
-import { errorToast, successToast, warningToast } from '../Constants'
+import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
 const OneLiners = () => {
@@ -70,7 +70,7 @@ const OneLiners = () => {
   })
 
   const fetchData = useCallback(async () => {
-    const { data } = await axios.get(`https://ic38.herokuapp.com/api/one-liners/${category}/${language}`)
+    const { data } = await axios.get(`${BASEURL}/api/one-liners/${category}/${language}`)
     console.log("data", data)
     setOneLinerData(data.data)
   }, [])
