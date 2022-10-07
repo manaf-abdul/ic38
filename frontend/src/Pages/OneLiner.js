@@ -30,7 +30,7 @@ const OneLiners = () => {
 
   const editHandler = async (e) => {
     try {
-      const { data } = await axios.post('http://localhost:5002/api/one-liners/edit',
+      const { data } = await axios.post(`${BASEURL}/api/one-liners/edit`,
         { _id: e._id, content: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
         console.log("inside");
@@ -53,7 +53,7 @@ const OneLiners = () => {
 
   const deletehandler = useCallback(async () => {
     try {
-      const { data } = await axios.post('http://localhost:5002/api/one-liners/delete',
+      const { data } = await axios.post(`${BASEURL}/api/one-liners/delete`,
         { _id: x._id, content: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {

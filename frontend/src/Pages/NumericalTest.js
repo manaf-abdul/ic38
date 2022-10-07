@@ -28,7 +28,7 @@ const NumericalTest = () => {
 
   const editHandler = async (e) => {
     try {
-      const { data } = await axios.post('http://localhost:5002/api/numericaltest/edit',
+      const { data } = await axios.post(`${BASEURL}/api/numericaltest/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
         console.log("inside");
@@ -51,7 +51,7 @@ const NumericalTest = () => {
 
   const deletehandler = useCallback(async () => {
     try {
-      const { data } = await axios.post('http://localhost:5002/api/numericaltest/delete',
+      const { data } = await axios.post(`${BASEURL}/api/numericaltest/delete`,
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {

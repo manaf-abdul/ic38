@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { toast, ToastContainer } from 'react-toastify';
-import { errorToast, successToast, warningToast } from '../../Constants';
+import { BASEURL, errorToast, successToast, warningToast } from '../../Constants';
 import { CartState } from '../../Context';
 import { produce } from "immer";
 import { generate } from "shortid";
@@ -29,7 +29,7 @@ const NumericalTestModal = (props) => {
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`http://localhost:5002/api/numericaltest/question/add`, { q: question, a: answer, option: who, category: category, language: language, id: props?.edit?._id })
+            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/add`, { q: question, a: answer, option: who, category: category, language: language, id: props?.edit?._id })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 // props?.setRender()
@@ -47,7 +47,7 @@ const NumericalTestModal = (props) => {
 
     const editSingleHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`http://localhost:5002/api/numericaltest/question/edit`, { q: question, a: answer, o1,o2,o3,o4, category: category, language: language, id: params.id })
+            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/edit`, { q: question, a: answer, o1,o2,o3,o4, category: category, language: language, id: params.id })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 // props?.setRender()
@@ -77,7 +77,7 @@ const NumericalTestModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`http://localhost:5002/api/terminology`, formData, config)
+                const { data } = await axios.post(`${BASEURL}/api/terminology`, formData, config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props?.setRender()

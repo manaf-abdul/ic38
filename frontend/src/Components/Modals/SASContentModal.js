@@ -52,7 +52,7 @@ const SASContentModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`http://localhost:5002/api/short-and-simple`, formData,config)
+                const { data } = await axios.post(`${BASEURL}/api/short-and-simple`, formData,config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()

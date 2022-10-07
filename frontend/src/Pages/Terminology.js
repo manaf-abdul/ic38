@@ -26,7 +26,7 @@ const Terminology = () => {
     const editHandler = async () => {
         console.log(name)
         try {
-            const { data } = await axios.post('http://localhost:5002/api/terminology/edit',
+            const { data } = await axios.post(`${BASEURL}/api/terminology/edit`,
                 name)
             if (data.errorcode === 0) {
                 console.log("inside");
@@ -43,7 +43,7 @@ const Terminology = () => {
 
     const deleteHandler = async (x) => {
         try {
-            const { data } = await axios.post('http://localhost:5002/api/terminology/delete',
+            const { data } = await axios.post(`${BASEURL}/api/terminology/delete`,
                 x)
             if (data.errorcode === 0) {
                 console.log("inside");

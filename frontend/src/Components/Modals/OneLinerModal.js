@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { toast, ToastContainer } from 'react-toastify';
-import { errorToast, successToast, warningToast } from '../../Constants';
+import { BASEURL, errorToast, successToast, warningToast } from '../../Constants';
 import { CartState } from '../../Context';
 
 const OneLinerModal = (props) => {
@@ -16,7 +16,7 @@ const OneLinerModal = (props) => {
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`http://localhost:5002/api/one-liners/add`, { content: content, language: language, category: category })
+            const { data } = await axios.post(`${BASEURL}/api/one-liners/add`, { content: content, language: language, category: category })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -42,7 +42,7 @@ const OneLinerModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`http://localhost:5002/api/one-liners/${category}/${language}`, formData,config)
+                const { data } = await axios.post(`${BASEURL}/api/one-liners/${category}/${language}`, formData,config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()

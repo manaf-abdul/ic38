@@ -27,7 +27,7 @@ const ShortAndSimpleContent = () => {
     const editHandler = async () => {
         console.log(name)
         try {
-            const { data } = await axios.post('http://localhost:5002/api/short-and-simple/data/edit',
+            const { data } = await axios.post(`${BASEURL}/api/short-and-simple/data/edit`,
                 name)
             if (data.errorcode === 0) {
                 console.log("inside");
@@ -44,7 +44,7 @@ const ShortAndSimpleContent = () => {
 
     const deleteHandler = async (x) => {
         try {
-            const { data } = await axios.post('http://localhost:5002/api/short-and-simple/data/delete',
+            const { data } = await axios.post(`${BASEURL}/api/short-and-simple/data/delete`,
                 x)
             if (data.errorcode === 0) {
                 console.log("inside");

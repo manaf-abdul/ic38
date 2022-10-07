@@ -27,7 +27,7 @@ const ShortAndSimple = () => {
 
   const editHandler = async (e) => {
     try {
-      const { data } = await axios.post('http://localhost:5002/api/short-and-simple/edit',
+      const { data } = await axios.post(`${BASEURL}/api/short-and-simple/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
         console.log("inside");
@@ -50,7 +50,7 @@ const ShortAndSimple = () => {
 
   const deletehandler = useCallback(async () => {
     try {
-      const { data } = await axios.post('http://localhost:5002/api/short-and-simple/delete',
+      const { data } = await axios.post(`${BASEURL}/api/short-and-simple/delete`,
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {

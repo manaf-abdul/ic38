@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { toast, ToastContainer } from 'react-toastify';
-import { errorToast, successToast, warningToast } from '../../Constants';
+import { BASEURL, errorToast, successToast, warningToast } from '../../Constants';
 import { CartState } from '../../Context';
 
 const TerminolgyModal = (props) => {
@@ -16,7 +16,7 @@ const TerminolgyModal = (props) => {
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`http://localhost:5002/api/terminology/add`, { title: title, description: description, category: category,language:language })
+            const { data } = await axios.post(`${BASEURL}/api/terminology/add`, { title: title, description: description, category: category,language:language })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -45,7 +45,7 @@ const TerminolgyModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`http://localhost:5002/api/terminology`, formData,config)
+                const { data } = await axios.post(`${BASEURL}/api/terminology`, formData,config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()
