@@ -22,7 +22,7 @@ const schema=new mongoose.Schema(
         numberOfQes:{
             type:String
         },
-        qAndA:[
+        qAndA:{type:[
                 {
                 q:{ type: String, default: null },
                 o1: { type: String, default: null },
@@ -31,7 +31,7 @@ const schema=new mongoose.Schema(
                 o4: { type: String, default: null },
                 a:{ type: String, default: null }
             }
-        ]
+        ]}
     },
     {
         timestamps:true

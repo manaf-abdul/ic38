@@ -22,7 +22,7 @@ const swaggerJSDocs = require("./swaggerApi.json") // use the require method}
 
 dotenv.config()
 const app = express()
-connectDB()
+await connectDB()
 
 app.use(morgan('dev'))
 app.use(cors());
