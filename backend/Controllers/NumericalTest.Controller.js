@@ -148,14 +148,14 @@ export const editQuestion = async (req, res) => {
     console.log("req.body", req.body);
     try {
         const { q, o1, o2, o3, o4, a, id } = req.body
-        let numTest = await NumericalTest.findOne(
+        let numTest = await NumericalTest.exist(
             {
                 "qAndA._id": mongoose.Types.ObjectId(id)
             }
         )
         console.log("numTest", numTest);
-        // if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
-        numTest = await NumericalTest.updateOne(
+        if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        numTest = await NumericalTest.findOneAndUpdate(
             { "qAndA._id": id },
             {
                 $set: {
@@ -166,8 +166,8 @@ export const editQuestion = async (req, res) => {
                     "qAndA.$.o4": o4,
                     "qAndA.$.o4": o4,
                 },
-            },
-            { new: true }
+            }
+            // { new: true }
         ).exec()
         return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Updated Successfully", data: null });
     } catch (e) {
