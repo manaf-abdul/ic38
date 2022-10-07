@@ -10,7 +10,7 @@ import { CartState } from '../Context'
 
 const ShortAndSimpleContent = () => {
     const { category, language } = CartState()
-    const params=useParams()
+    const params = useParams()
     const [numericalTestData, setNumericalTestData] = useState([])
     const [edit, setEdit] = useState('')
     const [name, setName] = useState('')
@@ -25,22 +25,24 @@ const ShortAndSimpleContent = () => {
         setNumericalTestData(data.data)
     }, [])
 
-    const editHandler = async () => {
-        console.log(name)
-        try {
-            const { data } = await axios.post('http://localhost:5002/api/short-and-simple/data/edit',
-                name)
-            if (data.errorcode === 0) {
-                console.log("inside");
-                toast.success(`🦄 ${data.msg}!`, successToast);
-                setRender(true)
-                setEdit()
-            } else {
-                toast.warn(`🦄 ${data.msg}!`, warningToast);
-            }
-        } catch (error) {
-            toast.error(`🦄 ${error.message}!`, errorToast);
-        }
+    const editHandler = async (x) => {
+        
+        setEdit(x)
+        setModalShow(true)
+        // try {
+        //     const { data } = await axios.post('http://localhost:5002/api/short-and-simple/data/edit',
+        //         name)
+        //     if (data.errorcode === 0) {
+        //         console.log("inside");
+        //         toast.success(`🦄 ${data.msg}!`, successToast);
+        //         setRender(true)
+        //         setEdit()
+        //     } else {
+        //         toast.warn(`🦄 ${data.msg}!`, warningToast);
+        //     }
+        // } catch (error) {
+        //     toast.error(`🦄 ${error.message}!`, errorToast);
+        // }
     }
 
     const deleteHandler = async (x) => {
@@ -83,7 +85,7 @@ const ShortAndSimpleContent = () => {
         if (render) setRender(false)
         setEdit()
         fetchData()
-    }, [category,language,render])
+    }, [category, language, render])
 
     return (
         <>
@@ -99,29 +101,39 @@ const ShortAndSimpleContent = () => {
                 onHide={() => {
                     setModalShow(false)
                     setBulk(false)
+                    setEdit()
                 }}
                 setRender={() => setRender(true)}
                 bulk={bulk}
+                edit={edit}
             />
 
             <Container>
-               <h4>{numericalTestData.name}</h4>
-               {numericalTestData.qAndA && numericalTestData.qAndA.length > 0 ?
-                numericalTestData?.qAndA?.map(test=>(
-                    <Card>
-                    <b>Question:</b><p>{test?.q}</p>
-                    <b>Options:</b>
-
-                    <p> <b>1: </b>{test?.o1}</p>
-                    <p><b>2: </b>{test?.o2}</p>
-                    <p><b>3: </b>{test?.o3}</p>
-                    <p><b>4: </b>{test?.o4}</p>
-                    <p><b>Ans: </b>{test?.a}</p>
-                    </Card>
-                ))
-                :
-                "No Q&A Found"
-            }
+                <h4>{numericalTestData.name}</h4>
+                {numericalTestData.qAndA && numericalTestData.qAndA.length > 0 ?
+                    numericalTestData?.qAndA?.map((test, index) => (
+                        <Accordion>
+                            <Accordion.Item eventKey={index}>
+                                <Accordion.Header>
+                                    <b>Question:</b><p>{test?.q}</p>
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                    <b>Options:</b>
+                                    <p> <b>1: </b>{test?.o1}</p>
+                                    <p><b>2: </b>{test?.o2}</p>
+                                    <p><b>3: </b>{test?.o3}</p>
+                                    <p><b>4: </b>{test?.o4}</p>
+                                    <p><b>Ans: </b>{test?.a}</p>
+                                    <Button className='mx-1' variant='success' size="sm"
+                                        onClick={(e) => editHandler(test)}
+                                    >Edit</Button>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                        </Accordion>
+                    ))
+                    :
+                    "No Q&A Found"
+                }
             </Container>
         </>
     )

@@ -1,6 +1,7 @@
 import NumericalTest from "../Models/NumericalTest.Model.js";
 import { fileParser } from "../utils/fileParser.js";
 import slugify from "slugify";
+import mongoose from 'mongoose'
 
 export const postNumericalTest = async (req, res) => {
     try {
@@ -143,16 +144,37 @@ export const deleteQuestion = async (req, res) => {
 }
 
 export const editQuestion = async (req, res) => {
-    console.log("============editQuestion===========");
+    console.log("============editQuestion ===========");
     console.log("req.body",req.body);
     try {
-        const {id}=req.params
-        const {q,o1,o2,o3,o4,a,_id}=req.body
-        let numTest = await NumericalTest.findOne({_id:_id})
+        // const {id}=req.params
+        const {q,o1,o2,o3,o4,a,id}=req.body
+        // let numTest = await NumericalTest.findOne({qAndA:})
+        
+        // let numTest=await NumericalTest.find({'qAndA': {$elemMatch: {_id: id}}})
+        let numTest=await NumericalTest.findOne(
+            {
+                qAndA :{$elemMatch:{_id:id}}
+            }
+        )
+        console.log("numTest",numTest);
         if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
-        let updateObj={q,o1,o2,o3,o4,a}
-        await NumericalTest.updateOne({_id:_id},{$pull:{qAndA:_id}})
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
+        // let updateObj={q,o1,o2,o3,o4,a}
+         numTest = await NumericalTest.updateOne(
+            { "qAndA._id": mongoose.Types.ObjectId(id) },
+            {
+                $set: {
+                    "lessons.$.q": q,
+                    "lessons.$.a": a,
+                    "lessons.$.o1": o1,
+                    "lessons.$.o2": o2,
+                    "lessons.$.o4": o4,
+                    "lessons.$.o4": o4,
+                },
+            },
+            { new: true }
+        ).exec()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Updated Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });

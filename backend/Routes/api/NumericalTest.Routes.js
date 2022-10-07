@@ -1,9 +1,10 @@
 import express  from "express";
 const router=express.Router()
-import {getAllNumericalTest,postNumericalTest,postNewNumericalTest, editNumericalTest, deleteNumericalTest, getTestById, addNewQuestion} from '../../Controllers/NumericalTest.Controller.js'
+import {getAllNumericalTest,editQuestion,postNumericalTest,postNewNumericalTest, editNumericalTest, deleteNumericalTest, getTestById, addNewQuestion} from '../../Controllers/NumericalTest.Controller.js'
 
 
 router.post('/question/add',addNewQuestion)
+router.post('/question/edit',editQuestion)
 router.get('/:category/:language/:id',getTestById)
 router.get('/:category/:language',getAllNumericalTest)
 router.post('/edit',editNumericalTest)
