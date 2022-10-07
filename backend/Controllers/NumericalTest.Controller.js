@@ -108,12 +108,16 @@ export const addNewQuestion = async (req, res) => {
     console.log("============Add addNewQuestion===========");
     console.log("req.body",req.body);
     try {
-        const {id}=req.params
-        const {q,o1,o2,o3,o4,a}=req.body
-        let numTest = await NumericalTest.findOne({_id:_id})
+        // const {id}=req.params
+        const {q,option,a,id}=req.body
+        let o1=option[0]?.options ? option[0]?.options :null
+        let o2=option[1]?.options ? option[1]?.options :null
+        let o3=option[2]?.options ? option[2]?.options :null
+        let o4=option[3]?.options ? option[3]?.options :null
+        let numTest = await NumericalTest.findOne({_id:id})
         if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
         let updateObj={q,o1,o2,o3,o4,a}
-        await NumericalTest.updateOne({_id:_id},{$push:{qAndA:updateObj}})
+        await NumericalTest.updateOne({_id:id},{$push:{qAndA:updateObj}})
         return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
     } catch (e) {
         console.log(e)

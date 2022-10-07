@@ -78,8 +78,9 @@ const NumericalTest = () => {
     setEdit()
     if (render) setRender(false)
 
-    fetchData()
+   if(category&&language) fetchData()
   }, [category, language, render])
+  
   return (
     <>
       {/* <h1>Category : {category}   language:{language}</h1> */}

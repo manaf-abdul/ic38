@@ -7,8 +7,11 @@ import { errorToast, successToast, warningToast } from '../../Constants';
 import { CartState } from '../../Context';
 import { produce } from "immer";
 import { generate } from "shortid";
+import { useParams } from 'react-router-dom';
 
 const NumericalTestModal = (props) => {
+
+    const params=useParams()
 
     const { category, language } = CartState()
 
@@ -20,14 +23,14 @@ const NumericalTestModal = (props) => {
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`http://localhost:5002/api/numericaltest/add`, { q1: question, a: answer, option: who, category: category, language: language })
+            const { data } = await axios.post(`http://localhost:5002/api/numericaltest/question/add`, { q: question, a: answer, option: who, category: category, language: language,id:params.id })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
-                props.setRender()
-                setAnswer('')
-                setQuestion('')
-                setWho([])
-                props.onHide()
+                // props?.setRender()
+                // setAnswer('')
+                // setQuestion('')
+                // setWho([])
+                // props?.onHide()
             } else {
                 toast.warn(`🦄 ${data.msg}!`, warningToast);
             }
@@ -53,7 +56,7 @@ const NumericalTestModal = (props) => {
                 const { data } = await axios.post(`http://localhost:5002/api/terminology`, formData, config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
-                    props.setRender()
+                    props?.setRender()
                     setAnswer('')
                     setQuestion('')
                     setWho([])

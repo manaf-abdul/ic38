@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useCallback, useEffect, useState } from 'react'
-import { Accordion, Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
+import { Accordion, Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
@@ -88,7 +88,7 @@ const ShortAndSimpleContent = () => {
     return (
         <>
             <Jumbotron
-                name={"Short & Simple "}
+                name={"Batches"}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}
@@ -105,15 +105,23 @@ const ShortAndSimpleContent = () => {
             />
 
             <Container>
-                {/* {console.log(numericalTestData?.length)}
-                {numericalTestData ? numericalTestData.map(term => (
-                    console.log("inside.........")
-                //   <p>{term.name}</p>
+               <h4>{numericalTestData.name}</h4>
+               {numericalTestData.qAndA && numericalTestData.qAndA.length > 0 ?
+                numericalTestData?.qAndA?.map(test=>(
+                    <Card>
+                    <b>Question:</b><p>{test?.q}</p>
+                    <b>Options:</b>
+
+                    <p> <b>1: </b>{test?.o1}</p>
+                    <p><b>2: </b>{test?.o2}</p>
+                    <p><b>3: </b>{test?.o3}</p>
+                    <p><b>4: </b>{test?.o4}</p>
+                    <p><b>Ans: </b>{test?.a}</p>
+                    </Card>
                 ))
-                    :
-                    console.log("outside.........")
-                    // <h4 className='text-center'>No Data Found</h4>
-                } */}
+                :
+                "No Q&A Found"
+            }
             </Container>
         </>
     )

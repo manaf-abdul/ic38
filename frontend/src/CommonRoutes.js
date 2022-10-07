@@ -17,6 +17,7 @@ const CommonRoutes = () => {
       <SideBar />
       <Routes>
         <Route path='/' element={<DashBoard />} />
+        <Route path='/numericaltest/:id' element={<NumericalTestContent/>} />
         <Route path='/one-liners' element={<OneLiners />} />
         <Route path='/category' element={<Category/>} />
         <Route path='/language' element={<Language/>} />
@@ -24,7 +25,6 @@ const CommonRoutes = () => {
         <Route path='/short-and-simple' element={<ShortAndSimple/>} />
         <Route path='/short-and-simple/:id' element={<ShortAndSimpleContent/>} />
         <Route path='/numericaltest' element={<NumericalTest/>} />
-        <Route path='/numericaltest/:id' element={<NumericalTestContent/>} />
       </Routes>
     </>
   )
