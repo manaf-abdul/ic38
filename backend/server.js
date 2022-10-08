@@ -15,6 +15,7 @@ import SuperCategory from './Routes/api/superCategory.Routes.js'
 import LanguageRoutes from './Routes/api/language.Routes.js'
 import ShortAndSimple from './Routes/api/ShortAndSimple.Routes.js'
 import NumericalTest from './Routes/api/NumericalTest.Routes.js'
+import PractiseTest from './Routes/api/PractiseTest.Routes.js'
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url); // construct the require method
@@ -41,6 +42,7 @@ app.use('/api/supercategories', SuperCategory)
 app.use('/api/language', LanguageRoutes)
 app.use('/api/short-and-simple', ShortAndSimple)
 app.use('/api/numericaltest', NumericalTest)
+app.use('/api/practisetest',PractiseTest )
 
 const __dirname = path.resolve()
 

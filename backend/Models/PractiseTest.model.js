@@ -41,5 +41,5 @@ const schema=new mongoose.Schema(
     }
 )
 
-const testModel=new mongoose.model('TestModel',schema)
-export default testModel
+const PractiseTest=new mongoose.model('PractiseTest',schema)
+export default PractiseTest

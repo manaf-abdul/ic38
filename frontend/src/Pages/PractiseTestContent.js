@@ -5,11 +5,12 @@ import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import NumericalTestModal from '../Components/Modals/NumericalTestModal'
+import PractiseTestModal from '../Components/Modals/PractiseTestModal'
 import QuestionModal from '../Components/Modals/QuestionModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
-const NumericalTestContent = () => {
+const PractiseTestContent = () => {
     const { category, language } = CartState()
     const params = useParams()
     const [numericalTestData, setNumericalTestData] = useState([])
@@ -20,7 +21,7 @@ const NumericalTestContent = () => {
     const [bulk, setBulk] = useState(false)
 
     const fetchData = useCallback(async () => {
-        const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}/${params.id}`)
+        const { data } = await axios.get(`${BASEURL}/api/practisetest/${category}/${language}/${params.id}`)
         console.log("data", data)
         setNumericalTestData(data.data)
     }, [])
@@ -32,7 +33,7 @@ const NumericalTestContent = () => {
 
     const deleteHandler = async (x) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/delete`,x)
+            const { data } = await axios.post(`${BASEURL}/api/practisetest/question/delete`,x)
             if (data.errorcode === 0) {
                 console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
@@ -80,7 +81,7 @@ const NumericalTestContent = () => {
                 submitHandler={() => submitHandler()}
                 bulkHandler={() => bulkHandler()}
             />
-            <NumericalTestModal
+            <PractiseTestModal
                 show={modalShow}
                 onHide={() => {
                     setModalShow(false)
@@ -125,4 +126,4 @@ const NumericalTestContent = () => {
     )
 }
 
-export default NumericalTestContent
+export default PractiseTestContent

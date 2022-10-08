@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 
 export const postNumericalTest = async (req, res) => {
     console.log("here postNumericalTest",req.body)
+    // await NumericalTest.deleteMany()
     try {
         if (!req.file) return res.status(200).json({ errorcode: 1, status: false, msg: "File Not Present", data: null })
         const { category, language,id,isDelete } = req.body;
@@ -21,7 +22,8 @@ export const postNumericalTest = async (req, res) => {
         //     description,
         //     qAndA: data[0].data
         // })
-        await NumericalTest.updateOne({_id:id},{$push:{qAndA:{$each:data[0].data}}})
+        if(isDelete)  {await NumericalTest.updateOne({_id:id},{$set:{qAndA:data[0].data}})}
+        else{await NumericalTest.updateOne({_id:id},{$push:{qAndA:{$each:data[0].data}}})}
         return res.status(200).json({ errorcode: 0, status: true, msg: "Created Successfully", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
@@ -78,7 +80,7 @@ export const getAllNumericalTest = async (req, res) => {
     try {
         const { category, language } = req.params;
         let data = await NumericalTest.find({ superCategory: category, language: language })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerpractise test found ", data: data })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "NUmerical test found ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
@@ -191,7 +193,7 @@ export const editQuestion = async (req, res) => {
                     "qAndA.$.a": a,
                     "qAndA.$.o1": o1,
                     "qAndA.$.o2": o2,
-                    "qAndA.$.o4": o3,
+                    "qAndA.$.o3": o3,
                     "qAndA.$.o4": o4,
                 },
             }

@@ -6,12 +6,13 @@ import { toast, ToastContainer } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import ConfirmModal from '../Components/Modals/ConfirmModal'
 import NewNumTestModal from '../Components/Modals/NewNumTestModal'
+import NewPractiseTestModal from '../Components/Modals/NewPractiseTestModal'
 import QuestionModal from '../Components/Modals/QuestionModal'
 import SASCategoryModal from '../Components/Modals/SASCategoryModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
-const NumericalTest = () => {
+const PractiseTest = () => {
   const { category, language } = CartState()
   const [onelinerData, setOneLinerData] = useState()
   const [modalShow, setModalShow] = useState(false)
@@ -33,7 +34,7 @@ const NumericalTest = () => {
 
   const editHandler = async (e) => {
     try {
-      const { data } = await axios.post(`${BASEURL}/api/numericaltest/edit`,
+      const { data } = await axios.post(`${BASEURL}/api/practisetest/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
         console.log("inside");
@@ -56,7 +57,7 @@ const NumericalTest = () => {
 
   const deletehandler = useCallback(async () => {
     try {
-      const { data } = await axios.post(`${BASEURL}/api/numericaltest/delete`,
+      const { data } = await axios.post(`${BASEURL}/api/practisetest/delete`,
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {
@@ -73,7 +74,7 @@ const NumericalTest = () => {
   })
 
   const fetchData = useCallback(async () => {
-    const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}`)
+    const { data } = await axios.get(`${BASEURL}/api/practisetest/${category}/${language}`)
     console.log("data", data)
     setOneLinerData(data.data)
   }, [])
@@ -98,7 +99,7 @@ const NumericalTest = () => {
       <Container>
         <Button onClick={(e)=>submitHandler()}>ADD TEST</Button>
 
-        <NewNumTestModal
+        <NewPractiseTestModal
           show={modalShow}
           onHide={() => {
             setModalShow(false)
@@ -183,4 +184,4 @@ const NumericalTest = () => {
   )
 }
 
-export default NumericalTest
+export default PractiseTest

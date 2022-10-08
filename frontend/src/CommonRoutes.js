@@ -10,6 +10,8 @@ import ShortAndSimple from './Pages/ShortAndSimple';
 import ShortAndSimpleContent from './Pages/ShortAndSimpleContent';
 import NumericalTest from './Pages/NumericalTest';
 import NumericalTestContent from './Pages/NumericalTestContent.js';
+import PractiseTest from './Pages/PractiseTest';
+import PractiseTestContent from './Pages/PractiseTestContent'
 
 const CommonRoutes = () => {
   return (
@@ -25,6 +27,9 @@ const CommonRoutes = () => {
         <Route path='/short-and-simple' element={<ShortAndSimple/>} />
         <Route path='/short-and-simple/:id' element={<ShortAndSimpleContent/>} />
         <Route path='/numericaltest' element={<NumericalTest/>} />
+        
+        <Route path='/practisetest/:id' element={<PractiseTestContent/>} />
+        <Route path='/practisetest' element={<PractiseTest/>} />
       </Routes>
     </>
   )

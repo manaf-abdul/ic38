@@ -11,25 +11,25 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Courses',
-    path: '/instructor',
+    title: 'Practisetest',
+    path: '/practisetest',
     icon: <FaIcons.FaCartPlus />,
     cName: 'nav-text'
   },
   {
-    title: 'Blog',
+    title: 'Numerical Test',
     path: '/numericaltest',
     icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
   {
-    title: 'Enquiry',
+    title: 'Short & Simple',
     path: '/short-and-simple',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },
   {
-    title: 'Batch',
+    title: 'Terminology',
     path: '/terminology',
     icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
