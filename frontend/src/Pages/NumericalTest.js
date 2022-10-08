@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import ConfirmModal from '../Components/Modals/ConfirmModal'
 import NewNumTestModal from '../Components/Modals/NewNumTestModal'
+import QuestionModal from '../Components/Modals/QuestionModal'
 import SASCategoryModal from '../Components/Modals/SASCategoryModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
@@ -20,9 +21,13 @@ const NumericalTest = () => {
   const [render, setRender] = useState(false)
   const [x, setX] = useState()
   const [bulk, setBulk] = useState(false)
+  const [questionModal, setQuestionModalShow] = useState(false)
 
   const submitHandler = () => {
     setModalShow(true)
+  }
+  const bulkHandler = () => {
+    setQuestionModalShow(true)
   }
 
 
@@ -78,20 +83,20 @@ const NumericalTest = () => {
     setEdit()
     if (render) setRender(false)
 
-   if(category&&language) fetchData()
+    if (category && language) fetchData()
   }, [category, language, render])
-  
+
   return (
     <>
-      {/* <h1>Category : {category}   language:{language}</h1> */}
 
       <Jumbotron
-        name={"Short & Simple"}
+        name={"TEST"}
         buttonName={"Add/Edit"}
-        submitHandler={() => submitHandler()}
+        submitHandler={() =>bulkHandler ()}
       />
 
       <Container>
+        <Button onClick={(e)=>submitHandler()}>ADD TEST</Button>
 
         <NewNumTestModal
           show={modalShow}
@@ -108,9 +113,16 @@ const NumericalTest = () => {
           onHide={() => setConfirmModalShow(false)}
           deletehandler={() => deletehandler()}
         />
+        <QuestionModal
+          show={questionModal}
+          onHide={() => {
+            setQuestionModalShow(false)
+          }}
+          setRender={() => setRender(true)}
+        />
         <Row className='m-2'>
           {onelinerData && onelinerData.length > 0 ? onelinerData.map((x, index) => (
-            
+
             <Col key={x._id} sm={12} md={6} lg={6} xl={6} className='pb-3'>
               <Card key={x._id}>
                 <Card.Body>
@@ -142,7 +154,7 @@ const NumericalTest = () => {
                           </InputGroup>
                         </> :
                         <Link to={`${x._id}`}>
-                        <Card.Text className='h4'>{x.name}</Card.Text>
+                          <Card.Text className='h4'>{x.name}</Card.Text>
                         </Link>
                       }
                     </Col>

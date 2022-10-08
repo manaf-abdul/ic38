@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import NumericalTestModal from '../Components/Modals/NumericalTestModal'
+import QuestionModal from '../Components/Modals/QuestionModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
 
@@ -47,7 +48,7 @@ const ShortAndSimpleContent = () => {
 
     const deleteHandler = async (x) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/short-and-simple/data/delete`,
+            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/delete`,
                 x)
             if (data.errorcode === 0) {
                 console.log("inside");
@@ -107,7 +108,6 @@ const ShortAndSimpleContent = () => {
                 bulk={bulk}
                 edit={edit}
             />
-
             <Container>
                 <h4>{numericalTestData.name}</h4>
                 {numericalTestData.qAndA && numericalTestData.qAndA.length > 0 ?
@@ -127,6 +127,9 @@ const ShortAndSimpleContent = () => {
                                     <Button className='mx-1' variant='success' size="sm"
                                         onClick={(e) => editHandler(test)}
                                     >Edit</Button>
+                                    <Button className='mx-1' variant='danger' size="sm"
+                                        onClick={(e) => deleteHandler(test)}
+                                    >Delete</Button>
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>

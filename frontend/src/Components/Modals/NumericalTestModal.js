@@ -25,18 +25,19 @@ const NumericalTestModal = (props) => {
     const [o2, seto2] = useState('')
     const [o3, seto3] = useState('')
     const [o4, seto4] = useState('')
+    const [isDelete, setIsDelete] = useState(false)
     console.log("whooooooo", who)
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/add`, { q: question, a: answer, option: who, category: category, language: language, id: props?.edit?._id })
+            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/add`, { q: question, a: answer, option: who, category: category, language: language, id: params?.id })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
-                // props?.setRender()
-                // setAnswer('')
-                // setQuestion('')
-                // setWho([])
-                // props?.onHide()
+                props?.setRender()
+                setAnswer('')
+                setQuestion('')
+                setWho([])
+                props?.onHide()
             } else {
                 toast.warn(`🦄 ${data.msg}!`, warningToast);
             }
@@ -47,14 +48,14 @@ const NumericalTestModal = (props) => {
 
     const editSingleHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/edit`, { q: question, a: answer, o1,o2,o3,o4, category: category, language: language, id: params.id })
+            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/edit`, { q: question, a: answer, o1, o2, o3, o4, category: category, language: language, id: props?.edit?._id })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
-                // props?.setRender()
-                // setAnswer('')
-                // setQuestion('')
-                // setWho([])
-                // props?.onHide()
+                props?.setRender()
+                setAnswer('')
+                setQuestion('')
+                setWho([])
+                props?.onHide()
             } else {
                 toast.warn(`🦄 ${data.msg}!`, warningToast);
             }
@@ -69,6 +70,8 @@ const NumericalTestModal = (props) => {
             formData.append('file', file)
             formData.append('language', language)
             formData.append('superCategory', category)
+            formData.append('id', params.id)
+            formData.append('isDelete', isDelete)
 
             try {
                 const config = {
@@ -77,7 +80,7 @@ const NumericalTestModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`${BASEURL}/api/terminology`, formData, config)
+                const { data } = await axios.post(`${BASEURL}/api/numericaltest/question-file`, formData, config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props?.setRender()
@@ -109,7 +112,7 @@ const NumericalTestModal = (props) => {
             seto2(props.edit.o2 ? props.edit.o2 : null)
             seto3(props.edit.o3 ? props.edit.o3 : null)
             seto4(props.edit.o4 ? props.edit.o4 : null)
-        }else{
+        } else {
             setQuestion()
             setAnswer()
             seto1()
@@ -142,7 +145,7 @@ const NumericalTestModal = (props) => {
                             <Row>
                                 <Col xs={10} lg={10} xl={10}>
 
-                                <Form.Group controlId='name'>
+                                    <Form.Group controlId='name'>
                                         <Form.Label>Question</Form.Label>
                                         <Form.Control
                                             type='text'
@@ -203,19 +206,33 @@ const NumericalTestModal = (props) => {
                         <Row>
                             <Col xs={10} lg={10} xl={10}>
                                 {props.bulk ?
-                                    <Form.Group controlId='name'>
-                                        <Form.Label>File</Form.Label>
+                                    <>
+                                        <Form.Group controlId='name'>
+                                            <Form.Label>File</Form.Label>
 
-                                        <Form.Control
-                                            type="file"
-                                            className='file-input-box'
-                                            size='md'
-                                            width="50px"
-                                            name="imageOne"
-                                            onChange={(e) => uploadFileHandler(e)}
-                                            accept=".xlsx"
-                                        ></Form.Control>
-                                    </Form.Group>
+                                            <Form.Control
+                                                type="file"
+                                                className='file-input-box'
+                                                size='md'
+                                                width="50px"
+                                                name="imageOne"
+                                                onChange={(e) => uploadFileHandler(e)}
+                                                accept=".xlsx"
+                                            ></Form.Control>
+                                        </Form.Group>
+                                        <Form.Group controlId='name' className='pt-4 m-1'>
+                                            <Form.Check
+                                                type="switch"
+                                                id="custom-switch"
+                                                checked={isDelete ? true : false}
+                                                value={isDelete}
+                                                label={isDelete ? <span style={{ color: "red", fontWeight: "bold" }}>CAUTION : The previous data will be erased and the new data will be overwritten</span>
+                                                    : <span style={{}}>Delete previous datas</span>
+                                                }
+                                                onChange={(e) => setIsDelete(!isDelete)}
+                                            />
+                                        </Form.Group>
+                                    </>
                                     :
                                     <>
                                         <Form.Group controlId='brand' className='pb-4'>

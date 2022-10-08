@@ -4,20 +4,45 @@ import slugify from "slugify";
 import mongoose from 'mongoose'
 
 export const postNumericalTest = async (req, res) => {
+    console.log("here postNumericalTest",req.body)
     try {
         if (!req.file) return res.status(200).json({ errorcode: 1, status: false, msg: "File Not Present", data: null })
-        const { name, description, category, language } = req.body;
-        let ex = await NumericalTest.findOne({ slug: slugify(name) })
-        if (ex) return res.status(200).json({ errorcode: 2, status: false, msg: "Already Present", data: null })
+        const { category, language,id,isDelete } = req.body;
+        let test = await NumericalTest.findOne({_id:id})
+        if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "No Num-Test found", data: null })
         const data = fileParser(req.file.buffer)
+        console.log("data", data)
+        // let newPost = new NumericalTest({
+        //     name,
+        //     slug: slugify(name),
+        //     superCategory: category,
+        //     language: language,
+        //     numberOfQes: data[0].data.length,
+        //     description,
+        //     qAndA: data[0].data
+        // })
+        await NumericalTest.updateOne({_id:id},{$push:{qAndA:{$each:data[0].data}}})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Created Successfully", data: data })
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
+    }
+}
+
+export const postWholeTest = async (req, res) => {
+    console.log("here postWholeTest",req.body)
+    try {
+        if (!req.file) return res.status(200).json({ errorcode: 1, status: false, msg: "File Not Present", data: null })
+        const { superCategory, language,id,name } = req.body;
+        let ex = await NumericalTest.findOne({ slug: slugify(name) })
+        if (ex) return res.status(200).json({ errorcode: 2, status: false, msg: "Name Already Present", data: null })
+       const data = fileParser(req.file.buffer)
         console.log("data", data)
         let newPost = new NumericalTest({
             name,
             slug: slugify(name),
-            superCategory: category,
+            superCategory: superCategory,
             language: language,
             numberOfQes: data[0].data.length,
-            description,
             qAndA: data[0].data
         })
         newPost = await newPost.save()
@@ -26,7 +51,6 @@ export const postNumericalTest = async (req, res) => {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
 }
-
 // export const getNumericalTest = async (req, res) => {
 //     try {
 //         const { id } = req.params;
@@ -132,11 +156,15 @@ export const deleteQuestion = async (req, res) => {
     try {
         const { id } = req.params
         const { q, o1, o2, o3, o4, a, _id } = req.body
-        let numTest = await NumericalTest.findOne({ _id: _id })
+        // let numTest = await NumericalTest.findOne({ _id: _id })
+        let numTest = await NumericalTest.findOne(
+            {
+                "qAndA._id": mongoose.Types.ObjectId(_id)
+            }
+        )
         if (!numTest) return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
-        let updateObj = { q, o1, o2, o3, o4, a }
-        await NumericalTest.updateOne({ _id: _id }, { $pull: { qAndA: _id } })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
+        await NumericalTest.updateOne({ _id: numTest._id }, { $pull: {qAndA:{_id} } })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Deleted Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
@@ -148,7 +176,7 @@ export const editQuestion = async (req, res) => {
     console.log("req.body", req.body);
     try {
         const { q, o1, o2, o3, o4, a, id } = req.body
-        let numTest = await NumericalTest.exist(
+        let numTest = await NumericalTest.findOne(
             {
                 "qAndA._id": mongoose.Types.ObjectId(id)
             }
@@ -163,7 +191,7 @@ export const editQuestion = async (req, res) => {
                     "qAndA.$.a": a,
                     "qAndA.$.o1": o1,
                     "qAndA.$.o2": o2,
-                    "qAndA.$.o4": o4,
+                    "qAndA.$.o4": o3,
                     "qAndA.$.o4": o4,
                 },
             }
