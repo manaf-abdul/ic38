@@ -21,12 +21,15 @@ function SideBar() {
     const [sidebar, setSidebar] = useState(false);
     const [categories, setCategories] = useState()
     const [languges, setLanguges] = useState()
+    const [catName, setCatName] = useState('')
+    const [langName, setLangName] = useState('')
 
     const fetchCatData=useCallback(async () => {
         const { data } = await axios.get(`${BASEURL}/api/supercategories`)
             setCategories(data.data)
             console.log("data", data)
             setCategory(data.data[0]._id)
+            setCatName(data.data[0].name)
     },[])
 
     const fetchlangData=useCallback(async () => {
@@ -34,6 +37,7 @@ function SideBar() {
             setLanguges(data.data)
             console.log("data", data)
             setLanguage(data.data[0]._id)
+            setLangName(data.data[0].name)
     },[])
 
     console.log("Rendereing")
@@ -41,6 +45,7 @@ function SideBar() {
     const showSidebar = () => setSidebar(!sidebar);
 
     useEffect(() => {
+        
         fetchCatData()
         fetchlangData()
     }, [])
@@ -79,7 +84,10 @@ function SideBar() {
                     >
                         {categories ? categories.map(cat =>
 
-                            <NavDropdown.Item onClick={()=>setCategory(cat._id)}>
+                            <NavDropdown.Item onClick={()=>{
+                                setCategory(cat._id)
+                                setCatName(cat.name)
+                                }}>
                                 {cat.name}
                             </NavDropdown.Item>
                         )
@@ -101,7 +109,10 @@ function SideBar() {
                     >
                         {languges ? languges.map(cat =>
 
-                            <NavDropdown.Item onClick={()=>setLanguage(cat._id)} className="">
+                            <NavDropdown.Item onClick={()=>{
+                                setLanguage(cat._id)
+                                setLangName(cat.name)
+                                }} className="">
                                 {cat.name}
                             </NavDropdown.Item>
                         )
@@ -111,6 +122,18 @@ function SideBar() {
                             </>
                         }
                     </NavDropdown>
+                </div>
+                <div>
+                    <div className='d-flex justify-content-center'>    
+                   <span className='p5'>
+                   Category: {catName?catName:<span style={{ color: "red", fontWeight: "bold" }}>Please Select A Category</span>}
+        
+                   </span>
+                   <span className='p5'>
+                    
+                   Language: {langName?langName:<span  style={{ color: "red", fontWeight: "bold" }}>Please Select A Language</span>}
+                    </span>
+                    </div>
                 </div>
 
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
