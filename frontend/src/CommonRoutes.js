@@ -12,6 +12,7 @@ import NumericalTest from './Pages/NumericalTest';
 import NumericalTestContent from './Pages/NumericalTestContent.js';
 import PractiseTest from './Pages/PractiseTest';
 import PractiseTestContent from './Pages/PractiseTestContent'
+import ENotes from './Pages/ENotes';
 
 const CommonRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const CommonRoutes = () => {
         
         <Route path='/practisetest/:id' element={<PractiseTestContent/>} />
         <Route path='/practisetest' element={<PractiseTest/>} />
+        <Route path='/enotes' element={<ENotes/>} />
       </Routes>
     </>
   )
