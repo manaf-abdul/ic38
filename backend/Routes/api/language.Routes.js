@@ -1,7 +1,8 @@
 import express  from "express";
 const router=express.Router()
-import {getAllLanguages,postLanguage} from '../../Controllers/Language.Controller.js'
+import {getAllLanguages,postLanguage,editLanguage} from '../../Controllers/Language.Controller.js'
 
+router.post('/edit',editLanguage)
 router.get('/',getAllLanguages)
 router.post('/',postLanguage)
 

@@ -112,7 +112,8 @@ const OneLiners = () => {
           deletehandler={() => deletehandler()}
         />
 
-        {onelinerData && onelinerData.length > 0 ? onelinerData.map((x, index) => (
+        {onelinerData && onelinerData.length > 0 ?
+         onelinerData.map((x, index) => (
           <Card key={x._id}>
             <Card.Body>
               <Row>

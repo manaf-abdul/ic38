@@ -23,3 +23,17 @@ export const postLanguage=async(req,res)=>{
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
     }
 }
+
+export const editLanguage=async(req,res)=>{
+    try {
+        const {content,_id}=req.body
+        let language=await LanguageModel.findById(_id)
+        if(!language) return res.status(200).json({ errorcode: 0, status: true, msg: "Language Not Found", data: null });
+        language.name=content?content:language.name;
+        language=await language.save()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Language Edited Found", data: language });
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
