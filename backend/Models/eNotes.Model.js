@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 
-const schema=mongoose.Schema(
+const NoteSchema= mongoose.Schema(
     {   
         superCategory:{
-            type:mongoose.Schema.Types,
+            type:mongoose.Schema.Types.ObjectId,
             ref:'SuperCategory',
             required:true
         },
@@ -25,5 +25,5 @@ const schema=mongoose.Schema(
     }
 )
 
-const ENotes=mongoose.model('ENotes',schema)
-export default ENotes
+const ENote=mongoose.model('ENote',NoteSchema)
+export default ENote

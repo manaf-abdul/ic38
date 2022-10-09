@@ -1,8 +1,9 @@
 import axios from 'axios'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { createElement, useCallback, useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
+import NewCatAndLangModal from '../Components/Modals/NewCatAndLangModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 
 const Category = () => {
@@ -10,6 +11,13 @@ const Category = () => {
     const [edit, setEdit] = useState('')
     const [name, setName] = useState('')
     const [render, setRender] = useState(false)
+    const [cat, setcat] = useState(true)
+    const [modalShow,setModalShow]=useState(false)
+
+    const submitHandler = () => {
+        setcat(true)
+        setModalShow(true)
+    }
 
     console.log(category)
     const editHandler = async (e) => {
@@ -46,7 +54,15 @@ const Category = () => {
             <Jumbotron
                 name={"Categories"}
                 buttonName={"Add Category"}
-            // submitHandler={() => submitHandler()} 
+                submitHandler={() => submitHandler()} 
+            />
+            <NewCatAndLangModal
+                cat={cat}
+                show={modalShow}
+                onHide={() => {
+                setModalShow(false)
+                setcat(false)
+               }}
             />
             <Container>
                 <Row>

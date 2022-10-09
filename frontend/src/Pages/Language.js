@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Card, Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
+import NewCatAndLangModal from '../Components/Modals/NewCatAndLangModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 
 const Language = () => {
@@ -10,7 +11,13 @@ const Language = () => {
     const [edit, setEdit] = useState('')
     const [name, setName] = useState('')
     const [render, setRender] = useState(false)
+    const [lang, setLang] = useState(true)
+    const [modalShow, setModalShow] = useState(true)
 
+    const submitHandler = () => {
+        setLang(true)
+        setModalShow(true)
+    }
 
     const getCategoryData = useCallback(async () => {
         const { data } = await axios.get(`${BASEURL}/api/language`)
@@ -46,7 +53,15 @@ const Language = () => {
             <Jumbotron
                 name={"Language "}
                 buttonName={"Add Language"}
-            // submitHandler={() => submitHandler()} 
+                submitHandler={() => submitHandler()} 
+            />
+            <NewCatAndLangModal
+                lang={lang}
+                show={modalShow}
+                onHide={() => {
+                setModalShow(false)
+                setLang(false)
+               }}
             />
             <Container>
                 <Row>
