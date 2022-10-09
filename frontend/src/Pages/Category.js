@@ -63,6 +63,7 @@ const Category = () => {
                 setModalShow(false)
                 setcat(false)
                }}
+               setRender={()=>setRender(true)}
             />
             <Container>
                 <Row>

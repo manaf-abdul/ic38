@@ -62,6 +62,7 @@ const Language = () => {
                 setModalShow(false)
                 setLang(false)
                }}
+               setRender={()=>setRender(true)}
             />
             <Container>
                 <Row>
