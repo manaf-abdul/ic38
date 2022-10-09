@@ -12,7 +12,7 @@ const Language = () => {
     const [name, setName] = useState('')
     const [render, setRender] = useState(false)
     const [lang, setLang] = useState(true)
-    const [modalShow, setModalShow] = useState(true)
+    const [modalShow, setModalShow] = useState(false)
 
     const submitHandler = () => {
         setLang(true)
