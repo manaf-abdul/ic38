@@ -13,6 +13,7 @@ import NumericalTestContent from './Pages/NumericalTestContent.js';
 import PractiseTest from './Pages/PractiseTest';
 import PractiseTestContent from './Pages/PractiseTestContent'
 import ENotes from './Pages/ENotes';
+import VideoTutorial from './Pages/VideoTutorial';
 
 const CommonRoutes = () => {
   return (
@@ -32,6 +33,8 @@ const CommonRoutes = () => {
         <Route path='/practisetest/:id' element={<PractiseTestContent/>} />
         <Route path='/practisetest' element={<PractiseTest/>} />
         <Route path='/enotes' element={<ENotes/>} />
+        <Route path='/video' element={<VideoTutorial/>} />
+      
       </Routes>
     </>
   )

@@ -1,11 +1,11 @@
 import express from 'express'
 const router=express.Router()
-import {upload} from '../../Middlewares/s3BucketMulter'
-import { addVideoTutorial, deleteVideoTutorial, getVideoTutorial } from '../../Controllers/Video.Controller'
+import {s3UserStorage} from '../../Middlewares/s3BucketMulter.js'
+import { addVideoTutorial, deleteVideoTutorial, getVideoTutorial } from '../../Controllers/Video.Controller.js'
 
 // router.post('/edit',editSuperCategory)
 router.post('/delete',deleteVideoTutorial)
-router.post('/',upload('file'),addVideoTutorial)
+router.post('/',s3UserStorage.single('file'),addVideoTutorial)
 router.get('/',getVideoTutorial)
 
 export default router

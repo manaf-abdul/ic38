@@ -1,10 +1,11 @@
-import SuperCategory from "../Models/SuperCategory.Model.js";
+import VideoTutorials from "../Models/videoTutorial.Model.js";
 
 export const addVideoTutorial=async(req,res)=>{
+    console.log(req.body,req.file)
     try {
         const {name}=req.body
         if(!name || !req.file)  return res.status(200).json({ errorcode: 1, status: false, msg: "Name is required", data: null });
-        let newCat=new SuperCategory({
+        let newCat=new VideoTutorials({
             name:name,
             file:req.file?req.file:null
         })
@@ -21,9 +22,9 @@ export const deleteVideoTutorial=async(req,res)=>{
     try {
         const {_id}=req.body
         if(!_id) return res.status(200).json({ errorcode: 1, status: false, msg: "Name & ID is required", data: null })
-        let category=await SuperCategory.findById(_id)
+        let category=await VideoTutorials.findById(_id)
         if(!category)  return res.status(200).json({ errorcode: 1, status: false, msg: "Video not Found", data: null });
-        await SuperCategory.deleteOne({_id:_id})
+        await VideoTutorials.deleteOne({_id:_id})
         return res.status(200).json({ errorcode: 0, status: true, msg: "Video Deleted Successfully", data: category });
     } catch (e) {
         console.log(e)
@@ -33,7 +34,7 @@ export const deleteVideoTutorial=async(req,res)=>{
 
 export const getVideoTutorial=async(req,res)=>{
     try {
-        let data=await SuperCategory.find({})
+        let data=await VideoTutorials.find({})
         return res.status(200).json({ errorcode: 0, status: true, msg: "Video Found", data: data });
     } catch (e) {
         console.log(e)

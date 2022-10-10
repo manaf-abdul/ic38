@@ -58,5 +58,11 @@ export const SidebarData = [
     icon: <AiIcons.AiFillTool />,
     cName: 'nav-text'
   },
+  {
+    title: 'Video-Tutorial',
+    path: '/video',
+    icon: <FaIcons.FaCartPlus />,
+    cName: 'nav-text'
+  }
   
 ];
