@@ -66,11 +66,11 @@ const ShortAndSimple = () => {
     }
   })
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/short-and-simple/${category}/${language}`)
     console.log("data", data)
     setOneLinerData(data.data)
-  }, [])
+  }
 
 
   useEffect(() => {

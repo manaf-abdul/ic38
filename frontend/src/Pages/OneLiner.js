@@ -69,11 +69,11 @@ const OneLiners = () => {
     }
   })
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/one-liners/${category}/${language}`)
     console.log("data", data)
     setOneLinerData(data.data)
-  }, [])
+  }
 
 
   useEffect(() => {

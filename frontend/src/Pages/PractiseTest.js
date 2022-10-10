@@ -73,11 +73,11 @@ const PractiseTest = () => {
     }
   })
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/practisetest/${category}/${language}`)
     console.log("data", data)
     setOneLinerData(data.data)
-  }, [])
+  }
 
 
   useEffect(() => {

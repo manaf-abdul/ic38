@@ -18,11 +18,11 @@ const ShortAndSimpleContent = () => {
     const [modalShow, setModalShow] = useState(false)
     const [bulk, setBulk] = useState(false)
 
-    const fetchData = useCallback(async () => {
+    const fetchData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/short-and-simple/${category}/${language}/${params.id}`)
         console.log("data", data)
         setTerminologyData(data.data)
-    }, [])
+    }
 
     const editHandler = async () => {
         console.log(name)
