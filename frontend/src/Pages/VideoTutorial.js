@@ -62,15 +62,15 @@ const VideoTutorial = () => {
         }
       })
 
-
+    const getData = async () => {
+        const { data } = await axios.get(`${BASEURL}/api/video`)
+        setData(data.data)
+        console.log(data)
+    }
+    
     useEffect(() => {
         if(render) setRender(false)
-        const getData = async () => {
-            const { data } = await axios.get(`${BASEURL}/api/video`)
-            setData(data.data)
-            console.log(data)
-        }
-        getData()
+       getData()
 
     }, [render])
 
