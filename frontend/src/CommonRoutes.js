@@ -14,6 +14,7 @@ import PractiseTest from './Pages/PractiseTest';
 import PractiseTestContent from './Pages/PractiseTestContent'
 import ENotes from './Pages/ENotes';
 import VideoTutorial from './Pages/VideoTutorial';
+import Poster from './Pages/Poster';
 
 const CommonRoutes = () => {
   return (
@@ -34,6 +35,7 @@ const CommonRoutes = () => {
         <Route path='/practisetest' element={<PractiseTest/>} />
         <Route path='/enotes' element={<ENotes/>} />
         <Route path='/video' element={<VideoTutorial/>} />
+        <Route path='/poster' element={<Poster/>} />
       
       </Routes>
     </>

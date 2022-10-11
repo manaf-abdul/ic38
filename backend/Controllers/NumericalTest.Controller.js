@@ -165,7 +165,7 @@ export const deleteQuestion = async (req, res) => {
             }
         )
         if (!numTest) return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
-        await NumericalTest.updateOne({ _id: numTest._id }, { $pull: {qAndA:{_id} } })
+        await NumericalTest.updateOne({ _id: numTest._id }, { $pull: {qAndA:{id} } })
         return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Deleted Successfully", data: null });
     } catch (e) {
         console.log(e)

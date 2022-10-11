@@ -63,6 +63,12 @@ export const SidebarData = [
     path: '/video',
     icon: <FaIcons.FaCartPlus />,
     cName: 'nav-text'
+  },
+  {
+    title: 'Poster',
+    path: '/poster',
+    icon: <FaIcons.FaCartPlus />,
+    cName: 'nav-text'
   }
   
 ];
