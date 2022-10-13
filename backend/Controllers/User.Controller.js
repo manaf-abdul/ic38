@@ -98,7 +98,7 @@ export const updateProfile = async (req, res) => {
     console.log("req.file", req.file)
     try {
         const { userid, phone, location,
-            qualification, dateOfBirth, income, panNumber,
+            qualification, dateOfBirth, income, panNumber,occupation,gender
             } = req.body
         let user = await User.findById(userid)
         if (!user) return res.status(200).json({ errorcode: 2, status: false, msg: "User not Present", data: null });
