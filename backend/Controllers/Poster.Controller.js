@@ -1,4 +1,4 @@
-import Poster from "../Models/Posters.Model.js";
+import Poster from "../Models/Posters.model.js";
 
 export const postPosters=async(req,res)=>{
     console.log("postPosters")
