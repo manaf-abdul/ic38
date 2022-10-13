@@ -7,13 +7,14 @@ import { BASEURL, errorToast, successToast, warningToast } from '../../Constants
 import { CartState } from '../../Context';
 
 const MockTestModal= (props) => {
+    console.log("MockTestModal")
     const { category, language } = CartState()
 
     const [name, setName] = useState('')
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/practisetest/${category}/${language}`, {name:name})
+            const { data } = await axios.post(`${BASEURL}/api/mocktest/${category}/${language}`, {name:name})
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -39,7 +40,7 @@ const MockTestModal= (props) => {
 
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                       Add new Numerical Test
+                       Add new Mock Test
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

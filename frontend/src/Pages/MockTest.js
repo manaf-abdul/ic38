@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import ConfirmModal from '../Components/Modals/ConfirmModal'
-import NewNumTestModal from '../Components/Modals/NewNumMockTestModal'
+import NewNumTestModal from '../Components/Modals/MockTestModal'
 import QuestionModal from '../Components/Modals/QuestionModal'
 import SASCategoryModal from '../Components/Modals/SASCategoryModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
@@ -33,7 +33,7 @@ const MockTest = () => {
 
   const editHandler = async (e) => {
     try {
-      const { data } = await axios.post(`${BASEURL}/api/numericaltest/edit`,
+      const { data } = await axios.post(`${BASEURL}/api/mocktest/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
         console.log("inside");
@@ -56,7 +56,7 @@ const MockTest = () => {
 
   const deletehandler = useCallback(async () => {
     try {
-      const { data } = await axios.post(`${BASEURL}/api/numericaltest/delete`,
+      const { data } = await axios.post(`${BASEURL}/api/mocktest/delete`,
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {
@@ -73,7 +73,7 @@ const MockTest = () => {
   })
 
   const fetchData = async () => {
-    const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}`)
+    const { data } = await axios.get(`${BASEURL}/api/mocktest/${category}/${language}`)
     console.log("data", data)
     setOneLinerData(data.data)
   }

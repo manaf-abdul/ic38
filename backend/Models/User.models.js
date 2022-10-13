@@ -16,11 +16,20 @@ const userModel = new mongoose.Schema(
         },
         phone: {
             type: String,
-            required: true
+            // required: true
         },
         password: {
             type: String,
             required: true
+        },
+        occupation: {
+            type: String,
+            // required: true
+        },
+        gender: {
+            type: String,
+            enum: ["male", "female"],
+            lowercase: true,
         },
         emailOtp:{
             type: String,

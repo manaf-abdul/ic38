@@ -8,7 +8,6 @@ import path from 'path'
 import morgan from 'morgan'
 import UserRoutes from './Routes/api/user.Routes.js'
 import ConceptRoutes from './Routes/api/concept.Routes.js'
-import MockTestRoutes from './Routes/api/PractiseTest.Routes.js'
 import TerminologyRoutes from './Routes/api/terminology.Routes.js'
 import OneLiners from './Routes/api/oneLiner.Routes.js'
 import SuperCategory from './Routes/api/superCategory.Routes.js'
@@ -39,7 +38,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
 
 app.use('/api/user', UserRoutes)
 app.use('/api/concepts', ConceptRoutes)
-app.use('/api/mock-test', MockTestRoutes)
+app.use('/api/mocktest', MockTest)
 app.use('/api/terminology', TerminologyRoutes)
 app.use('/api/one-liners', OneLiners)
 app.use('/api/supercategories', SuperCategory)

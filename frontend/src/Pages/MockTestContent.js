@@ -4,7 +4,7 @@ import { Accordion, Button, Card, Col, Container, Form, InputGroup, Row } from '
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
-import NumericalTestModal from '../Components/Modals/MockTestModal'
+import NumericalTestModal from '../Components/Modals/NewNumMockTestModal'
 import QuestionModal from '../Components/Modals/QuestionModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
@@ -20,7 +20,7 @@ const MockTestContent = () => {
     const [bulk, setBulk] = useState(false)
 
     const fetchData = async () => {
-        const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}/${params.id}`)
+        const { data } = await axios.get(`${BASEURL}/api/mocktest/${category}/${language}/${params.id}`)
         console.log("data", data)
         setNumericalTestData(data.data)
     }
@@ -32,7 +32,7 @@ const MockTestContent = () => {
 
     const deleteHandler = async (x) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/delete`,x)
+            const { data } = await axios.post(`${BASEURL}/api/mocktest/question/delete`,x)
             if (data.errorcode === 0) {
                 console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
