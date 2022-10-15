@@ -17,6 +17,7 @@ import VideoTutorial from './Pages/VideoTutorial';
 import Poster from './Pages/Poster';
 import MockTestContent from './Pages/MockTestContent';
 import MockTest from './Pages/MockTest';
+import ExamSyllabus from './Pages/ExamSyllabus';
 
 const CommonRoutes = () => {
   return (
@@ -41,6 +42,7 @@ const CommonRoutes = () => {
         
         <Route path='/mocktest/:id' element={<MockTestContent/>} />
         <Route path='/mocktest' element={<MockTest/>} />
+        <Route path='/exam-syllabus' element={<ExamSyllabus/>} />
       
       </Routes>
     </>

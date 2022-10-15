@@ -17,6 +17,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Exam Syllabus',
+    path: '/exam-syllabus',
+    icon: <FaIcons.FaCartPlus />,
+    cName: 'nav-text'
+  },
+  {
     title: 'E-Notes',
     path: '/enotes',
     icon: <FaIcons.FaCartPlus />,

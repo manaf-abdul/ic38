@@ -84,7 +84,6 @@ const OneLiners = () => {
   }, [category, language, render])
   return (
     <>
-      {/* <h1>Category : {category}   language:{language}</h1> */}
 
       <Jumbotron
         name={"One-Liners "}
@@ -93,7 +92,6 @@ const OneLiners = () => {
         submitHandler={() => submitHandler()}
         bulkHandler={() => bulkHandler()}
       />
-
       <Container>
 
         <OneLinerModal
@@ -113,67 +111,54 @@ const OneLiners = () => {
         />
 
         {onelinerData && onelinerData.length > 0 ?
-         onelinerData.map((x, index) => (
-          <Card key={x._id}>
-            <Card.Body>
-              <Row>
-                <Col>
-                  {edit == index ?
-                    <>
-                      <Form.Label>Content</Form.Label>
-
-                      {/* <Form.Control
-                        type='name'
-                        placeholder='Enter name'
-                        value={name}
-                        // onBlur={() => setEdit()}
-                        autoFocus
-                        onChange={(e) => setName(e.target.value)}
-                      ></Form.Control> */}
-
-                      <InputGroup className="mb-3">
-                        <Form.Control
-                          type='name'
-                          placeholder='Enter name'
-                          value={name}
-                          autoFocus
-                          onChange={(e) => setName(e.target.value)}
-                        ></Form.Control>
-                        <Button className='mx-1' variant='success' size="sm" onClick={(e) => editHandler(x)}>Save</Button>
-                        <Button className='mx-1' variant='danger' size="sm" onClick={() => setEdit()}>Cancel</Button>
-                      </InputGroup>
-                    </> :
-                    <Card.Text className='h4'>{x.content}</Card.Text>
-                  }
-                </Col>
-                <Col className='d-flex justify-content-end'>
-                  {edit == index ?
-                    <Col>
-                      {/* <Button className='m-2 mt-4' variant='success' size="sm" onClick={(e) => editHandler(x)}>Save</Button>
+          onelinerData.map((x, index) => (
+            <Card key={x._id}>
+              <Card.Body>
+                <Row>
+                  <Col>
+                    {edit == index ?
+                      <>
+                        <Form.Label>Content</Form.Label>
+                        <InputGroup className="mb-3">
+                          <Form.Control
+                            type='name'
+                            placeholder='Enter name'
+                            value={name}
+                            autoFocus
+                            onChange={(e) => setName(e.target.value)}
+                          ></Form.Control>
+                          <Button className='mx-1' variant='success' size="sm" onClick={(e) => editHandler(x)}>Save</Button>
+                          <Button className='mx-1' variant='danger' size="sm" onClick={() => setEdit()}>Cancel</Button>
+                        </InputGroup>
+                      </> :
+                      <Card.Text className='h4'>{x.content}</Card.Text>
+                    }
+                  </Col>
+                  <Col className='d-flex justify-content-end'>
+                    {edit == index ?
+                      <Col>
+                        {/* <Button className='m-2 mt-4' variant='success' size="sm" onClick={(e) => editHandler(x)}>Save</Button>
                       <Button className='m-2 mt-4' variant='danger' size="sm" onClick={() => setEdit()}>Cancel</Button> */}
-
-                    </Col>
-                    :
-                    <>
-                      <Button className='m-2' variant='success' size="sm" onClick={() => {
-                        setEdit(index)
-                        setName(x.content)
-                        { console.log("x.content", x.content) }
-                      }}>Edit</Button>
-                      <Button className='m-2' variant='danger' size="sm" onClick={() => deleteHandler(x)}>Delete</Button>
-                    </>
-                  }
-
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        )
-        )
+                      </Col>
+                      :
+                      <>
+                        <Button className='m-2' variant='success' size="sm" onClick={() => {
+                          setEdit(index)
+                          setName(x.content)
+                          { console.log("x.content", x.content) }
+                        }}>Edit</Button>
+                        <Button className='m-2' variant='danger' size="sm" onClick={() => deleteHandler(x)}>Delete</Button>
+                      </>
+                    }
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          )
+          )
           :
           <h4 className='text-center'>No Data Found</h4>
         }
-
       </Container>
     </>
   )

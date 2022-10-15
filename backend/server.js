@@ -19,6 +19,7 @@ import ENotes from './Routes/api/eNotes.Routes.js'
 import Video from './Routes/api/videoTutorial.Routes.js'
 import Poster from './Routes/api/poster.Routes.js'
 import MockTest from './Routes/api/MockTest.Routes.js'
+import ExamSyllabus from './Routes/api/examSyllabus.routes.js'
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url); // construct the require method
@@ -50,6 +51,7 @@ app.use('/api/mocktest',MockTest )
 app.use('/api/enotes',ENotes )
 app.use('/api/video',Video )
 app.use('/api/poster',Poster )
+app.use('/api/examsyllabus',ExamSyllabus )
 
 const __dirname = path.resolve()
 

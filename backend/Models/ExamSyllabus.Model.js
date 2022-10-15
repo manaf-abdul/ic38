@@ -2,10 +2,10 @@ import mongoose from 'mongoose'
 
 const conceptContentSchema=mongoose.Schema(
     {
-        chapterId:{
+        superCategory:{
             type:mongoose.Schema.Types.ObjectId,
             required:true,
-            ref:"ConceptChapter"
+            ref:"SuperCategory"
         },
         title:{
             type:String,
@@ -20,5 +20,5 @@ const conceptContentSchema=mongoose.Schema(
     }
 )
 
-const ExamSyllabusContent=mongoose.model('ExamSyllabusContent',conceptContentSchema)
-export default ExamSyllabusContent
+const ExamSyllabus=mongoose.model('ExamSyllabus',conceptContentSchema)
+export default ExamSyllabus
