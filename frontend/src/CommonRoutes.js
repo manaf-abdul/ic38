@@ -18,6 +18,8 @@ import Poster from './Pages/Poster';
 import MockTestContent from './Pages/MockTestContent';
 import MockTest from './Pages/MockTest';
 import ExamSyllabus from './Pages/ExamSyllabus';
+import LiveTest from './Pages/LiveTest';
+import LiveTestContent from './Pages/LiveTestContent';
 
 const CommonRoutes = () => {
   return (
@@ -43,6 +45,8 @@ const CommonRoutes = () => {
         <Route path='/mocktest/:id' element={<MockTestContent/>} />
         <Route path='/mocktest' element={<MockTest/>} />
         <Route path='/exam-syllabus' element={<ExamSyllabus/>} />
+        <Route path='/live-test/:id' element={<LiveTest/>} />
+        <Route path='/live-test' element={<LiveTestContent/>} />
       
       </Routes>
     </>
