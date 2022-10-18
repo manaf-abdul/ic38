@@ -75,7 +75,7 @@ const PractiseTestContent = () => {
     return (
         <>
             <Jumbotron
-                name={"Batches"}
+                name={"PractiseTest Content"}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}

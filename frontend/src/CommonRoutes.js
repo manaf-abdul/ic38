@@ -45,8 +45,8 @@ const CommonRoutes = () => {
         <Route path='/mocktest/:id' element={<MockTestContent/>} />
         <Route path='/mocktest' element={<MockTest/>} />
         <Route path='/exam-syllabus' element={<ExamSyllabus/>} />
-        <Route path='/live-test/:id' element={<LiveTest/>} />
-        <Route path='/live-test' element={<LiveTestContent/>} />
+        <Route path='/live-test/:id' element={<LiveTestContent/>} />
+        <Route path='/live-test' element={<LiveTest/>} />
       
       </Routes>
     </>

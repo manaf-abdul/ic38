@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import ConfirmModal from '../Components/Modals/ConfirmModal'
-import NewNumTestModal from '../Components/Modals/MockTestModal'
+import NewNumTestModal from '../Components/Modals/LiveTestModal'
 import QuestionModal from '../Components/Modals/QuestionModal'
 import SASCategoryModal from '../Components/Modals/SASCategoryModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
@@ -80,9 +80,9 @@ const LiveTest = () => {
 
 
   useEffect(() => {
+    console.log("here")
     setEdit()
     if (render) setRender(false)
-
     if (category && language) fetchData()
   }, [category, language, render])
 
@@ -90,7 +90,7 @@ const LiveTest = () => {
     <>
 
       <Jumbotron
-        name={"TEST"}
+        name={"Live Test"}
         buttonName={"Add/Edit"}
         submitHandler={() =>bulkHandler ()}
       />

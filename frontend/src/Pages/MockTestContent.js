@@ -74,7 +74,7 @@ const MockTestContent = () => {
     return (
         <>
             <Jumbotron
-                name={"Batches"}
+                name={"Mock test Content"}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}

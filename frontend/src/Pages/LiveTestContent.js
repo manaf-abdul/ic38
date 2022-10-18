@@ -4,7 +4,7 @@ import { Accordion, Button, Card, Col, Container, Form, InputGroup, Row } from '
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
-import NumericalTestModal from '../Components/Modals/NewNumMockTestModal'
+import NumericalTestModal from '../Components/Modals/NewNumLIveTestModal'
 import QuestionModal from '../Components/Modals/QuestionModal'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
@@ -74,7 +74,7 @@ const LiveTestContent = () => {
     return (
         <>
             <Jumbotron
-                name={"Batches"}
+                name={"Live test Content"}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}

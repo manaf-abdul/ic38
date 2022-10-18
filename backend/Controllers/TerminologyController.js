@@ -28,6 +28,7 @@ export const getTerminologies=async(req,res)=>{
     console.log("---------getTerminologies--------------");
     try {
         const {category,language}=req.params
+        console.log(req.params)
         if(!category || !language)  return res.status(200).json({ errorcode: 1, status: false, msg: "Category & Language should be present", data: null })
         let data=await Terminology.find({language:language,superCategory:category}).sort({ title: 1 }).collation({ locale: "en", caseLevel: true })
         return res.status(200).json({ errorcode: 0, status: true, msg: "Terminology Found", data: data });

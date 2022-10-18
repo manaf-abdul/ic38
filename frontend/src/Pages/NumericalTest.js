@@ -90,7 +90,7 @@ const NumericalTest = () => {
     <>
 
       <Jumbotron
-        name={"TEST"}
+        name={"Numerical test"}
         buttonName={"Add/Edit"}
         submitHandler={() =>bulkHandler ()}
       />

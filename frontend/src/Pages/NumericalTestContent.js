@@ -74,7 +74,7 @@ const NumericalTestContent = () => {
     return (
         <>
             <Jumbotron
-                name={"Batches"}
+                name={"Numerical test Content"}
                 buttonName={"Add/Edit"}
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}

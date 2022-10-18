@@ -90,7 +90,7 @@ const MockTest = () => {
     <>
 
       <Jumbotron
-        name={"TEST"}
+        name={"Mock Test"}
         buttonName={"Add/Edit"}
         submitHandler={() =>bulkHandler ()}
       />

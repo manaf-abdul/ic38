@@ -60,6 +60,54 @@
                 }
             }
         },
+        "/api/language": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Get all Languages",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Post New Language",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "English"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/concepts": {
             "get": {
                 "tags": [
@@ -167,13 +215,35 @@
                 }
             }
         },
-        "/api/terminology": {
+        "/api/terminology/{category}/{language}": {
             "get": {
                 "tags": [
                     "Terminology"
                 ],
                 "summary": "Get all Terminologies",
                 "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -228,7 +298,7 @@
                 "tags": [
                     "One-Liners"
                 ],
-                "summary": "Get all Terminologies",
+                "summary": "Get all One-Liners",
                 "description": "for testing the swagger doc",
                 "parameters": [
                     {
@@ -301,13 +371,35 @@
                 }
             }
         },
-        "/api/language": {
+        "/api/short-and-simple/{category}/{language}": {
             "get": {
                 "tags": [
-                    "Language"
+                    "Short & Simple"
                 ],
-                "summary": "Get all Languages",
+                "summary": "Get all Short & Simple Categories",
                 "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -316,38 +408,57 @@
                         "description": "Unauthorized User"
                     }
                 }
-            },
-            "post": {
+            }
+        },
+        "/api/short-and-simple/{category}/{language}/{subCategory}": {
+            "get": {
                 "tags": [
-                    "Language"
+                    "Short & Simple"
                 ],
-                "summary": "Post New Language",
+                "summary": "Get all Short & Simple By CAtegories",
                 "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    },
+                    {
+                        "name": "subCategory",
+                        "in": "path",
+                        "description": "subCategory",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633c4d758631f84e20351984"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
                     },
                     "401": {
                         "description": "Unauthorized User"
-                    }
-                },
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "English"
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
         }
+        
     }
 }
