@@ -13,6 +13,10 @@
     },
     "servers": [
         {
+            "url": "http://3.6.83.168:5002",
+            "description": "Live Environment"
+        },
+        {
             "url": "https://ic38.herokuapp.com",
             "description": "Live Environment"
         },
@@ -458,7 +462,120 @@
                     }
                 }
             }
+        },
+        "/api/video": {
+            "get": {
+                "tags": [
+                    "Video Tutorial"
+                ],
+                "summary": "Video Tutorial",
+                "description": "for testing the swagger doc",
+               "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/enotes/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Enotes"
+                ],
+                "summary": "Get all Enotes",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+               "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/poster/{language}": {
+            "get": {
+                "tags": [
+                    "Poster"
+                ],
+                "summary": "Get all Enotes",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "languageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+               "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/examsyllabus/{category}": {
+            "get": {
+                "tags": [
+                    "Exam Syllabus"
+                ],
+                "summary": "Get exam syllabus by category",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    }
+                ],
+               "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
         }
-        
     }
 }

@@ -1,46 +1,30 @@
 import mongoose from "mongoose";
 
-const schema=new mongoose.Schema(
+const schema = new mongoose.Schema(
     {
-        language:{
-            type:mongoose.Schema.Types.ObjectId,
+        language: {
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'Language',
         },
-        superCategory:{
-            type:mongoose.Schema.Types.ObjectId,
+        superCategory: {
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'SuperCategory',
         },
-        name:{
-            type:String
-        },
-        slug:{
-            type:String,
-            lowercase:true
-        },
-        description:{
-            type:String,
-            lowercase:true
-        },
-        numberOfQes:{
-            type:String
-        },
-        qAndA:{type:[
-                {
-                q:{ type: String, default: null },
-                o1: { type: String, default: null },
-                o2: { type: String, default: null },
-                o3: { type: String, default: null },
-                o4: { type: String, default: null },
-                a:{ type: String, default: null }
-            }
-        ]}
+
+        q: { type: String, default: null },
+        o1: { type: String, default: null },
+        o2: { type: String, default: null },
+        o3: { type: String, default: null },
+        o4: { type: String, default: null },
+        a: { type: String, default: null }
+
     },
     {
-        timestamps:true
+        timestamps: true
     }
 )
 
-const LiveTest=new mongoose.model('LiveTest',schema)
+const LiveTest = new mongoose.model('LiveTest', schema)
 export default LiveTest

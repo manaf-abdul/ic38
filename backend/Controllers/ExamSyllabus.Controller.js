@@ -52,7 +52,8 @@ export const deleteExamSyllabus=async(req,res)=>{
 
 export const getExamSyllabus=async(req,res)=>{
     try {
-        let data=await ExamSyllabus.find({})
+        const {category}=req.params;
+        let data=await ExamSyllabus.find({superCategory:category})
         return res.status(200).json({ errorcode: 0, status: true, msg: "Exam Syllabus Found", data: data });
     } catch (e) {
         console.log(e)
