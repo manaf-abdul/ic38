@@ -93,7 +93,7 @@ const MockTestContent = () => {
             />
             <Container>
                 <h4>{numericalTestData?.name}</h4>
-                {numericalTestData.qAndA && numericalTestData.qAndA.length > 0 ?
+                {numericalTestData?.qAndA && numericalTestData?.qAndA?.length > 0 ?
                     numericalTestData?.qAndA?.map((test, index) => (
                         <Accordion>
                             <Accordion.Item eventKey={index}>
