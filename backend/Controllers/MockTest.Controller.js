@@ -11,12 +11,27 @@ export const postNumericalTest = async (req, res) => {
         const { category, language,id,isDelete } = req.body;
         let test = await NumericalTest.findOne({_id:id})
         if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "No Num-Test found", data: null })
-        const data = fileParser(req.file.buffer)
-        console.log("data", data)
-        if(isDelete)  {await NumericalTest.updateOne({_id:id},{$set:{qAndA:data[0].data}})}
-        else{await NumericalTest.updateOne({_id:id},{$push:{qAndA:{$each:data[0].data}}})}
+        let data = fileParser(req.file.buffer)
+        data=data[0].data;
+        data=data.map(dat=>{
+            return{
+                q:dat.q,
+                o1:dat.o1=="T"?"true":dat.o1=="F"?"false":dat.o1,
+                o2:dat.o2=="T"?"true":dat.o2=="F"?"false":dat.o2,
+                o3:dat.o3=="T"?"true":dat.o3=="F"?"false":dat.o3,
+                o4:dat.o4=="T"?"true":dat.o4=="F"?"false":dat.o4,
+                a:dat.a=="1"? (dat.o1=="T"?"true":dat.o1=="F"?"false":dat.o1)
+                 :dat.a=='2'? (dat.o2=="T"?"true":dat.o2=="F"?"false":dat.o2)
+                 :dat.a=='3'? (dat.o3=="T"?"true":dat.o3=="F"?"false":dat.o3)
+                 :dat.a=="4"? (dat.o4=="T"?"true":dat.o4=="F"?"false":dat.o4)
+                 :null
+            }
+        })
+        if(isDelete)  {await NumericalTest.updateOne({_id:id},{$set:{qAndA:data}})}
+        else{await NumericalTest.updateOne({_id:id},{$push:{qAndA:{$each:data}}})}
         return res.status(200).json({ errorcode: 0, status: true, msg: "Created Successfully", data: data })
     } catch (error) {
+        console.log(error)
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
 }
