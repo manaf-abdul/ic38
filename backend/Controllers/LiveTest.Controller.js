@@ -18,14 +18,14 @@ export const postNumericalTest = async (req, res) => {
                 language:language,
                 superCategory:category,
                 q:dat.q,
-                o1:dat.o1=="T"?"true":dat.o1=="F"?"false":dat.o1,
-                o2:dat.o2=="T"?"true":dat.o2=="F"?"false":dat.o2,
-                o3:dat.o3=="T"?"true":dat.o3=="F"?"false":dat.o3,
-                o4:dat.o4=="T"?"true":dat.o4=="F"?"false":dat.o4,
-                a:dat.a=="1"? (dat.o1=="T"?"true":dat.o1=="F"?"false":dat.o1)
-                 :dat.a=='2'? (dat.o2=="T"?"true":dat.o2=="F"?"false":dat.o2)
-                 :dat.a=='3'? (dat.o3=="T"?"true":dat.o3=="F"?"false":dat.o3)
-                 :dat.a=="4"? (dat.o4=="T"?"true":dat.o4=="F"?"false":dat.o4)
+                o1:dat.o1=="T"||"t"?"true":dat.o1=="F"||"f"?"false":dat.o1,
+                o2:dat.o2=="T"||"t"?"true":dat.o2=="F"||"f"?"false":dat.o2,
+                o3:dat.o3=="T"||"t"?"true":dat.o3=="F"||"f"?"false":dat.o3,
+                o4:dat.o4=="T"||"t"?"true":dat.o4=="F"||"f"?"false":dat.o4,
+                a:dat.a=="1"? (dat.o1=="T"||"t"?"true":dat.o1=="F"||"f"?"false":dat.o1)
+                 :dat.a=='2'? (dat.o2=="T"||"t"?"true":dat.o2=="F"||"f"?"false":dat.o2)
+                 :dat.a=='3'? (dat.o3=="T"||"t"?"true":dat.o3=="F"||"f"?"false":dat.o3)
+                 :dat.a=="4"? (dat.o4=="T"||"t"?"true":dat.o4=="F"||"f"?"false":dat.o4)
                  :null
             }
         })
