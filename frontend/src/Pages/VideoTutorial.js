@@ -4,8 +4,10 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
+import { CartState } from '../Context'
 
 const VideoTutorial = () => {
+    const { category, language } = CartState()
     const [file, setFile] = useState()
     const [title, setTitle] = useState('')
     const [data, setData] = useState()
@@ -21,6 +23,7 @@ const VideoTutorial = () => {
             const formData = new FormData()
             formData.append('file', file)
             formData.append('name', title)
+            formData.append('category',category)
 
             try {
                 const config = {
@@ -63,7 +66,7 @@ const VideoTutorial = () => {
       })
 
     const getData = async () => {
-        const { data } = await axios.get(`${BASEURL}/api/video`)
+        const { data } = await axios.get(`${BASEURL}/api/video/${category}`)
         setData(data.data)
         console.log(data)
     }
@@ -72,7 +75,7 @@ const VideoTutorial = () => {
         if(render) setRender(false)
        getData()
 
-    }, [render])
+    }, [render,category])
 
 
     return (

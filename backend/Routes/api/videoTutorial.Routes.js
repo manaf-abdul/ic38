@@ -6,6 +6,6 @@ import { addVideoTutorial, deleteVideoTutorial, getVideoTutorial } from '../../C
 // router.post('/edit',editSuperCategory)
 router.post('/delete',deleteVideoTutorial)
 router.post('/',s3UserStorage.single('file'),addVideoTutorial)
-router.get('/',getVideoTutorial)
+router.get('/:category',getVideoTutorial)
 
 export default router

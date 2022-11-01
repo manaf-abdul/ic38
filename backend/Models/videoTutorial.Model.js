@@ -6,6 +6,10 @@ const schema=mongoose.Schema(
             type:String,
             required:true
         },
+        category:{
+            type:mongoose.Types.ObjectId,
+            ref:"SuperCategory"
+        },
         file:{ }
     },{
         timeStamps:true
