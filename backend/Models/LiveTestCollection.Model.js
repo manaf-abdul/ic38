@@ -10,7 +10,20 @@ const schema=new mongoose.Schema(
             type:Date,
             required:true
         },
+        language: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Language',
+        },
+        superCategory: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'SuperCategory',
+        }
     },{
         timestamps:true
     }
 )
+
+const LiveTestSet = new mongoose.model('LiveTestSet', schema)
+export default LiveTest

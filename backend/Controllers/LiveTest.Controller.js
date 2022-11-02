@@ -1,4 +1,5 @@
 import NumericalTest from "../Models/LiveTest.Model.js";
+import NumericalTestSet from "../Models/LiveTestSet.Model.js";
 import { fileParser } from "../utils/fileParser.js";
 import slugify from "slugify";
 import mongoose from 'mongoose'
@@ -88,7 +89,7 @@ export const getAllNumericalTest = async (req, res) => {
     console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     try {
         const { category, language } = req.params;
-        let data = await NumericalTest.find({ superCategory: category, language: language })
+        let data = await NumericalTestSet.find({ superCategory: category, language: language })
         return res.status(200).json({ errorcode: 0, status: true, msg: "Live test found ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
@@ -99,12 +100,12 @@ export const editNumericalTest = async (req, res) => {
     try {
         const { name, _id,description} = req.body;
         if (!_id) return res.status(200).json({ errorcode: 1, status: false, msg: "Id is required", data: null })
-        let test = await NumericalTest.findById(_id)
+        let test = await NumericalTestSet.findById(_id)
         if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "Live test not found", data: null })
-        let testEx = await NumericalTest.findOne({ name: name })
+        let testEx = await NumericalTestSet.findOne({ name: name })
         if (testEx) return res.status(200).json({ errorcode: 3, status: false, msg: "Name is in use", data: null })
         test.name = name ? name : test.name;
-        test.description = description ? description : test.description
+        test.dateAndTime = description ? description : test.dateAndTime
         test = await test.save()
         return res.status(200).json({ errorcode: 0, status: true, msg: "Live test Updated Successfully", data: test })
     } catch (error) {
@@ -117,7 +118,7 @@ export const postNewNumericalTest = async (req, res) => {
         console.log(req.body);
         const { name,description } = req.body;
         const { category, language } = req.params;
-        let test = new NumericalTest({ name,description, superCategory: category, language })
+        let test = new NumericalTestSet({ name,dateAndTime:description, superCategory: category, language })
         test = await test.save()
         return res.status(200).json({ errorcode: 0, status: true, msg: "New Live test created ", data: test })
     } catch (error) {
