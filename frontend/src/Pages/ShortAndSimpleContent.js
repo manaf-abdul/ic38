@@ -92,6 +92,7 @@ const ShortAndSimpleContent = () => {
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}
                 bulkHandler={() => bulkHandler()}
+                type={"S&S"}
             />
             <SASContentModal
                 show={modalShow}

@@ -470,7 +470,7 @@
                 ],
                 "summary": "Video Tutorial",
                 "description": "for testing the swagger doc",
-               "responses": {
+                "responses": {
                     "200": {
                         "description": "Status True"
                     },
@@ -509,7 +509,7 @@
                         }
                     }
                 ],
-               "responses": {
+                "responses": {
                     "200": {
                         "description": "Status True"
                     },
@@ -538,7 +538,7 @@
                         }
                     }
                 ],
-               "responses": {
+                "responses": {
                     "200": {
                         "description": "Status True"
                     },
@@ -567,7 +567,115 @@
                         }
                     }
                 ],
-               "responses": {
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/livetest/attend/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "Get all Enotes",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/livetest/result": {
+            "post": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "Post Test Result",
+                "description": "Post Test Result",
+                "produces": "application/json",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "633b46097e1f1a58be99e4dd"
+                                    },
+                                    "result": {
+                                        "type": "Number",
+                                        "example": 45
+                                    },
+                                    "testId": {
+                                        "type": "string",
+                                        "example": "6362940863a5d39d6f2b62a6"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verified SuccessFully"
+                    },
+                    "401": {
+                        "description": "Unauthorized access to API"
+                    }
+                }
+            }
+        },
+        "/api/livetest/live-test-result": {
+            "get": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "GET LIve TEst Results",
+                "description": "for testing the swagger doc",
+                "responses": {
                     "200": {
                         "description": "Status True"
                     },

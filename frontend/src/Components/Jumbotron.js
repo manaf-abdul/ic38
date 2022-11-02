@@ -7,9 +7,35 @@ const Jumbotron = (props) => {
         <div className="jumbotron square p-5 mb-4 ">
             <Row>
                 <Col lg={3} className='text-center'>
+                  {props.type==="NTestContent" ? 
+                    <Link to="/numericaltest" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
+                        Go Back
+                    </Link>
+                    :
+                    props.type==="PTestContent" ? 
+                    <Link to="/practisetest" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
+                        Go Back
+                    </Link>
+                    :
+                    props.type==="MTestContent" ? 
+                    <Link to="/mocktest" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
+                        Go Back
+                    </Link>
+                    :
+                    props.type==="LTestContent" ? 
+                    <Link to="/live-test" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
+                        Go Back
+                    </Link>
+                    :
+                    props.type==="S&S" ? 
+                    <Link to="/short-and-simple" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
+                        Go Back
+                    </Link>
+                    :
                     <Link to="/" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
                         Go Back
                     </Link>
+                  }
                 </Col>
                 <Col lg={6} >
                     <h1 className="m-0 p-0 text-center square ">{props.name}</h1>

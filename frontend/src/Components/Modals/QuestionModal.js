@@ -19,6 +19,7 @@ const QuestionModal = (props) => {
 
     const [file, setFile] = useState()
     const [name, setName] = useState('')
+    const [isDelete, setIsDelete] = useState(false)
 
     const addHandler = async (selected) => {
         try {
@@ -53,6 +54,39 @@ const QuestionModal = (props) => {
         }
     }
 
+    const addLiveTestHandler = async (selected) => {
+        try {
+            const formData = new FormData()
+            formData.append('file', file)
+            formData.append('language', language)
+            formData.append('superCategory', category)
+            formData.append('isDelete', isDelete)
+
+            try {
+                const config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    onUploadProgress: progressEvent => console.log(progressEvent.loaded)
+                }
+                const { data } = await axios.post(`${BASEURL}/api/livetest/question-file`, formData, config)
+                if (data.errorcode === 0) {
+                    toast.success(`🦄 ${data.msg}!`, successToast);
+                    props?.setRender()
+                    setName('')
+                    setFile()
+                    props.onHide()
+                } else {
+                    toast.warn(`🦄 ${data.msg}!`, warningToast);
+                }
+            } catch (error) {
+                toast.error(`🦄 ${error.message}!`, errorToast);
+            }
+        } catch (error) {
+            toast.error(`🦄 ${error.message}!`, errorToast);
+        }
+    }
+
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
         setFile(file)
@@ -61,7 +95,7 @@ const QuestionModal = (props) => {
     //     if (props.edit) {
     //         console.log("INSIDEEEEEEEEEE")
     //     } else {
-           
+
     //     }
 
     // }, [props])
@@ -82,16 +116,16 @@ const QuestionModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <>
-                    <Form.Group controlId='name'>
+                    {!props.livetest && <Form.Group controlId='name'>
                         <Form.Label>Name</Form.Label>
 
                         <Form.Control
-                             type='text'
-                             placeholder='Enter Content'
-                             value={name}
-                             onChange={(e) => setName(e.target.value)}
+                            type='text'
+                            placeholder='Enter Content'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         ></Form.Control>
-                    </Form.Group>
+                    </Form.Group>}
                     <Form.Group controlId='name'>
                         <Form.Label>File</Form.Label>
 
@@ -104,6 +138,18 @@ const QuestionModal = (props) => {
                             onChange={(e) => uploadFileHandler(e)}
                             accept=".xlsx"
                         ></Form.Control>
+                    </Form.Group>
+                    <Form.Group controlId='name' className='pt-4 m-1'>
+                        <Form.Check
+                            type="switch"
+                            id="custom-switch"
+                            checked={isDelete ? true : false}
+                            value={isDelete}
+                            label={isDelete ? <span style={{ color: "red", fontWeight: "bold" }}>CAUTION : The previous data will be erased and the new data will be overwritten</span>
+                                : <span style={{}}>Delete previous datas</span>
+                            }
+                            onChange={(e) => setIsDelete(!isDelete)}
+                        />
                     </Form.Group>
                     {/* <Form.Group controlId='name' className='pt-4 m-1'>
                         <Form.Check
@@ -120,7 +166,12 @@ const QuestionModal = (props) => {
                 </>
             </Modal.Body>
             <Modal.Footer className='align-items-center'>
-                <Button onClick={() => addHandler()} variant="success" size="md">Add</Button>
+                {props.livetest
+                    ?
+                    <Button onClick={() => addLiveTestHandler()} variant="success" size="md">Add</Button>
+                    :
+                    <Button onClick={() => addHandler()} variant="success" size="md">Add</Button>
+                }
 
                 <Button onClick={props.onHide} variant="danger" size="md">No</Button>
             </Modal.Footer>

@@ -119,6 +119,7 @@ const LiveTest = () => {
             setQuestionModalShow(false)
           }}
           setRender={() => setRender(true)}
+          livetest={"true"}
         />
         <Row className='m-2'>
           {onelinerData && onelinerData.length > 0 ? onelinerData.map((x, index) => (

@@ -151,7 +151,7 @@ const Poster = () => {
                 <Row className='pt-4'>
                     <Col xs={10} lg={10} xl={10}>
                         {data && data.length > 0 ?
-                            data.map(data => (
+                            data?.map(data => (
                                 <Card>
                                     <Row>
                                         <Col xs={6}m lg={6}>
@@ -164,9 +164,9 @@ const Poster = () => {
                                     </Row>
                                     <Row className='pt-3'>
                                     <Col xs={12} lg={12}>
-                                {data.file.map(file=>(
+                                {data?.file?.map(file=>(
                                     <>
-                                    <img src={file.location}/>
+                                    <img src={file?.location}/>
                                     <Button onClick={(e)=>deleteImageHandler(file.key,data._id)}>Delete Image</Button>
                                     </>
 

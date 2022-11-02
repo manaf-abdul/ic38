@@ -1,15 +1,16 @@
 import NumericalTest from "../Models/LiveTest.Model.js";
-import NumericalTestSet from "../Models/LiveTestSet.Model.js";
+import NumericalTestSet from "../Models/LiveTestCollection.Model.js";
 import { fileParser } from "../utils/fileParser.js";
 import slugify from "slugify";
 import mongoose from 'mongoose'
+import LiveTestResult from "../Models/LIveTestResult.Model.js";
 
 export const postNumericalTest = async (req, res) => {
     console.log("here postlivetest",req.body)
     // await NumericalTest.deleteMany()
     try {
         if (!req.file) return res.status(200).json({ errorcode: 1, status: false, msg: "File Not Present", data: null })
-        const { category, language,id,isDelete } = req.body;
+        const { superCategory, language,id,isDelete } = req.body;
         // let test = await NumericalTest.findOne({_id:id})
         // if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "No LiveTest found", data: null })
         let data = fileParser(req.file.buffer)
@@ -17,7 +18,7 @@ export const postNumericalTest = async (req, res) => {
         data=data.map(dat=>{
             return{
                 language:language,
-                superCategory:category,
+                superCategory:superCategory,
                 q:dat.q,
                 o1:dat.o1=="T"||"t"?"true":dat.o1=="F"||"f"?"false":dat.o1,
                 o2:dat.o2=="T"||"t"?"true":dat.o2=="F"||"f"?"false":dat.o2,
@@ -132,9 +133,9 @@ export const deleteNumericalTest = async (req, res) => {
     try {
         // const {category,language}=req.params
         const { name, _id, language, category } = req.body
-        let SASCat = await NumericalTest.findOne({ language: language, superCategory: category, _id: _id })
+        let SASCat = await NumericalTestSet.findOne({ language: language, superCategory: category, _id: _id })
         if (!SASCat) return res.status(200).json({ errorcode: 1, status: false, msg: "Live-Test Not Found", data: null })
-        await NumericalTest.deleteOne({ language: language, superCategory: category, _id: _id })
+        await NumericalTestSet.deleteOne({ language: language, superCategory: category, _id: _id })
         return res.status(200).json({ errorcode: 0, status: true, msg: "Live-Test  Deleted Successfully", data: null });
     } catch (e) {
         console.log(e)
@@ -208,11 +209,61 @@ export const editQuestion = async (req, res) => {
                     "qAndA.$.o4": o4,
                 },
             }
-            // { new: true }
         ).exec()
         return res.status(200).json({ errorcode: 0, status: true, msg: "Live-Test Question Updated Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+export const attendLiveTest = async (req, res) => {
+    console.log("============attendLiveTest ===========");
+    console.log("req.body", req.body);
+    try {
+        console.log(req.body);
+        const { category, language } = req.params;
+        // let data = await NumericalTest.aggregate({ superCategory: category, language: language })
+        let data=await NumericalTest.aggregate(
+            [
+                {
+                    $match:{
+                        superCategory:mongoose.Types.ObjectId(category),
+                        language:mongoose.Types.ObjectId(language)
+                    }
+                },
+                {$sample:{size:50}}
+            ]
+        )
+        // let s=data.length
+        // console.log(s)
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Live test Found ", data: data })
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
+    }
+}
+
+export const postLiveTestResult = async (req, res) => {
+    console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+    try {
+        const { userId,result,testId } = req.body;
+        let data = new LiveTestResult({ user:userId,result,testId })
+        data=await data.save()
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Result saved Successfully ", data: data })
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
+    }
+}
+
+export const getLiveTestResult = async (req, res) => {
+    console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+    try {
+        // const { userId,result,testId } = req.body;
+        let data=await LiveTestResult.find().sort({result:-1}).limit(30).populate([
+            {path:"user",select:"username profilePic"}
+        ])
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Result Fetched Successfully ", data: data })
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
 }

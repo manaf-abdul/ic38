@@ -11,14 +11,16 @@ const MockTestModal= (props) => {
     const { category, language } = CartState()
 
     const [name, setName] = useState('')
+    const [date, setDate] = useState('')
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/livetest/${category}/${language}`, {name:name})
+            const { data } = await axios.post(`${BASEURL}/api/livetest/${category}/${language}`, {name:name,description:date})
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
                 setName('')
+                setDate('')
                 props.onHide()
             } else {
                 toast.warn(`🦄 ${data.msg}!`, warningToast);
@@ -40,7 +42,7 @@ const MockTestModal= (props) => {
 
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                       Add new Mock Test
+                       Add new Live Test
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -54,6 +56,15 @@ const MockTestModal= (props) => {
                                         placeholder='Enter Content'
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
+                                    ></Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId='brand' className='pb-4'>
+                                    <Form.Label>Date & Time</Form.Label>
+                                    <Form.Control
+                                        type='text'
+                                        placeholder='Enter Content'
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
                                     ></Form.Control>
                                 </Form.Group>
                         </Col>

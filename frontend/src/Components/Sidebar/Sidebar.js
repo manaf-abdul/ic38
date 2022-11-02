@@ -16,7 +16,7 @@ function SideBar() {
 
     const navigate = useNavigate()
 
-    const {setCategory,setLanguage}=CartState()
+    const {category,language,setCategory,setLanguage}=CartState()
 
     const [sidebar, setSidebar] = useState(false);
     const [categories, setCategories] = useState()
@@ -77,7 +77,7 @@ function SideBar() {
                         className="px-5 col-lg-6 text-center textProperty"
                         title={
                             <span style={{ color: 'white' }}>
-                                Categories
+                                {catName?catName:"Categories"}
                             </span>
                         }
                         id="adminmenu"
@@ -102,7 +102,7 @@ function SideBar() {
                         className="px-5 col-lg-6 text-center textProperty"
                         title={
                             <span style={{ color: 'white' }}>
-                                Languages
+                                {langName?langName:"Languages"}
                             </span>
                         }
                         id="adminmenu"

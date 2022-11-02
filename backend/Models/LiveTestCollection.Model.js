@@ -7,7 +7,7 @@ const schema=new mongoose.Schema(
             required:true
         },
         dateAndTime:{
-            type:Date,
+            type:String,
             required:true
         },
         language: {
@@ -26,4 +26,4 @@ const schema=new mongoose.Schema(
 )
 
 const LiveTestSet = new mongoose.model('LiveTestSet', schema)
-export default LiveTest
+export default LiveTestSet

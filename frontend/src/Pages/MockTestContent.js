@@ -79,6 +79,7 @@ const MockTestContent = () => {
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}
                 bulkHandler={() => bulkHandler()}
+                type={"MTestContent"}
             />
             <NumericalTestModal
                 show={modalShow}

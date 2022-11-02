@@ -79,6 +79,7 @@ const NumericalTestContent = () => {
                 bulkButton={'Bulk Add'}
                 submitHandler={() => submitHandler()}
                 bulkHandler={() => bulkHandler()}
+                type={"NTestContent"}
             />
             <NumericalTestModal
                 show={modalShow}
@@ -102,10 +103,10 @@ const NumericalTestContent = () => {
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     <b>Options:</b>
-                                    <p> <b>1: </b>{test?.o1}</p>
-                                    <p><b>2: </b>{test?.o2}</p>
-                                    <p><b>3: </b>{test?.o3}</p>
-                                    <p><b>4: </b>{test?.o4}</p>
+                                    {test?.o1 && <p> <b>1: </b>{test?.o1}</p>}
+                                    {test?.o2 && <p><b>2: </b>{test?.o2}</p>}
+                                    {test?.o3 && <p><b>3: </b>{test?.o3}</p>}
+                                    {test?.o4 && <p><b>4: </b>{test?.o4}</p>}
                                     <p><b>Ans: </b>{test?.a}</p>
                                     <Button className='mx-1' variant='success' size="sm"
                                         onClick={(e) => editHandler(test)}
