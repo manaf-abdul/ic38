@@ -16,7 +16,7 @@ function SideBar() {
 
     const navigate = useNavigate()
 
-    const {category,language,setCategory,setLanguage}=CartState()
+    const {category,language,setCategory,setLanguage,admin,setAdmin}=CartState()
 
     const [sidebar, setSidebar] = useState(false);
     const [categories, setCategories] = useState()
@@ -64,11 +64,24 @@ function SideBar() {
                             className="px-5"
                             title={
                                 <span style={{ color: 'white' }}>
-                                    {/* {cart && cart.email ? cart.email : 'Admin'} */}
+                                    Admin
                                 </span>
                             }
                             id="adminmenu"
                         >
+                             {admin && admin.token ?
+                             <NavDropdown.Item onClick={()=>{
+                               setAdmin({})
+                                }} className="">
+                                Logout
+                            </NavDropdown.Item>
+                            :
+                            <NavDropdown.Item onClick={()=>{
+                                navigate('/login')
+                                 }} className="">
+                                 LogIn
+                             </NavDropdown.Item> 
+                        }
                         </NavDropdown>
                     </div>
                 </div>

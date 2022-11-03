@@ -5,10 +5,11 @@ const Cart = createContext();
 const Context = ({ children }) => {
     const [category, setCategory] = useState('');
     const [language, setLanguage] = useState('');
+    const [admin,setAdmin]=useState({})
 
     return (
         <> 
-        <Cart.Provider value={{ category,language, setLanguage,setCategory }}>
+        <Cart.Provider value={{ category,language,admin,setAdmin,setLanguage,setCategory }}>
             {children}
         </Cart.Provider>
         </>

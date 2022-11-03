@@ -32,6 +32,9 @@ const Jumbotron = (props) => {
                         Go Back
                     </Link>
                     :
+                    props.type==="home" ? 
+                    ""
+                    :
                     <Link to="/" className="btn my-3" style={{backgroundColor:"black",color:"white"}}>
                         Go Back
                     </Link>
