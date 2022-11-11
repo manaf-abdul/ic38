@@ -75,7 +75,7 @@ export const getTestById = async (req, res) => {
         const { id } = req.params;
         if (!id) return res.status(200).json({ errorcode: 0, status: false, msg: "Id is required", data: null })
         let data = await NumericalTest.findById(id)
-        return res.status(200).json({ errorcode: 0, status: true, msg: "practise test found ", data: data })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MOcktest test found ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
@@ -86,7 +86,7 @@ export const getAllNumericalTest = async (req, res) => {
     try {
         const { category, language } = req.params;
         let data = await NumericalTest.find({ superCategory: category, language: language })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerpractise test found ", data: data })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest test found ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
@@ -97,12 +97,12 @@ export const editNumericalTest = async (req, res) => {
         const { name, _id } = req.body;
         if (!_id) return res.status(200).json({ errorcode: 1, status: false, msg: "Id is required", data: null })
         let test = await NumericalTest.findById(_id)
-        if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "Numerical test not found", data: null })
+        if (!test) return res.status(200).json({ errorcode: 2, status: false, msg: "MockTest test not found", data: null })
         let testEx = await NumericalTest.findOne({ name: name })
         if (testEx) return res.status(200).json({ errorcode: 3, status: false, msg: "Name is in use", data: null })
         test.name = name ? name : test.name
         test = await test.save()
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical test Updated Successfully", data: test })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest test Updated Successfully", data: test })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
@@ -115,7 +115,7 @@ export const postNewNumericalTest = async (req, res) => {
         const { category, language } = req.params;
         let test = new NumericalTest({ name, superCategory: category, language })
         test = await test.save()
-        return res.status(200).json({ errorcode: 0, status: true, msg: "New Numerical test created ", data: test })
+        return res.status(200).json({ errorcode: 0, status: true, msg: "New MockTest test created ", data: test })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
@@ -128,9 +128,9 @@ export const deleteNumericalTest = async (req, res) => {
         // const {category,language}=req.params
         const { name, _id, language, category } = req.body
         let SASCat = await NumericalTest.findOne({ language: language, superCategory: category, _id: _id })
-        if (!SASCat) return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        if (!SASCat) return res.status(200).json({ errorcode: 1, status: false, msg: "MockTest Not Found", data: null })
         await NumericalTest.deleteOne({ language: language, superCategory: category, _id: _id })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test  Deleted Successfully", data: null });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest  Deleted Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
@@ -151,7 +151,7 @@ export const addNewQuestion = async (req, res) => {
         // if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
         let updateObj = { q, o1, o2, o3, o4, a }
         await NumericalTest.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $push: { qAndA: updateObj } })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Added Successfully", data: null });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest Question Added Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
@@ -170,9 +170,9 @@ export const deleteQuestion = async (req, res) => {
                 "qAndA._id": mongoose.Types.ObjectId(_id)
             }
         )
-        if (!numTest) return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        if (!numTest) return res.status(200).json({ errorcode: 1, status: false, msg: "MockTest Not Found", data: null })
         await NumericalTest.updateOne({ _id: numTest._id }, { $pull: {qAndA:{_id} } })
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Deleted Successfully", data: null });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest Question Deleted Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
@@ -190,7 +190,7 @@ export const editQuestion = async (req, res) => {
             }
         )
         console.log("numTest", numTest);
-        if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "Numerical-Test Not Found", data: null })
+        if(!numTest)  return res.status(200).json({ errorcode: 1, status: false, msg: "MockTest Not Found", data: null })
         numTest = await NumericalTest.findOneAndUpdate(
             { "qAndA._id": id },
             {
@@ -205,7 +205,7 @@ export const editQuestion = async (req, res) => {
             }
             // { new: true }
         ).exec()
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Numerical-Test Question Updated Successfully", data: null });
+        return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest Question Updated Successfully", data: null });
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });

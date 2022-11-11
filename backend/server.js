@@ -61,18 +61,14 @@ const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '/frontend/build')))
-
+    
     app.get('*', (req, res) =>
         res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
     )
 } else {
-    app.get('/', (req, res) => {
+    app.get('/other', (req, res) => {
         res.send('API is running....')
     })
 }
-// app.get('/get',async(req,res)=>{
-//     const {data}=await Axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=6UTQpnRJNRwlU-XnzU3LQFhumGx9UQPStT93MHwmXmxIhRalYGP4Z2c4Rw2HWR1WeAeqMvPhyxt41TCU0Z7DvQjnSM07LOdFm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnH810grv4XdUG_LwF2eyuMa5ufkfaA__S5UK4miFUlt12chAkuCJLDM1zrPx1aiUl95iAjojgKbQq7vfscZ4onCrcFK6sgX0iw&lib=Ms-_GpD7w53h-KAzT1xgMOxu7vu5ZmFTa')
-//     res.send(data)
-// })
 
 app.listen(process.env.PORT || 5005, console.log(`DigrowServer running in ${process.env.PORT}`))
