@@ -684,6 +684,212 @@
                     }
                 }
             }
+        },
+        "/api/practisetest/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Practise-Test"
+                ],
+                "summary": "Get all Practise test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Practise-Test"
+                ],
+                "summary": "Create a new Practise-test",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/practisetest/{category}/{language}/{id}": {
+            "get": {
+                "tags": [
+                    "Practise-Test"
+                ],
+                "summary": "Get details of each Practise test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6335ab3eee629df139d896b2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/numericaltest/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Numerical-Test"
+                ],
+                "summary": "Get all Numerical test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Numerical-Test"
+                ],
+                "summary": "Create a new Numerical-test",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/numericaltest/{category}/{language}/{id}": {
+            "get": {
+                "tags": [
+                    "Numerical-Test"
+                ],
+                "summary": "Get details of each Numerical test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6335ab3eee629df139d896b2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
         }
     }
 }

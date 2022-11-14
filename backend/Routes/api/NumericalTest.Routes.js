@@ -10,8 +10,8 @@ router.post('/edit',editNumericalTest)
 router.post('/delete',deleteNumericalTest)
 router.post('/question-file',upload.single('file'),postNumericalTest)
 router.post('/file',upload.single('file'),postWholeTest)
-router.get('/:category/:language/:id',getTestById)
 router.get('/:category/:language',getAllNumericalTest)
+router.get('/:category/:language/:id',getTestById)
 router.post('/:category/:language',postNewNumericalTest)
 
 export default router
