@@ -3,7 +3,6 @@ const router=express.Router()
 import {deleteQuestion,postWholeTest,getAllNumericalTest,editQuestion,postNumericalTest,postNewNumericalTest, editNumericalTest, deleteNumericalTest, getTestById, addNewQuestion, attendLiveTest, postLiveTestResult, getLiveTestResult} from '../../Controllers/LiveTest.Controller.js'
 import {upload} from '../../Middlewares/Multer.js'
 
-
 router.get('/live-test-result',getLiveTestResult)
 router.get('/attend/:category/:language',attendLiveTest)
 router.post('/question/add',addNewQuestion)

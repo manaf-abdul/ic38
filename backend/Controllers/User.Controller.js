@@ -34,7 +34,7 @@ export const signUp = async (req, res) => {
         if (existingUser) return res.status(200).json({ errorcode: 3, status: false, msg: "User already Present.Please Login", data: null })
 
         let newUser = await User.create({
-            username: name, email, phone, password, bloodGroup
+            username: name, email, phone, password
         })
         if (newUser) {
             const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "300d" });

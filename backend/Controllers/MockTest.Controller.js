@@ -1,4 +1,5 @@
 import NumericalTest from "../Models/MockTest.Model.js";
+import MockTestResult from "../Models/MockTestResult.Model.js";
 import { fileParser } from "../utils/fileParser.js";
 import slugify from "slugify";
 import mongoose from 'mongoose'
@@ -209,5 +210,17 @@ export const editQuestion = async (req, res) => {
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: e });
+    }
+}
+
+
+export const postMockTestResult = async (req, res) => {
+    console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+    try {
+        const { userId,result,testId } = req.body;
+        let data=await MockTestResult.findOneAndUpdate({user:userId,testId:testId},{result:result},{upsert: true,new: true})
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Result saved Successfully ", data: data })
+    } catch (error) {
+        return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
     }
 }
