@@ -86,7 +86,18 @@ export const getAllNumericalTest = async (req, res) => {
     console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     try {
         const { category, language } = req.params;
-        let data = await NumericalTest.find({ superCategory: category, language: language })
+        const {userId}=req.body;
+
+        let testData = await NumericalTest.find({ superCategory: category, language: language })
+        testData.map(test=>console.log(test._id))
+        let data=testData.map(async test=>{
+            let testResult=await MockTestResult.findOne({user:userId,testId:test._id})
+            return{
+                test,
+                attended:testResult?true:false,
+            }
+        })
+        data = await Promise.all(data);
         return res.status(200).json({ errorcode: 0, status: true, msg: "MockTest test found ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });
@@ -218,7 +229,7 @@ export const postMockTestResult = async (req, res) => {
     console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     try {
         const { userId,result,testId } = req.body;
-        let data=await MockTestResult.findOneAndUpdate({user:userId,testId:testId},{result:result},{upsert: true,new: true})
+        let data=await MockTestResult.findOneAndUpdate({user:userId,testId:testId},{result:result,user:userId,testId:testId},{upsert: true,new: true})
         return res.status(200).json({ errorcode: 0, status: true, msg: "Result saved Successfully ", data: data })
     } catch (error) {
         return res.status(200).json({ errorcode: 5, status: false, msg: error.message, data: error });

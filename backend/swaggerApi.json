@@ -158,13 +158,35 @@
                 }
             }
         },
-        "/api/mock-test": {
-            "get": {
+        "/api/mock-test/test/{category}/{language}": {
+            "post": {
                 "tags": [
                     "Mock-Test"
                 ],
-                "summary": "Get all Mock test",
+                "summary": "Create a new mock-test",
                 "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Status True"
@@ -173,19 +195,56 @@
                         "description": "Unauthorized User"
                     }
                 }
-            },
+            }
+        },
+        "/api/mocktest/result": {
             "post": {
                 "tags": [
                     "Mock-Test"
                 ],
-                "summary": "Create a new mock-test",
-                "description": "for testing the swagger doc",
+                "summary": "Post Test Result",
+                "description": "Post Test Result",
+                "produces": "application/json",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "633b46097e1f1a58be99e4dd"
+                                    },
+                                    "result": {
+                                        "type": "Number",
+                                        "example": 45
+                                    },
+                                    "testId": {
+                                        "type": "string",
+                                        "example": "63484090f1a920b4b6dd0773"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Status True"
+                        "description": "Verified SuccessFully"
                     },
                     "401": {
-                        "description": "Unauthorized User"
+                        "description": "Unauthorized access to API"
                     }
                 }
             }

@@ -11,8 +11,8 @@ router.post('/delete',deleteNumericalTest)
 router.post('/result',postMockTestResult)
 router.post('/question-file',upload.single('file'),postNumericalTest)
 router.post('/file',upload.single('file'),postWholeTest)
+router.post('/test/:category/:language',getAllNumericalTest)
 router.get('/:category/:language/:id',getTestById)
-router.get('/:category/:language',getAllNumericalTest)
 router.post('/:category/:language',postNewNumericalTest)
 
 export default router
