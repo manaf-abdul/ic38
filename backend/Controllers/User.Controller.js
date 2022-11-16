@@ -45,6 +45,29 @@ export const signUp = async (req, res) => {
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: null });
     }
 }
+const getGoogleData = async (tokenId) => {
+    const data = await this.authClient
+        .verifyIdToken({
+            idToken: tokenId,
+            audience: `${process.env.GOOGLE_CLIENT_ID}`,
+        })
+        .catch((_err) => {
+            return res.status(200).json({ status: false, msg: _err.message, data: null });
+        });
+
+    return data;
+}
+
+export const signUpGoogle = async (req, res) => {
+    try {
+        const { tokenId } = req.body;
+        const data=await getGoogleData(tokenId)
+        return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: null });
+    } catch (e) {
+        return res.status(200).json({ status: false, msg: e.message, data: null });
+    }
+}
+
 
 export const sendOtpforForgotPssword = async (req, res) => {
     try {
