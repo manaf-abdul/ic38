@@ -12,6 +12,7 @@ router.post('/result',postMockTestResult)
 router.post('/question-file',upload.single('file'),postNumericalTest)
 router.post('/file',upload.single('file'),postWholeTest)
 router.post('/test/:category/:language',getAllNumericalTest)
+router.get('/:category/:language',getAllNumericalTest)
 router.get('/:category/:language/:id',getTestById)
 router.post('/:category/:language',postNewNumericalTest)
 

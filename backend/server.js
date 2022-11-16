@@ -41,7 +41,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSDocs));
 
 app.use('/api/user', UserRoutes)
 app.use('/api/concepts', ConceptRoutes)
-app.use('/api/mocktest', MockTest)
+// app.use('/api/mocktest', MockTest)
 app.use('/api/terminology', TerminologyRoutes)
 app.use('/api/one-liners', OneLiners)
 app.use('/api/supercategories', SuperCategory)

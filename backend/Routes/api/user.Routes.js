@@ -5,6 +5,8 @@ import {signUp,signIn,sendOtpforForgotPssword,confirmOtpforForgotPssword,changeP
 
 router.post("/signup", signUp)
 router.post("/signin", signIn)
+router.post("/signin-google", signInGoogle)
+router.post("/signup-google", signUpGoogle)
 router.post("/send-otp-forgotpassword", sendOtpforForgotPssword)
 router.post("/confirm-otp-forgotpassword", confirmOtpforForgotPssword)
 router.post("/changePassword", changePassword)
