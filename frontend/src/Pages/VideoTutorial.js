@@ -100,7 +100,7 @@ const VideoTutorial = () => {
                                 onChange={(e) => setTitle(e.target.value)}
                             ></Form.Control>
 
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>URL</Form.Label>
                             <Form.Control
                                 type='text'
                                 placeholder='Enter Url of Video'
