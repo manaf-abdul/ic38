@@ -10,7 +10,11 @@ const schema=mongoose.Schema(
             type:mongoose.Types.ObjectId,
             ref:"SuperCategory"
         },
-        file:{ }
+        file:{ },
+        url:{
+            type:String,
+            default:null
+        }
     },{
         timeStamps:true
     }

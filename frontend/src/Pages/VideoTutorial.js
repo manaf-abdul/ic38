@@ -12,6 +12,7 @@ const VideoTutorial = () => {
     const [title, setTitle] = useState('')
     const [data, setData] = useState()
     const [render, setRender] = useState(false)
+    const [url, setUrl] = useState("")
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
@@ -23,7 +24,8 @@ const VideoTutorial = () => {
             const formData = new FormData()
             formData.append('file', file)
             formData.append('name', title)
-            formData.append('category',category)
+            formData.append('category', category)
+            formData.append('url', url)
 
             try {
                 const config = {
@@ -50,32 +52,32 @@ const VideoTutorial = () => {
 
     const deleteHandler = useCallback(async (id) => {
         try {
-          const { data } = await axios.post(`${BASEURL}/api/video/delete`,
-            { _id: id}
-          )
-          if (data.errorcode === 0) {
-            console.log("inside");
-            toast.success(`🦄 ${data.msg}!`, successToast);
-            setRender(true)
-          } else {
-            toast.warn(`🦄 ${data.msg}!`, warningToast);
-          }
+            const { data } = await axios.post(`${BASEURL}/api/video/delete`,
+                { _id: id }
+            )
+            if (data.errorcode === 0) {
+                console.log("inside");
+                toast.success(`🦄 ${data.msg}!`, successToast);
+                setRender(true)
+            } else {
+                toast.warn(`🦄 ${data.msg}!`, warningToast);
+            }
         } catch (error) {
-          toast.error(`🦄 ${error.message}!`, errorToast);
+            toast.error(`🦄 ${error.message}!`, errorToast);
         }
-      })
+    })
 
     const getData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/video/${category}`)
         setData(data.data)
         console.log(data)
     }
-    
-    useEffect(() => {
-        if(render) setRender(false)
-       getData()
 
-    }, [render,category])
+    useEffect(() => {
+        if (render) setRender(false)
+        getData()
+
+    }, [render, category])
 
 
     return (
@@ -96,6 +98,14 @@ const VideoTutorial = () => {
                                 placeholder='Enter Content'
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
+                            ></Form.Control>
+
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Enter Url of Video'
+                                value={url}
+                                onChange={(e) => setUrl(e.target.value)}
                             ></Form.Control>
 
                             <Form.Label>File</Form.Label>
@@ -121,12 +131,12 @@ const VideoTutorial = () => {
                             data.map(data => (
                                 <>
                                     <video width="320" height="240" controls>
-                                        <source src={data.file.location} type="video/mp4" />
+                                        <source src={data.url?data.url:data.file.location} type="video/mp4" />
 
                                         {/* <source src="movie.ogg" type="video/ogg"> */}
                                         Your browser does not support the video tag.
                                     </video>
-                                    <Button onClick={(e)=>deleteHandler(data._id)}>Delete</Button>
+                                    <Button onClick={(e) => deleteHandler(data._id)}>Delete</Button>
                                 </>
                             ))
                             : "No Data Found"}

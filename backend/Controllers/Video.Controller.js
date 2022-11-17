@@ -4,11 +4,12 @@ export const addVideoTutorial=async(req,res)=>{
     console.log(req.body,req.file)
     try {
         const {name,category}=req.body
-        if(!name || !req.file || !category)  return res.status(200).json({ errorcode: 1, status: false, msg: "Name,file & Category is required", data: null });
+        if(!name || (!req.file && !url) || !category)  return res.status(200).json({ errorcode: 1, status: false, msg: "Name,file & Category is required", data: null });
         let newCat=new VideoTutorials({
             name:name,
             file:req.file?req.file:null,
-            category
+            category,
+            url
         })
         newCat=await newCat.save()
         return res.status(200).json({ errorcode: 0, status: true, msg: "Video Added Success", data: newCat });
