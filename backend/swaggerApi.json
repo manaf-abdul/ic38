@@ -57,7 +57,7 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "emailId": {
+                                    "email": {
                                         "type": "string",
                                         "example": "abdulmanafp1996@gmail.com"
                                     }

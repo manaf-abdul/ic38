@@ -91,15 +91,22 @@ export const signInGoogle = async (req, res) => {
         let user = await User.findOne({ email: email });
         if (!user) {
             let user = new User({
-                email
+                email:email
             })
             user=await user.save()
+            console.log("user",user);
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "300d" });
             user = { ...user._doc, password: null, token };
+
+            console.log("user",user);
             return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: user });
         }else{
+
+            console.log("ELSE user",user);
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "300d" });
             user = { ...user._doc, password: null, token };
+
+            console.log("ELSE user",user);
             return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: user });    
         }
         } catch (e) {
