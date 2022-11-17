@@ -3,6 +3,9 @@ import { comparePassword } from '../utils/bcrypt.utils.js';
 import jwt from "jsonwebtoken";
 import { getRandomDigits } from '../utils/utility.helper.js';
 import { sendMail } from '../utils/email.js';
+// import { OAuth2Client } from "google-auth-library"
+
+// const authClient = new OAuth2Client(`${process.env.GOOGLE_CLIENT_ID}`)
 
 export const signIn = async (req, res) => {
     try {
@@ -45,25 +48,61 @@ export const signUp = async (req, res) => {
         return res.status(200).json({ errorcode: 5, status: false, msg: e.message, data: null });
     }
 }
-const getGoogleData = async (tokenId) => {
-    const data = await this.authClient
-        .verifyIdToken({
-            idToken: tokenId,
-            audience: `${process.env.GOOGLE_CLIENT_ID}`,
-        })
-        .catch((_err) => {
-            return res.status(200).json({ status: false, msg: _err.message, data: null });
-        });
+// const getGoogleData = async (tokenId) => {
+//     const data = await authClient
+//         .verifyIdToken({
+//             idToken: tokenId,
+//             audience: `${process.env.GOOGLE_CLIENT_ID}`,
+//         })
+//         .catch((_err) => {
+//             return res.status(200).json({ status: false, msg: _err.message, data: null });
+//         });
 
-    return data;
-}
+//     return data;
+// }
 
-export const signUpGoogle = async (req, res) => {
+// export const signUpGoogle = async (req, res) => {
+//     try {
+//         const { tokenId } = req.body;
+//         const data = await getGoogleData(tokenId)
+//         const payload = data.getPayload();
+//         if (!payload) return res.status(200).json({ errorcode: 2, status: false, msg: "Error in fetching user data from google", data: null });
+//         const name = payload.name;
+//         const email = payload.email;
+//         const image = payload.picture;
+//         const googleId = data.getUserId();
+
+//         let user=new User({
+//             name,email,profilePic:image,googleId
+//         })
+
+//         user=await user.save()
+//         return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: null });
+//     } catch (e) {
+//         return res.status(200).json({ status: false, msg: e.message, data: null });
+//     }
+// }
+
+
+export const signInGoogle = async (req, res) => {
     try {
-        const { tokenId } = req.body;
-        const data=await getGoogleData(tokenId)
-        return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: null });
-    } catch (e) {
+        const { email } = req.body;
+        // const data = await getGoogleData(tokenId)
+        let user = await User.findOne({ email: email });
+        if (!user) {
+            let user = new User({
+                email
+            })
+            user=await user.save()
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "300d" });
+            user = { ...user._doc, password: null, token };
+            return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: user });
+        }else{
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "300d" });
+            user = { ...user._doc, password: null, token };
+            return res.status(200).json({ errorcode: 0, status: true, msg: "Changed  Successfully", data: user });    
+        }
+        } catch (e) {
         return res.status(200).json({ status: false, msg: e.message, data: null });
     }
 }
@@ -121,8 +160,8 @@ export const updateProfile = async (req, res) => {
     console.log("req.file", req.file)
     try {
         const { userid, phone, location,
-            qualification, dateOfBirth, income, panNumber,occupation,gender
-            } = req.body
+            qualification, dateOfBirth, income, panNumber, occupation, gender
+        } = req.body
         let user = await User.findById(userid)
         if (!user) return res.status(200).json({ errorcode: 2, status: false, msg: "User not Present", data: null });
         user.phone = phone ? phone : user.phone
@@ -132,9 +171,9 @@ export const updateProfile = async (req, res) => {
         user.income = income ? income : user.income
         user.panNumber = panNumber ? panNumber : user.panNumber
         user.profilePic = req.file ? req.file : user.profilePic
-        user=await user.save()
+        user = await user.save()
         return res.status(200).json({ errorcode: 0, status: true, msg: "User Data Updated Successfully", data: user });
-    
+
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e, data: e });
@@ -145,11 +184,11 @@ export const getProfile = async (req, res) => {
     console.log("here")
     console.log("req.file", req.file)
     try {
-        const { id} = req.params
+        const { id } = req.params
         let user = await User.findById(id)
         if (!user) return res.status(200).json({ errorcode: 2, status: false, msg: "User not Present", data: null });
         return res.status(200).json({ errorcode: 0, status: true, msg: "User Data Found", data: user });
-    
+
     } catch (e) {
         console.log(e)
         return res.status(200).json({ errorcode: 5, status: false, msg: e, data: e });

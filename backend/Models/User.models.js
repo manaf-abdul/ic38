@@ -5,7 +5,7 @@ const userModel = new mongoose.Schema(
     {
         username: {
             type: String,
-            required: true
+            default:null
         },
         email: {
             type: String,
@@ -16,19 +16,20 @@ const userModel = new mongoose.Schema(
         },
         phone: {
             type: String,
-            // required: true
+            default:null
         },
         password: {
             type: String,
-            required: true
+            default:null
         },
         occupation: {
             type: String,
-            // required: true
+            default:null
         },
         googleId: {
             type: String,
             required: false,
+            default:null
         },
         gender: {
             type: String,
