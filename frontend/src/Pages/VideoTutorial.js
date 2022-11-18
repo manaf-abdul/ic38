@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import Jumbotron from '../Components/Jumbotron'
 import { BASEURL, errorToast, successToast, warningToast } from '../Constants'
 import { CartState } from '../Context'
+import ReactPlayer from 'react-player'
 
 const VideoTutorial = () => {
     const { category, language } = CartState()
@@ -110,14 +111,14 @@ const VideoTutorial = () => {
 
                             <Form.Label>File</Form.Label>
 
-                            <Form.Control
+                            {/* <Form.Control
                                 type="file"
                                 className='file-input-box'
                                 size='md'
                                 width="50px"
                                 name="imageOne"
                                 onChange={(e) => uploadFileHandler(e)}
-                            ></Form.Control>
+                            ></Form.Control> */}
 
                         </Form.Group>
                         <Button onClick={() => addHandler()} variant="success" size="md">Add</Button>
@@ -130,12 +131,13 @@ const VideoTutorial = () => {
                         {data && data.length > 0 ?
                             data.map(data => (
                                 <>
-                                    <video width="320" height="240" controls>
-                                        <source src={data.url?data.url:data.file.location} type="video/mp4" />
-
-                                        {/* <source src="movie.ogg" type="video/ogg"> */}
+                                    {/* <video width="320" height="240" controls>
+                                        <source src={data.url?data.url:data.file.location} />
+                                    <source src="https://youtu.be/67dwOanARKc"></source>
+                                        <source src="movie.ogg" type="video/ogg">
                                         Your browser does not support the video tag.
-                                    </video>
+                                    </video> */}
+                                    <ReactPlayer url={data.url?data.url:data.file.location} />
                                     <Button onClick={(e) => deleteHandler(data._id)}>Delete</Button>
                                 </>
                             ))
