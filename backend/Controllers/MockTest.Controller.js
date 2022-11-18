@@ -93,7 +93,14 @@ export const getAllNumericalTest = async (req, res) => {
         let data=testData.map(async test=>{
             let testResult=await MockTestResult.findOne({user:userId,testId:test._id})
             return{
-                test,
+                // _id:test?._id,
+                // language:test?.language,
+                // superCategory:test?.superCategory,
+                // qAndA:test?.qAndA,
+                // createdAt:test?.createdAt,
+                // updatedAt:test?.updatedAt,
+                // attended:testResult?true:false,
+                ...test._doc,
                 attended:testResult?true:false,
             }
         })
