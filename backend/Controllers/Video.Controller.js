@@ -3,7 +3,7 @@ import VideoTutorials from "../Models/videoTutorial.Model.js";
 export const addVideoTutorial=async(req,res)=>{
     console.log(req.body,req.file)
     try {
-        const {name,category}=req.body
+        const {name,category,url}=req.body
         if(!name || (!req.file && !url) || !category)  return res.status(200).json({ errorcode: 1, status: false, msg: "Name,file & Category is required", data: null });
         let newCat=new VideoTutorials({
             name:name,
