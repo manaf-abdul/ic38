@@ -207,7 +207,7 @@
                 "tags": [
                     "Mock-Test"
                 ],
-                "summary": "Create a new mock-test",
+                "summary": "Get Mock-Test Data",
                 "description": "for testing the swagger doc",
                 "parameters": [
                     {
