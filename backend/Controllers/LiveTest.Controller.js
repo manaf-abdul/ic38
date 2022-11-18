@@ -235,6 +235,8 @@ export const attendLiveTest = async (req, res) => {
                 {$sample:{size:50}}
             ]
         )
+
+        // let data= await NumericalTestSet.find({ superCategory: category, language: language })
         // let s=data.length
         // console.log(s)
         return res.status(200).json({ errorcode: 0, status: true, msg: "Live test Found ", data: data })

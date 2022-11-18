@@ -788,6 +788,45 @@
                 }
             }
         },
+        "/api/livetest/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "GET LIve TEst Results",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
         "/api/practisetest/{category}/{language}": {
             "get": {
                 "tags": [
