@@ -89,9 +89,9 @@ export const getAllNumericalTest = async (req, res) => {
         const {userId}=req.body;
 
         let testData = await NumericalTest.find({ superCategory: category, language: language })
-        testData.map(test=>console.log(test._id))
         let data=testData.map(async test=>{
             let testResult=await MockTestResult.findOne({user:userId,testId:test._id})
+            console.log("testresult",testResult);
             return{
                 // _id:test?._id,
                 // language:test?.language,
@@ -102,6 +102,7 @@ export const getAllNumericalTest = async (req, res) => {
                 // attended:testResult?true:false,
                 ...test._doc,
                 attended:testResult?true:false,
+                result:testResult?testResult.result:null
             }
         })
         data = await Promise.all(data);
