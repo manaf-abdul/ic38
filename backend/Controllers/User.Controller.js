@@ -167,16 +167,14 @@ export const updateProfile = async (req, res) => {
     console.log("req.file", req.file)
     try {
         const { userid, phone, location,
-            qualification, dateOfBirth, income, panNumber, occupation, gender
+             dateOfBirth, occupation,
         } = req.body
         let user = await User.findById(userid)
         if (!user) return res.status(200).json({ errorcode: 2, status: false, msg: "User not Present", data: null });
         user.phone = phone ? phone : user.phone
-        user.location = location ? location : user.location
-        user.qualification = qualification ? qualification : user.qualification
+        user.occupation = occupation ? occupation : user.occupation
         user.dateOfBirth = dateOfBirth ? dateOfBirth : user.dateOfBirth
-        user.income = income ? income : user.income
-        user.panNumber = panNumber ? panNumber : user.panNumber
+        user.location = location ? location : user.location
         user.profilePic = req.file ? req.file : user.profilePic
         user = await user.save()
         return res.status(200).json({ errorcode: 0, status: true, msg: "User Data Updated Successfully", data: user });
