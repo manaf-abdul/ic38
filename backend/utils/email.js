@@ -5,7 +5,7 @@ dotenv.config();
 const MAILJET_API_KEY_PUBLIC = process.env.MAILJET_API_KEY_PUBLIC;
 const MAILJET_API_KEY_PRIVATE = process.env.MAILJET_API_KEY_PRIVATE;
 // console.log("MAILJET_API_KEY_PUBLIC,MAILJET_API_KEY_PRIVATE",MAILJET_API_KEY_PUBLIC,MAILJET_API_KEY_PRIVATE)
-const Email = "abdulmanafp1996@gmail.com";
+const Email = "inkinfotechindia@gmail.com";
 const Name = process.env.MAILJET_APPNAME;
 
 const mailjet=Mailjet.apiConnect(MAILJET_API_KEY_PUBLIC,MAILJET_API_KEY_PRIVATE)
