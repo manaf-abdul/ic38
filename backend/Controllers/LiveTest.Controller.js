@@ -117,9 +117,9 @@ export const editNumericalTest = async (req, res) => {
 export const postNewNumericalTest = async (req, res) => {
     try {
         console.log(req.body);
-        const { name,description } = req.body;
+        const { name,description,date2 } = req.body;
         const { category, language } = req.params;
-        let test = new NumericalTestSet({ name,dateAndTime:description, superCategory: category, language })
+        let test = new NumericalTestSet({ name,dateAndTime1:description,dateAndTime2:date2, superCategory: category, language })
         test = await test.save()
         return res.status(200).json({ errorcode: 0, status: true, msg: "New Live test created ", data: test })
     } catch (error) {
@@ -223,6 +223,8 @@ export const attendLiveTest = async (req, res) => {
     try {
         console.log(req.body);
         const { category, language } = req.params;
+        const {id}=req.body
+        let update=await NumericalTestSet.updateOne({_id:id},{$inc:{attended:1}})
         // let data = await NumericalTest.aggregate({ superCategory: category, language: language })
         let data=await NumericalTest.aggregate(
             [

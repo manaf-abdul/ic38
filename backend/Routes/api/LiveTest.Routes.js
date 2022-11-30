@@ -4,7 +4,7 @@ import {deleteQuestion,postWholeTest,getAllNumericalTest,editQuestion,postNumeri
 import {upload} from '../../Middlewares/Multer.js'
 
 router.get('/live-test-result',getLiveTestResult)
-router.get('/attend/:category/:language',attendLiveTest)
+router.post('/attend/:category/:language',attendLiveTest)
 router.post('/question/add',addNewQuestion)
 router.post('/question/edit',editQuestion)
 router.post('/question/delete',deleteQuestion)

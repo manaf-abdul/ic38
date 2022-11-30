@@ -12,10 +12,12 @@ const MockTestModal= (props) => {
 
     const [name, setName] = useState('')
     const [date, setDate] = useState('')
+    const [date2, setDate2] = useState('')
+    console.log("date",date)
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/livetest/${category}/${language}`, {name:name,description:date})
+            const { data } = await axios.post(`${BASEURL}/api/livetest/${category}/${language}`, {name:name,description:date,date2:date2})
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -61,10 +63,19 @@ const MockTestModal= (props) => {
                                 <Form.Group controlId='brand' className='pb-4'>
                                     <Form.Label>Date & Time</Form.Label>
                                     <Form.Control
-                                        type='text'
+                                        type='datetime-local'
                                         placeholder='Enter Content'
                                         value={date}
                                         onChange={(e) => setDate(e.target.value)}
+                                    ></Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId='brand' className='pb-4'>
+                                    <Form.Label>Date & Time 2</Form.Label>
+                                    <Form.Control
+                                        type='datetime-local'
+                                        placeholder='Enter Content'
+                                        value={date2}
+                                        onChange={(e) => setDate2(e.target.value)}
                                     ></Form.Control>
                                 </Form.Group>
                         </Col>

@@ -805,7 +805,7 @@
             }
         },
         "/api/livetest/{category}/{language}": {
-            "get": {
+            "post": {
                 "tags": [
                     "Live Test"
                 ],
@@ -833,6 +833,22 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "6362940863a5d39d6f2b62a6"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Status True"

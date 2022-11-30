@@ -5,7 +5,7 @@ const Cart = createContext();
 const Context = ({ children }) => {
     const [category, setCategory] = useState('');
     const [language, setLanguage] = useState('');
-    const [admin,setAdmin]=useState({})
+    const [admin,setAdmin]=useState({name:"manf",token:"1234"})
 
     return (
         <> 
