@@ -78,7 +78,6 @@ const LiveTest = () => {
     setOneLinerData(data.data)
   }
 
-
   useEffect(() => {
     console.log("here")
     setEdit()
@@ -86,17 +85,37 @@ const LiveTest = () => {
     if (category && language) fetchData()
   }, [category, language, render])
 
+  const fileUrl = "LiveTestSample.xlsx"
+
   return (
     <>
 
       <Jumbotron
         name={"Live Test"}
         buttonName={"Add/Edit"}
-        submitHandler={() =>bulkHandler ()}
+        submitHandler={() => bulkHandler()}
       />
 
       <Container>
-        <Button onClick={(e)=>submitHandler()}>ADD TEST</Button>
+        <Row>
+          <Col xs={12} lg={12}>
+            <a
+              download
+              href={fileUrl}
+              className="download-button"
+
+            >
+              Download Live Test Example File
+            </a>
+          </Col>
+          <Col xs={12} lg={12}>
+            <Button onClick={(e) => submitHandler()}>ADD TEST</Button>
+          </Col>
+        </Row>
+
+        {/* <Button onClick={(e) => fileHandler()}> */}
+
+        {/* </Button> */}
 
         <NewNumTestModal
           show={modalShow}
@@ -133,7 +152,7 @@ const LiveTest = () => {
                         <>
                           <Form.Label>Content</Form.Label>
 
-                         <InputGroup className="mb-3">
+                          <InputGroup className="mb-3">
                             <Form.Control
                               type='name'
                               placeholder='Enter name'
