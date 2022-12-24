@@ -85,8 +85,6 @@ const LiveTest = () => {
     if (category && language) fetchData()
   }, [category, language, render])
 
-  const fileUrl = "LiveTestSample.xlsx"
-
   return (
     <>
 
@@ -97,26 +95,6 @@ const LiveTest = () => {
       />
 
       <Container>
-        <Row>
-          <Col xs={12} lg={12}>
-            <a
-              download
-              href={fileUrl}
-              className="download-button"
-
-            >
-              Download Live Test Example File
-            </a>
-          </Col>
-          <Col xs={12} lg={12}>
-            <Button onClick={(e) => submitHandler()}>ADD TEST</Button>
-          </Col>
-        </Row>
-
-        {/* <Button onClick={(e) => fileHandler()}> */}
-
-        {/* </Button> */}
-
         <NewNumTestModal
           show={modalShow}
           onHide={() => {
