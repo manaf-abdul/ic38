@@ -1,5 +1,5 @@
 // export const BASEURL="https://ic38.herokuapp.com"
-export const BASEURL="http://3.6.83.168:5002"
+export const BASEURL="http://65.0.43.215:5002"
 
 // export const BASEURL="http://localhost:5002"
 
