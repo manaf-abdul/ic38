@@ -1,0 +1,1069 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "IC 38",
+        "description": "IC-38 API in NodeJs using Swagger",
+        "contact": {
+            "email": "abdulmanafp1966@gmail.com"
+        },
+        "license": {
+            "url": "https://manaf-abdul.github.io/manafabdul/"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://3.6.83.168:5002",
+            "description": "Live Environment"
+        },
+        {
+            "url": "https://ic38.herokuapp.com",
+            "description": "Live Environment"
+        },
+        {
+            "url": "http://localhost:5002",
+            "description": "Development Environment"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Super-Category",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/api/user/signin-google": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Sign Up && Sign In With Google",
+                "description": "Sign Up && Sign In With Google",
+                "produces": "application/json",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "abdulmanafp1996@gmail.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verified SuccessFully"
+                    },
+                    "401": {
+                        "description": "Unauthorized access to API"
+                    }
+                }
+            }
+        },
+        "/api/supercategories": {
+            "get": {
+                "tags": [
+                    "Super-Category"
+                ],
+                "summary": "Get all Super-Categories",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Super-Category"
+                ],
+                "summary": "Create new Super-Category",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/language": {
+            "get": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Get all Languages",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Language"
+                ],
+                "summary": "Post New Language",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "English"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/concepts": {
+            "get": {
+                "tags": [
+                    "Concepts"
+                ],
+                "summary": "Get all chapters",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/concepts/{id}": {
+            "get": {
+                "tags": [
+                    "Concepts"
+                ],
+                "summary": "Get all Contents of Chapters",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "632708c9b5a7bf544400ce2b"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/mocktest/test/{category}/{language}": {
+            "post": {
+                "tags": [
+                    "Mock-Test"
+                ],
+                "summary": "Get Mock-Test Data",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "633b46097e1f1a58be99e4dd"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/mocktest/result": {
+            "post": {
+                "tags": [
+                    "Mock-Test"
+                ],
+                "summary": "Post Test Result",
+                "description": "Post Test Result",
+                "produces": "application/json",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "633b46097e1f1a58be99e4dd"
+                                    },
+                                    "result": {
+                                        "type": "Number",
+                                        "example": 45
+                                    },
+                                    "testId": {
+                                        "type": "string",
+                                        "example": "63484090f1a920b4b6dd0773"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verified SuccessFully"
+                    },
+                    "401": {
+                        "description": "Unauthorized access to API"
+                    }
+                }
+            }
+        },
+        "/api/mocktest/{id}": {
+            "get": {
+                "tags": [
+                    "Mock-Test"
+                ],
+                "summary": "Get details of each mock test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6335ab3eee629df139d896b2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/terminology/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Terminology"
+                ],
+                "summary": "Get all Terminologies",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Terminology"
+                ],
+                "summary": "Post & EDit Terminologies",
+                "description": "for testing the swagger doc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "example": "OneLiner Content-1"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "633929c2a89b9f63b74cc7c9"
+                                    },
+                                    "superCategory": {
+                                        "type": "string",
+                                        "example": "6338546d1fca07627d35e7e7"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/one-liners/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "One-Liners"
+                ],
+                "summary": "Get all One-Liners",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "One-Liners"
+                ],
+                "summary": "Post & EDit Terminologies",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                },
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "example": "OneLiner Content-1"
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "example": "633929c2a89b9f63b74cc7c9"
+                                    },
+                                    "superCategory": {
+                                        "type": "string",
+                                        "example": "6338546d1fca07627d35e7e7"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/short-and-simple/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Short & Simple"
+                ],
+                "summary": "Get all Short & Simple Categories",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/short-and-simple/{category}/{language}/{subCategory}": {
+            "get": {
+                "tags": [
+                    "Short & Simple"
+                ],
+                "summary": "Get all Short & Simple By CAtegories",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    },
+                    {
+                        "name": "subCategory",
+                        "in": "path",
+                        "description": "subCategory",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633c4d758631f84e20351984"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/video": {
+            "get": {
+                "tags": [
+                    "Video Tutorial"
+                ],
+                "summary": "Video Tutorial",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/enotes/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Enotes"
+                ],
+                "summary": "Get all Enotes",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/poster/{language}": {
+            "get": {
+                "tags": [
+                    "Poster"
+                ],
+                "summary": "Get all Enotes",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "languageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/examsyllabus/{category}": {
+            "get": {
+                "tags": [
+                    "Exam Syllabus"
+                ],
+                "summary": "Get exam syllabus by category",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/livetest/attend/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "Get all Enotes",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/livetest/result": {
+            "post": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "Post Test Result",
+                "description": "Post Test Result",
+                "produces": "application/json",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "string",
+                                        "example": "633b46097e1f1a58be99e4dd"
+                                    },
+                                    "result": {
+                                        "type": "Number",
+                                        "example": 45
+                                    },
+                                    "testId": {
+                                        "type": "string",
+                                        "example": "6362940863a5d39d6f2b62a6"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verified SuccessFully"
+                    },
+                    "401": {
+                        "description": "Unauthorized access to API"
+                    }
+                }
+            }
+        },
+        "/api/livetest/live-test-result": {
+            "get": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "GET LIve TEst Results",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/livetest/{category}/{language}": {
+            "post": {
+                "tags": [
+                    "Live Test"
+                ],
+                "summary": "GET LIve TEst Results",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "6362940863a5d39d6f2b62a6"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/practisetest/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Practise-Test"
+                ],
+                "summary": "Get all Practise test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Practise-Test"
+                ],
+                "summary": "Create a new Practise-test",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/practisetest/{category}/{language}/{id}": {
+            "get": {
+                "tags": [
+                    "Practise-Test"
+                ],
+                "summary": "Get details of each Practise test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6335ab3eee629df139d896b2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/numericaltest/{category}/{language}": {
+            "get": {
+                "tags": [
+                    "Numerical-Test"
+                ],
+                "summary": "Get all Numerical test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Numerical-Test"
+                ],
+                "summary": "Create a new Numerical-test",
+                "description": "for testing the swagger doc",
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        },
+        "/api/numericaltest/{category}/{language}/{id}": {
+            "get": {
+                "tags": [
+                    "Numerical-Test"
+                ],
+                "summary": "Get details of each Numerical test",
+                "description": "for testing the swagger doc",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "categoryId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6338546d1fca07627d35e7e7"
+                        }
+                    },
+                    {
+                        "name": "language",
+                        "in": "path",
+                        "description": "LanguageId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "633929c2a89b9f63b74cc7c9"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ChapterId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "6335ab3eee629df139d896b2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Status True"
+                    },
+                    "401": {
+                        "description": "Unauthorized User"
+                    }
+                }
+            }
+        }
+    }
+}
