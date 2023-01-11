@@ -19,7 +19,6 @@ const Terminology = () => {
 
     const fetchData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/terminology/${category}/${language}`)
-        console.log("data", data)
         setTerminologyData(data.data)
     }
 
@@ -29,7 +28,6 @@ const Terminology = () => {
             const { data } = await axios.post(`${BASEURL}/api/terminology/edit`,
                 name)
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
                 setEdit()
@@ -46,7 +44,6 @@ const Terminology = () => {
             const { data } = await axios.post(`${BASEURL}/api/terminology/delete`,
                 x)
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
                 setEdit()
@@ -75,13 +72,11 @@ const Terminology = () => {
         }));
     };
 
-    console.log("nameeeee", name)
-
     useEffect(() => {
         if (render) setRender(false)
         setEdit()
         fetchData()
-    }, [category,language,render])
+    }, [category, language, render])
 
     return (
         <>

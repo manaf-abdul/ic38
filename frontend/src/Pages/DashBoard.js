@@ -9,10 +9,6 @@ const DashBoard = () => {
 
   const { category, language } = CartState()
 
-  console.log("rendering")
-  console.log("category", category)
-  console.log("language", language)
-
   return (
     <>
       <Jumbotron name={"Home"} type={"home"}/>

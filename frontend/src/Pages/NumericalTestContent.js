@@ -21,7 +21,6 @@ const NumericalTestContent = () => {
 
     const fetchData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/numericaltest/${category}/${language}/${params.id}`)
-        console.log("data", data)
         setNumericalTestData(data.data)
     }
 
@@ -34,7 +33,6 @@ const NumericalTestContent = () => {
         try {
             const { data } = await axios.post(`${BASEURL}/api/numericaltest/question/delete`,x)
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
                 setEdit()
@@ -62,8 +60,6 @@ const NumericalTestContent = () => {
             [name]: value,
         }));
     };
-
-    console.log("nameeeee", name)
 
     useEffect(() => {
         if (render) setRender(false)

@@ -12,34 +12,31 @@ const Category = () => {
     const [name, setName] = useState('')
     const [render, setRender] = useState(false)
     const [cat, setcat] = useState(true)
-    const [modalShow,setModalShow]=useState(false)
+    const [modalShow, setModalShow] = useState(false)
 
     const submitHandler = () => {
         setcat(true)
         setModalShow(true)
     }
 
-    console.log(category)
     const editHandler = async (e) => {
         try {
-          const { data } = await axios.post(`${BASEURL}/api/supercategories/edit`,
-            { _id: e._id, content: name, category: e.superCategory, language: e.language })
-          if (data.errorcode === 0) {
-            console.log("inside");
-            toast.success(`🦄 ${data.msg}!`, successToast);
-            setRender(true)
-            setEdit()
-          } else {
-            toast.warn(`🦄 ${data.msg}!`, warningToast);
-          }
+            const { data } = await axios.post(`${BASEURL}/api/supercategories/edit`,
+                { _id: e._id, content: name, category: e.superCategory, language: e.language })
+            if (data.errorcode === 0) {
+                toast.success(`🦄 ${data.msg}!`, successToast);
+                setRender(true)
+                setEdit()
+            } else {
+                toast.warn(`🦄 ${data.msg}!`, warningToast);
+            }
         } catch (error) {
-          toast.error(`🦄 ${error.message}!`, errorToast);
+            toast.error(`🦄 ${error.message}!`, errorToast);
         }
-      }    
+    }
 
     const getCategoryData = useCallback(async () => {
         const { data } = await axios.get(`${BASEURL}/api/supercategories`)
-        console.log("Category data", data)
         setCategory(data.data)
     }, [])
 
@@ -54,22 +51,22 @@ const Category = () => {
             <Jumbotron
                 name={"Categories"}
                 buttonName={"Add Category"}
-                submitHandler={() => submitHandler()} 
+                submitHandler={() => submitHandler()}
             />
             <NewCatAndLangModal
                 cat={cat}
                 show={modalShow}
                 onHide={() => {
-                setModalShow(false)
-                setcat(false)
-               }}
-               setRender={()=>setRender(true)}
+                    setModalShow(false)
+                    setcat(false)
+                }}
+                setRender={() => setRender(true)}
             />
             <Container>
                 <Row>
                     {
                         category && category.length > 0 ?
-                            category.map((x,index) => (
+                            category.map((x, index) => (
                                 <Col key={x._id} sm={12} md={6} lg={4} xl={3}>
                                     <Card key={x._id}>
                                         <Card.Body>
@@ -102,9 +99,7 @@ const Category = () => {
                                                             <Button className='m-2' variant='success' size="sm" onClick={() => {
                                                                 setEdit(index)
                                                                 setName(x.name)
-                                                                // { console.log("x.content", x.content) }
                                                             }}>Edit</Button>
-                                                            {/* <Button className='m-2' variant='danger' size="sm" onClick={() => deleteHandler(x)}>Delete</Button> */}
                                                         </>
                                                     }
 

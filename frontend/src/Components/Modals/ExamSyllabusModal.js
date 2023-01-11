@@ -13,8 +13,6 @@ const TerminolgyModal = (props) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
 
-    console.log(title,description)
-
     const addHandler = async (selected) => {
         try {
             const { data } = await axios.post(`${BASEURL}/api/examsyllabus`, { title: title, content: description, superCategory: category })
@@ -34,7 +32,6 @@ const TerminolgyModal = (props) => {
 
     return (
         <>
-            {/* <ToastContainer /> */}
             <Modal
                 {...props}
                 size="md"
@@ -44,40 +41,40 @@ const TerminolgyModal = (props) => {
 
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                       Add Exam Syllabus Topic
+                        Add Exam Syllabus Topic
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
                         <Col xs={10} lg={10} xl={10}>
-                               
-                                <>
-                                    <Form.Group controlId='brand' className='pb-4'>
-                                        <Form.Label>Title</Form.Label>
-                                        <Form.Control
-                                            type='text'
-                                            placeholder='Enter Content'
-                                            value={title}
-                                            onChange={(e) => setTitle(e.target.value)}
-                                        ></Form.Control>
-                                    </Form.Group>
 
-                                    <Form.Group controlId='brand' className='pb-4'>
-                                        <Form.Label>description</Form.Label>
-                                        <Form.Control
-                                            type='text'
-                                            placeholder='Enter Content'
-                                            value={description}
-                                            onChange={(e) => setDescription(e.target.value)}
-                                        ></Form.Control>
-                                    </Form.Group>
-                                </>
+                            <>
+                                <Form.Group controlId='brand' className='pb-4'>
+                                    <Form.Label>Title</Form.Label>
+                                    <Form.Control
+                                        type='text'
+                                        placeholder='Enter Content'
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
+                                    ></Form.Control>
+                                </Form.Group>
+
+                                <Form.Group controlId='brand' className='pb-4'>
+                                    <Form.Label>description</Form.Label>
+                                    <Form.Control
+                                        type='text'
+                                        placeholder='Enter Content'
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
+                                    ></Form.Control>
+                                </Form.Group>
+                            </>
                         </Col>
                     </Row>
 
                 </Modal.Body>
                 <Modal.Footer className='align-items-center'>
-                        <Button onClick={() => addHandler()} variant="success" size="md">Add</Button>
+                    <Button onClick={() => addHandler()} variant="success" size="md">Add</Button>
                     <Button onClick={props.onHide} variant="danger" size="md">No</Button>
                 </Modal.Footer>
             </Modal>

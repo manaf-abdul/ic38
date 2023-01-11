@@ -57,7 +57,6 @@ const VideoTutorial = () => {
                 { _id: id }
             )
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
             } else {
@@ -71,7 +70,6 @@ const VideoTutorial = () => {
     const getData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/video/${category}`)
         setData(data.data)
-        console.log(data)
     }
 
     useEffect(() => {
@@ -137,7 +135,7 @@ const VideoTutorial = () => {
                                         <source src="movie.ogg" type="video/ogg">
                                         Your browser does not support the video tag.
                                     </video> */}
-                                    <ReactPlayer url={data.url?data.url:data.file.location} />
+                                    <ReactPlayer url={data.url ? data.url : data.file.location} />
                                     <Button onClick={(e) => deleteHandler(data._id)}>Delete</Button>
                                 </>
                             ))

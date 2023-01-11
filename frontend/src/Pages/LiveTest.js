@@ -36,7 +36,6 @@ const LiveTest = () => {
       const { data } = await axios.post(`${BASEURL}/api/livetest/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setEdit()
@@ -60,7 +59,6 @@ const LiveTest = () => {
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setConfirmModalShow(false)
@@ -74,12 +72,10 @@ const LiveTest = () => {
 
   const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/livetest/${category}/${language}`)
-    console.log("data", data)
     setOneLinerData(data.data)
   }
 
   useEffect(() => {
-    console.log("here")
     setEdit()
     if (render) setRender(false)
     if (category && language) fetchData()

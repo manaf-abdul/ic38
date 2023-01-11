@@ -63,7 +63,6 @@ const Poster = () => {
             { _id: id}
           )
           if (data.errorcode === 0) {
-            console.log("inside");
             toast.success(`🦄 ${data.msg}!`, successToast);
             setRender(true)
           } else {
@@ -80,7 +79,6 @@ const Poster = () => {
             { key: id,id:x}
           )
           if (data.errorcode === 0) {
-            console.log("inside");
             toast.success(`🦄 ${data.msg}!`, successToast);
             setRender(true)
           } else {
@@ -93,7 +91,6 @@ const Poster = () => {
     const getData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/poster/${language}`)
         setData(data.data)
-        console.log(data)
     }
     
     useEffect(() => {

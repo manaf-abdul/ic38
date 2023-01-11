@@ -11,8 +11,6 @@ import { useParams } from 'react-router-dom';
 
 const QuestionModal = (props) => {
 
-    console.log("props", props)
-
     const params = useParams()
 
     const { category, language } = CartState()
@@ -91,15 +89,6 @@ const QuestionModal = (props) => {
         const file = e.target.files[0]
         setFile(file)
     }
-    // useEffect(() => {
-    //     if (props.edit) {
-    //         console.log("INSIDEEEEEEEEEE")
-    //     } else {
-
-    //     }
-
-    // }, [props])
-
 
     return (
         <Modal

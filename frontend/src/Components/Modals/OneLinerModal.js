@@ -42,7 +42,7 @@ const OneLinerModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`${BASEURL}/api/one-liners/${category}/${language}`, formData,config)
+                const { data } = await axios.post(`${BASEURL}/api/one-liners/${category}/${language}`, formData, config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()
@@ -66,7 +66,6 @@ const OneLinerModal = (props) => {
 
     return (
         <>
-            {/* <ToastContainer /> */}
             <Modal
                 {...props}
                 size="md"

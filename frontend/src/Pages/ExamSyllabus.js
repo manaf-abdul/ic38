@@ -28,7 +28,6 @@ const ExamSyllabus = () => {
         }));
     };
     const editHandler = async () => {
-        console.log(name)
         try {
             const { data } = await axios.post(`${BASEURL}/api/examsyllabus/edit`,
                 name)
@@ -47,7 +46,6 @@ const ExamSyllabus = () => {
 
     const fetchData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/examsyllabus`)
-        console.log("data", data)
         setTerminologyData(data.data)
     }
 
@@ -57,10 +55,8 @@ const ExamSyllabus = () => {
             { _id: x._id, content: name, category: x.superCategory, language: x.language }
           )
           if (data.errorcode === 0) {
-            console.log("inside");
             toast.success(`🦄 ${data.msg}!`, successToast);
             setRender(true)
-            // setConfirmModalShow(false)
           } else {
             toast.warn(`🦄 ${data.msg}!`, warningToast);
           }

@@ -33,7 +33,6 @@ const OneLiners = () => {
       const { data } = await axios.post(`${BASEURL}/api/one-liners/edit`,
         { _id: e._id, content: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setEdit()
@@ -57,7 +56,6 @@ const OneLiners = () => {
         { _id: x._id, content: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setConfirmModalShow(false)
@@ -71,7 +69,6 @@ const OneLiners = () => {
 
   const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/one-liners/${category}/${language}`)
-    console.log("data", data)
     setOneLinerData(data.data)
   }
 

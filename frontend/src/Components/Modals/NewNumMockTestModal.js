@@ -11,8 +11,6 @@ import { useParams } from 'react-router-dom';
 
 const NewNumMockTestModal = (props) => {
 
-    console.log("props", props)
-
     const params = useParams()
 
     const { category, language } = CartState()
@@ -26,7 +24,6 @@ const NewNumMockTestModal = (props) => {
     const [o3, seto3] = useState('')
     const [o4, seto4] = useState('')
     const [isDelete, setIsDelete] = useState(false)
-    console.log("whooooooo", who)
 
     const addHandler = async (selected) => {
         try {
@@ -105,7 +102,6 @@ const NewNumMockTestModal = (props) => {
     }
     useEffect(() => {
         if (props.edit) {
-            console.log("INSIDEEEEEEEEEE")
             setQuestion(props.edit.q)
             setAnswer(props.edit.a)
             seto1(props.edit.o1 ? props.edit.o1 : null)
@@ -126,7 +122,6 @@ const NewNumMockTestModal = (props) => {
 
     return (
         <>
-            {/* <ToastContainer /> */}
             <Modal
                 {...props}
                 size="md"

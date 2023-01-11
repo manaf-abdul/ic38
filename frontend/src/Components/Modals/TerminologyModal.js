@@ -16,7 +16,7 @@ const TerminolgyModal = (props) => {
 
     const addHandler = async (selected) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/terminology/add`, { title: title, description: description, category: category,language:language })
+            const { data } = await axios.post(`${BASEURL}/api/terminology/add`, { title: title, description: description, category: category, language: language })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -45,7 +45,7 @@ const TerminolgyModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`${BASEURL}/api/terminology`, formData,config)
+                const { data } = await axios.post(`${BASEURL}/api/terminology`, formData, config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()
@@ -70,7 +70,6 @@ const TerminolgyModal = (props) => {
 
     return (
         <>
-            {/* <ToastContainer /> */}
             <Modal
                 {...props}
                 size="md"

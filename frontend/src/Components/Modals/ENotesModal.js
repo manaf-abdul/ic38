@@ -8,18 +8,18 @@ import { CartState } from '../../Context.js';
 import Editor from '../Editor.js'
 
 const ENotesModal = (props) => {
-    const {category,language}=CartState()
+    const { category, language } = CartState()
 
     const [value, setValue] = useState('')
     const [title, setTitle] = useState('')
 
     const getValue = (value) => {
         setValue(value);
-      };
-    
-      const submitHandler=async()=>{
+    };
+
+    const submitHandler = async () => {
         try {
-            const {data}=await axios.post(`${BASEURL}/api/enotes/add`,{content:value,title:title,category:category,language:language})
+            const { data } = await axios.post(`${BASEURL}/api/enotes/add`, { content: value, title: title, category: category, language: language })
             if (data.errorcode === 0) {
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 props.setRender()
@@ -32,8 +32,8 @@ const ENotesModal = (props) => {
         } catch (error) {
             toast.error(`${error.message}`, errorToast)
         }
-      }
-    
+    }
+
 
     return (
         <Modal

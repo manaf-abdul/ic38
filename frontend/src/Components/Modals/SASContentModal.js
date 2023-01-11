@@ -16,7 +16,6 @@ const SASContentModal = (props) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [isDelete, setIsDelete] = useState(false)
-    console.log("isDelete", isDelete);
 
     const addHandler = async (selected) => {
         try {
@@ -52,7 +51,7 @@ const SASContentModal = (props) => {
                     },
                     onUploadProgress: progressEvent => console.log(progressEvent.loaded)
                 }
-                const { data } = await axios.post(`${BASEURL}/api/short-and-simple`, formData,config)
+                const { data } = await axios.post(`${BASEURL}/api/short-and-simple`, formData, config)
                 if (data.errorcode === 0) {
                     toast.success(`🦄 ${data.msg}!`, successToast);
                     props.setRender()
@@ -77,7 +76,6 @@ const SASContentModal = (props) => {
 
     return (
         <>
-            {/* <ToastContainer /> */}
             <Modal
                 {...props}
                 size="md"
@@ -112,7 +110,7 @@ const SASContentModal = (props) => {
                                         <Form.Check
                                             type="switch"
                                             id="custom-switch"
-                                            checked={isDelete?true:false}
+                                            checked={isDelete ? true : false}
                                             value={isDelete}
                                             label={isDelete ? <span style={{ color: "red", fontWeight: "bold" }}>CAUTION : The previous data will be erased and the new data will be overwritten</span>
                                                 : <span style={{}}>Delete previous datas</span>

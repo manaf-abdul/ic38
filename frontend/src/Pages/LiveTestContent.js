@@ -21,7 +21,6 @@ const LiveTestContent = () => {
 
     const fetchData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/livetest/${category}/${language}/${params.id}`)
-        console.log("data", data)
         setNumericalTestData(data.data)
     }
 
@@ -32,9 +31,8 @@ const LiveTestContent = () => {
 
     const deleteHandler = async (x) => {
         try {
-            const { data } = await axios.post(`${BASEURL}/api/livetest/question/delete`,x)
+            const { data } = await axios.post(`${BASEURL}/api/livetest/question/delete`, x)
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
                 setEdit()
@@ -62,8 +60,6 @@ const LiveTestContent = () => {
             [name]: value,
         }));
     };
-
-    console.log("nameeeee", name)
 
     useEffect(() => {
         if (render) setRender(false)

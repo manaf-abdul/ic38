@@ -30,7 +30,6 @@ const ShortAndSimple = () => {
       const { data } = await axios.post(`${BASEURL}/api/short-and-simple/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setEdit()
@@ -54,7 +53,6 @@ const ShortAndSimple = () => {
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setConfirmModalShow(false)
@@ -68,7 +66,6 @@ const ShortAndSimple = () => {
 
   const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/short-and-simple/${category}/${language}`)
-    console.log("data", data)
     setOneLinerData(data.data)
   }
 

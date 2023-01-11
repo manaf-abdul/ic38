@@ -11,14 +11,12 @@ const RichTextEditor = ({ initialValue, getValue }) => {
 
   return (
     <div className='pt-5'>
-    <JoditEditor
-      ref={editor}
-      value={initialValue}
-        //   config={config}
-      tabIndex={1}
-      //   onBlur={(newContent) => getValue(newContent)}
-      onChange={(newContent) => getValue(newContent)}
-    />
+      <JoditEditor
+        ref={editor}
+        value={initialValue}
+        tabIndex={1}
+        onChange={(newContent) => getValue(newContent)}
+      />
     </div>
   );
 };

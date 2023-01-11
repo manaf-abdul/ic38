@@ -10,7 +10,7 @@ import { CartState } from '../Context'
 
 const ShortAndSimpleContent = () => {
     const { category, language } = CartState()
-    const params=useParams()
+    const params = useParams()
     const [terminologyData, setTerminologyData] = useState([])
     const [edit, setEdit] = useState('')
     const [name, setName] = useState('')
@@ -20,7 +20,6 @@ const ShortAndSimpleContent = () => {
 
     const fetchData = async () => {
         const { data } = await axios.get(`${BASEURL}/api/short-and-simple/${category}/${language}/${params.id}`)
-        console.log("data", data)
         setTerminologyData(data.data)
     }
 
@@ -30,7 +29,6 @@ const ShortAndSimpleContent = () => {
             const { data } = await axios.post(`${BASEURL}/api/short-and-simple/data/edit`,
                 name)
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
                 setEdit()
@@ -47,7 +45,6 @@ const ShortAndSimpleContent = () => {
             const { data } = await axios.post(`${BASEURL}/api/short-and-simple/data/delete`,
                 x)
             if (data.errorcode === 0) {
-                console.log("inside");
                 toast.success(`🦄 ${data.msg}!`, successToast);
                 setRender(true)
                 setEdit()
@@ -76,13 +73,11 @@ const ShortAndSimpleContent = () => {
         }));
     };
 
-    console.log("nameeeee", name)
-
     useEffect(() => {
         if (render) setRender(false)
         setEdit()
         fetchData()
-    }, [category,language,render])
+    }, [category, language, render])
 
     return (
         <>

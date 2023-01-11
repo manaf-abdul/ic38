@@ -36,7 +36,6 @@ const MockTest = () => {
       const { data } = await axios.post(`${BASEURL}/api/mocktest/edit`,
         { _id: e._id, name: name, category: e.superCategory, language: e.language })
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setEdit()
@@ -60,7 +59,6 @@ const MockTest = () => {
         { _id: x._id, name: name, category: x.superCategory, language: x.language }
       )
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setConfirmModalShow(false)
@@ -74,7 +72,6 @@ const MockTest = () => {
 
   const fetchData = async () => {
     const { data } = await axios.get(`${BASEURL}/api/mocktest/${category}/${language}`)
-    console.log("data", data)
     setOneLinerData(data.data)
   }
 
@@ -92,11 +89,11 @@ const MockTest = () => {
       <Jumbotron
         name={"Mock Test"}
         buttonName={"Add/Edit"}
-        submitHandler={() =>bulkHandler ()}
+        submitHandler={() => bulkHandler()}
       />
 
       <Container>
-        <Button onClick={(e)=>submitHandler()}>ADD TEST</Button>
+        <Button onClick={(e) => submitHandler()}>ADD TEST</Button>
 
         <NewNumTestModal
           show={modalShow}
@@ -132,7 +129,7 @@ const MockTest = () => {
                         <>
                           <Form.Label>Content</Form.Label>
 
-                         <InputGroup className="mb-3">
+                          <InputGroup className="mb-3">
                             <Form.Control
                               type='name'
                               placeholder='Enter name'

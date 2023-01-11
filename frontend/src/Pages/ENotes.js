@@ -20,19 +20,15 @@ const ENotes = () => {
   const [render, setRender] = useState(false)
   const [modalShow, setModalShow] = useState(false)
 
-  // console.log("outside",value,title)
-
   const submitHandler = async () => {
     setModalShow(true)
   }
 
   const editHandler = async (x) => {
-    console.log("editHandler", x)
     try {
       const { data } = await axios.post(`${BASEURL}/api/enotes/edit`,
         { id: x, content: value, title: title })
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setEdit()
@@ -50,7 +46,6 @@ const ENotes = () => {
       const { data } = await axios.post(`${BASEURL}/api/enotes/delete`,
         x)
       if (data.errorcode === 0) {
-        console.log("inside");
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true)
         setEdit()
@@ -69,7 +64,6 @@ const ENotes = () => {
   const getData = async () => {
     try {
       const { data } = await axios.get(`${BASEURL}/api/enotes/${category}/${language}`)
-      console.log("data",data)
       setEnotes(data.data)
     } catch (error) {
       toast.error(`🦄 ${error.message}!`, errorToast);

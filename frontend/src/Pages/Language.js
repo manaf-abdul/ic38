@@ -21,7 +21,6 @@ const Language = () => {
 
     const getCategoryData = useCallback(async () => {
         const { data } = await axios.get(`${BASEURL}/api/language`)
-        console.log("Category data", data)
         setLanguage(data.data)
     }, [])
 
@@ -30,7 +29,6 @@ const Language = () => {
           const { data } = await axios.post(`${BASEURL}/api/language/edit`,
             { _id: e._id, content: name, category: e.superCategory, language: e.language })
           if (data.errorcode === 0) {
-            console.log("inside");
             toast.success(`🦄 ${data.msg}!`, successToast);
             setRender(true)
             setEdit()

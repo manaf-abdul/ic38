@@ -45,7 +45,6 @@ const NewCatAndLangModal = (props) => {
 
     return (
         <>
-            {/* <ToastContainer /> */}
             <Modal
                 {...props}
                 size="md"
