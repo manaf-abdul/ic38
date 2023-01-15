@@ -74,6 +74,7 @@ const LiveTest = () => {
     const { data } = await axios.get(`${BASEURL}/api/livetest/${category}/${language}`)
     setOneLinerData(data.data)
   }
+  const fileUrl = "LiveTestSample.xlsx"
 
   useEffect(() => {
     setEdit()
@@ -91,6 +92,21 @@ const LiveTest = () => {
       />
 
       <Container>
+      <Row>
+          <Col xs={12} lg={12}>
+            <a
+              download
+              href={fileUrl}
+              className="download-button"
+
+            >
+              Download Live Test Example File
+            </a>
+          </Col>
+          <Col xs={12} lg={12}>
+            <Button onClick={(e) => submitHandler()}>ADD TEST</Button>
+          </Col>
+        </Row>
         <NewNumTestModal
           show={modalShow}
           onHide={() => {

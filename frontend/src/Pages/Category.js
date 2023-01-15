@@ -35,6 +35,23 @@ const Category = () => {
         }
     }
 
+    const deleteHandler = async (e) => {
+        console.log(e)
+        try {
+            const { data } = await axios.post(`${BASEURL}/api/supercategories/delete`,
+                { _id: e})
+            if (data.errorcode === 0) {
+                toast.success(`🦄 ${data.msg}!`, successToast);
+                setRender(true)
+                // setDeleteCat()
+            } else {
+                toast.warn(`🦄 ${data.msg}!`, warningToast);
+            }
+        } catch (error) {
+            toast.error(`🦄 ${error.message}!`, errorToast);
+        }
+    }
+
     const getCategoryData = useCallback(async () => {
         const { data } = await axios.get(`${BASEURL}/api/supercategories`)
         setCategory(data.data)
@@ -100,6 +117,10 @@ const Category = () => {
                                                                 setEdit(index)
                                                                 setName(x.name)
                                                             }}>Edit</Button>
+                                                            <Button className='m-2' variant='danger' size="sm" onClick={() => 
+                                                                
+                                                               deleteHandler(x._id)
+                                                            }>Delete</Button>
                                                         </>
                                                     }
 
