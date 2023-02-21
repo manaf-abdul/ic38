@@ -1,7 +1,11 @@
-import axios, { Axios } from "axios";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import Jumbotron from "../Components/Jumbotron";
+import ConfirmModal from "../Components/Modals/ConfirmModal";
+import ConceptsChapterModal from "../Components/Modals/ConceptsChapterModal";
+import { BASEURL, errorToast, successToast, warningToast } from "../Constants";
+import { CartState } from "../Context";
+import axios from "axios";
 import {
-  Accordion,
   Button,
   Card,
   Col,
@@ -10,38 +14,55 @@ import {
   InputGroup,
   Row,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import Jumbotron from "../Components/Jumbotron";
-import ConfirmModal from "../Components/Modals/ConfirmModal";
-import SASCategoryModal from "../Components/Modals/SASCategoryModal";
-import { BASEURL, errorToast, successToast, warningToast } from "../Constants";
-import { CartState } from "../Context";
 
-const ShortAndSimple = () => {
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+const Concepts = () => {
   const { category, language } = CartState();
   const [onelinerData, setOneLinerData] = useState();
   const [modalShow, setModalShow] = useState(false);
   const [confirmModalShow, setConfirmModalShow] = useState(false);
-  const [edit, setEdit] = useState("");
   const [name, setName] = useState("");
   const [render, setRender] = useState(false);
   const [x, setX] = useState();
+  const [edit, setEdit] = useState("");
   const [bulk, setBulk] = useState(false);
-
   const submitHandler = () => {
     setModalShow(true);
   };
 
+  const deleteHandler = useCallback(async (z) => {
+    setConfirmModalShow(true);
+    setX(z);
+  });
+
+  const deletehandler = useCallback(async () => {
+    try {
+      const { data } = await axios.post(`${BASEURL}/api/concepts/delete`, {
+        _id: x._id,
+        name: name,
+        category: x.superCategory,
+        language: x.language,
+      });
+      if (data.errorcode === 0) {
+        toast.success(`🦄 ${data.msg}!`, successToast);
+        setRender(true);
+        setConfirmModalShow(false);
+      } else {
+        toast.warn(`🦄 ${data.msg}!`, warningToast);
+      }
+    } catch (error) {
+      toast.error(`🦄 ${error.message}!`, errorToast);
+    }
+  });
+  console.log(onelinerData);
   const editHandler = async (e) => {
     try {
+      console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       const { data } = await axios.post(
-        `${BASEURL}/api/short-and-simple/edit`,
+        `${BASEURL}/api/concepts/update-chapter/${e._id}`,
         {
-          _id: e._id,
-          name: name,
-          category: e.superCategory,
-          language: e.language,
+          name: e.name,
         }
       );
       if (data.errorcode === 0) {
@@ -55,42 +76,13 @@ const ShortAndSimple = () => {
       toast.error(`🦄 ${error.message}!`, errorToast);
     }
   };
-
-  const deleteHandler = useCallback(async (z) => {
-    setConfirmModalShow(true);
-    setX(z);
-  });
-
-  const deletehandler = useCallback(async () => {
-    try {
-      const { data } = await axios.post(
-        `${BASEURL}/api/short-and-simple/delete`,
-        {
-          _id: x._id,
-          name: name,
-          category: x.superCategory,
-          language: x.language,
-        }
-      );
-      if (data.errorcode === 0) {
-        toast.success(`🦄 ${data.msg}!`, successToast);
-        setRender(true);
-        setConfirmModalShow(false);
-      } else {
-        toast.warn(`🦄 ${data.msg}!`, warningToast);
-      }
-    } catch (error) {
-      toast.error(`🦄 ${error.message}!`, errorToast);
-    }
-  });
-
   const fetchData = async () => {
+    console.log("----", category, language);
     const { data } = await axios.get(
-      `${BASEURL}/api/short-and-simple/${category}/${language}`
+      `${BASEURL}/api/concepts/${category}/${language}`
     );
     setOneLinerData(data.data);
   };
-
   useEffect(() => {
     setEdit();
     if (render) setRender(false);
@@ -99,16 +91,13 @@ const ShortAndSimple = () => {
   }, [category, language, render]);
   return (
     <>
-      {/* <h1>Category : {category}   language:{language}</h1> */}
-
       <Jumbotron
-        name={"Short & Simple"}
-        buttonName={"Add/Edit"}
+        name={"Concepts"}
+        buttonName={"Add Concept Chapter"}
         submitHandler={() => submitHandler()}
       />
-
       <Container>
-        <SASCategoryModal
+        <ConceptsChapterModal
           show={modalShow}
           onHide={() => {
             setModalShow(false);
@@ -163,7 +152,9 @@ const ShortAndSimple = () => {
                           </>
                         ) : (
                           <Link to={`${x._id}`}>
-                            <Card.Text className="h4">{x.name}</Card.Text>
+                            <Card.Text className="h4">
+                              {x.chapterTitle}
+                            </Card.Text>
                           </Link>
                         )}
                       </Col>
@@ -181,7 +172,7 @@ const ShortAndSimple = () => {
                               size="sm"
                               onClick={() => {
                                 setEdit(index);
-                                setName(x.name);
+                                setName(x.chapterTitle);
                                 {
                                   console.log("x.content", x.name);
                                 }
@@ -214,4 +205,4 @@ const ShortAndSimple = () => {
   );
 };
 
-export default ShortAndSimple;
+export default Concepts;

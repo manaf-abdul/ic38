@@ -35,6 +35,12 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
+    title: "Concepts",
+    path: "/concepts",
+    icon: <FaIcons.FaAirbnb />,
+    cName: "nav-text",
+  },
+  {
     title: "Practisetest",
     path: "/practisetest",
     icon: <FaIcons.FaCartPlus />,

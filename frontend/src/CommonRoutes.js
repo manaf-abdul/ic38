@@ -8,11 +8,13 @@ import Language from "./Pages/Language";
 import Terminology from "./Pages/Terminology";
 import ShortAndSimple from "./Pages/ShortAndSimple";
 import ShortAndSimpleContent from "./Pages/ShortAndSimpleContent";
+import ConceptsContent from "./Pages/ConceptsContent";
 import NumericalTest from "./Pages/NumericalTest";
 import NumericalTestContent from "./Pages/NumericalTestContent.js";
 import PractiseTest from "./Pages/PractiseTest";
 import PractiseTestContent from "./Pages/PractiseTestContent";
 import ENotes from "./Pages/ENotes";
+import Concepts from "./Pages/Concepts";
 import VideoTutorial from "./Pages/VideoTutorial";
 import Poster from "./Pages/Poster";
 import MockTestContent from "./Pages/MockTestContent";
@@ -62,6 +64,7 @@ const CommonRoutes = () => {
           path="/short-and-simple/:id"
           element={<ShortAndSimpleContent />}
         />
+        <Route path="/concepts/:id" element={<ConceptsContent />} />
         <Route
           path="/numericaltest"
           element={admin && admin.token ? <NumericalTest /> : <Login />}
@@ -75,6 +78,10 @@ const CommonRoutes = () => {
         <Route
           path="/enotes"
           element={admin && admin.token ? <ENotes /> : <Login />}
+        />
+        <Route
+          path="/concepts"
+          element={admin && admin.token ? <Concepts /> : <Login />}
         />
         <Route
           path="/video"
