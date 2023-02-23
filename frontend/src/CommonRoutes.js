@@ -24,7 +24,7 @@ import LiveTest from "./Pages/LiveTest";
 import LiveTestContent from "./Pages/LiveTestContent";
 import Login from "./Pages/Auth/Login";
 import { CartState } from "./Context";
-import Utility from "./Pages/utility";
+import Utility from "./Pages/Utility";
 
 const CommonRoutes = () => {
   const { admin, setAdmin } = CartState();

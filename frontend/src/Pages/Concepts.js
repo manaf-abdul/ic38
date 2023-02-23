@@ -56,15 +56,15 @@ const Concepts = () => {
     }
   });
   console.log(onelinerData);
+
   const editHandler = async (e) => {
     try {
-      console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-      const { data } = await axios.post(
-        `${BASEURL}/api/concepts/update-chapter/${e._id}`,
-        {
-          name: e.name,
-        }
-      );
+      const { data } = await axios.post(`${BASEURL}/api/concepts/edit`, {
+        _id: e._id,
+        name: name,
+        category: e.superCategory,
+        language: e.language,
+      });
       if (data.errorcode === 0) {
         toast.success(`🦄 ${data.msg}!`, successToast);
         setRender(true);

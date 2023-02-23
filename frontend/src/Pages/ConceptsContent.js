@@ -53,7 +53,7 @@ const ConceptsContent = () => {
   const deleteHandler = async (x) => {
     try {
       const { data } = await axios.post(
-        `${BASEURL}/api/concepts/data/delete`,
+        `${BASEURL}/api/concepts/question/delete`,
         x
       );
       if (data.errorcode === 0) {
@@ -183,17 +183,6 @@ const ConceptsContent = () => {
                       ""
                     ) : (
                       <Col className="d-flex justify-content-end">
-                        <Button
-                          className="m-1"
-                          variant="success"
-                          size="sm"
-                          onClick={() => {
-                            setEdit(index);
-                            setName(term);
-                          }}
-                        >
-                          Edit
-                        </Button>
                         <Button
                           className="m-1"
                           variant="danger"

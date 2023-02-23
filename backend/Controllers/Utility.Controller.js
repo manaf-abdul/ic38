@@ -1,4 +1,3 @@
-import slugify from "slugify";
 import ConceptContent from "../Models/ConceptContentModel.js";
 import ConceptChapter from "../Models/ConceptModel.js";
 
